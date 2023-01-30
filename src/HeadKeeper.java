@@ -1,3 +1,107 @@
+
 public class HeadKeeper extends Keeper{
 
+    // this class will use the Builder design pattern
+    // this pattern allows a modular approach to constructor
+    // a HeadKeeper object has to have a name and surname attributes.
+    // the rest is optional.
+
+    // the constructor is private to force the use of the nested builder class
+    // it will receive an object of the builder class and assign its parameters to the HeadKeeper object
+
+    // the ID is made final ,as it doesn't need to change once assigned.
+    private final int keeperID;
+    private HeadKeeper(HdKBuilder build){
+        this.setFirstName(build.firstName);
+        this.setLastName(build.lastName);
+        this.setAddress(build.address);
+        this.setContactNumber(build.contactNumber);
+        this.keeperID=KEEPER_ID_BASE++;
+    }
+
+    // getter for the KeeperID
+    public int getKeeperID() {
+        return keeperID;
+    }
+
+    // override the getMethod() to include the KeeperID;
+    @Override
+    public String getDetails() {
+        return "\nKeeper details:"+
+                "\nKeeper ID: "+getKeeperID()+
+                "\nFirst name: "+getFirstName()+
+                "\nLast name:"+getLastName()+
+                "\nAddress: "+getAddress()+
+                "\nContact number: "+getContactNumber();
+    }
+
+    // the builder class is nested and static
+    // being a static class allows to use its methods without having to create an oblject
+    public static class HdKBuilder{
+        // the class has the exact same attributes.
+        private String firstName;
+        private String lastName;
+        private String address;
+        private String contactNumber;
+
+        // the class will have setters for each attribute
+        // they will check if the parameter has the correct format or throw an exception
+        public HdKBuilder setName(String name) throws ValidationException{
+            // checking the name format
+            if (name.equals(""))
+                // if empty, throw exception
+                throw new ValidationException("Name cannot be empty");
+            // using a regex to make sure there is no numbers or special characters
+            else  if (name.matches("(\\p{Upper})(\\p{Lower}){1,10}")){
+                // if format is ok, assign the value to the builder attribute
+                this.firstName=name;
+                return this;
+            }
+            else throw new ValidationException("Invalid Name Format");
+
+        }
+
+        public HdKBuilder setLastName(String lastName) throws ValidationException{
+            // same logic and checks than for the name
+            if (lastName.equals(""))
+                throw new ValidationException("Last Name cannot be empty");
+            else if(lastName.matches("(\\p{Upper})(\\p{Lower}){1,10}")){
+                this.lastName=lastName;
+                return this;
+            }
+            else throw new ValidationException("Invalid Last Name Format");
+        }
+
+        public HdKBuilder setAddress(String address){
+                // no check for the address, to keep simple
+                this.address=address;
+                return this;
+        }
+        public HdKBuilder setContactNumber(String number){
+                // no check for the number, to keep simple
+                this.contactNumber=number;
+                return this;
+        }
+
+        // the builder will return a HeadKeeper object
+        public HeadKeeper HBuilder() throws ValidationException{
+            // check if a name is assigned
+            if (this.firstName==null)
+                throw new ValidationException("Name cannot be empty");
+            // check if a last name is assigned
+            if (this.lastName==null)
+                throw new ValidationException("Name cannot be empty");
+            // if no address was set, we assign a default value
+            if (this.address==null)
+                this.address="To be updated";
+            // if no address was set, we assign a default value
+            if (this.contactNumber==null)
+                this.contactNumber="To be updated";
+            // once all has been checked
+            // we create a new HeadKeeper object, that will take this HdKBuilder object as parameter
+            // and return it to the caller
+            return new HeadKeeper(this);
+        }
+
+    }
 }
