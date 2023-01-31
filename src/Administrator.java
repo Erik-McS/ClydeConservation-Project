@@ -62,7 +62,8 @@ public class Administrator implements Employee{
         return "\nKeeper details:"+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
-                "\nAddress: "+
-                "\nContact number: ";
+                "\nAddress: "+getAddress()+
+                "\nContact number: "+getContactNumber()
+                ;
     }
 }

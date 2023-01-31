@@ -12,7 +12,7 @@ public class TestClass {
 
 
 
-            Menus.mainMenu(erik);
+            Menus.mainMenu();
 
 
 
