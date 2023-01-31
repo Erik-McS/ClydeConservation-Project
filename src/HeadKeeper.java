@@ -12,19 +12,22 @@ public class HeadKeeper extends Keeper{
     // the ID is made final ,as it doesn't need to change once assigned.
     private final int keeperID;
     private HeadKeeper(HdKBuilder build){
+        // the constructor will assign each attributes of the nested Builder  class to the HeadKeeper object
         this.setFirstName(build.firstName);
         this.setLastName(build.lastName);
         this.setAddress(build.address);
         this.setContactNumber(build.contactNumber);
+        // using a static variable from the parent class. this will assign a unique ID to the child object
+        // also increment the static variable.
         this.keeperID=KEEPER_ID_BASE++;
     }
 
-    // getter for the KeeperID
+    // getter for the KeeperID, no setter as the ID is constant once created
     public int getKeeperID() {
         return keeperID;
     }
 
-    // override the getMethod() to include the KeeperID;
+    // override the getDetails() method to include the KeeperID;
     @Override
     public String getDetails() {
         return "\nKeeper details:"+
@@ -46,6 +49,7 @@ public class HeadKeeper extends Keeper{
 
         // the class will have setters for each attribute
         // they will check if the parameter has the correct format or throw an exception
+        // no getters needed for this class
         public HdKBuilder setName(String name) throws ValidationException{
             // checking the name format
             if (name.equals(""))
@@ -65,7 +69,7 @@ public class HeadKeeper extends Keeper{
             // same logic and checks than for the name
             if (lastName.equals(""))
                 throw new ValidationException("Last Name cannot be empty");
-            else if(lastName.matches("(\\p{Upper})(\\p{Lower}){1,10}")){
+            else if(lastName.matches("(\\p{Upper})(\\p{Lower}){1,20}")){
                 this.lastName=lastName;
                 return this;
             }
