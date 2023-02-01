@@ -1,4 +1,4 @@
-
+package employees;
 public class HeadKeeper extends Keeper{
 
     // this class will use the Builder design pattern
@@ -50,30 +50,30 @@ public class HeadKeeper extends Keeper{
         // the class will have setters for each attribute
         // they will check if the parameter has the correct format or throw an exception
         // no getters needed for this class
-        public HdKBuilder setName(String name) throws ValidationException{
+        public HdKBuilder setName(String name) throws EmployeeValidation{
             // checking the name format
             if (name.equals(""))
                 // if empty, throw exception
-                throw new ValidationException("Name cannot be empty");
+                throw new EmployeeValidation("Name cannot be empty");
             // using a regex to make sure there is no numbers or special characters
             else  if (name.matches("(\\p{Upper})(\\p{Lower}){1,10}")){
                 // if format is ok, assign the value to the builder attribute
                 this.firstName=name;
                 return this;
             }
-            else throw new ValidationException("Invalid Name Format");
+            else throw new EmployeeValidation("Invalid Name Format");
 
         }
 
-        public HdKBuilder setLastName(String lastName) throws ValidationException{
+        public HdKBuilder setLastName(String lastName) throws EmployeeValidation{
             // same logic and checks than for the name
             if (lastName.equals(""))
-                throw new ValidationException("Last Name cannot be empty");
+                throw new EmployeeValidation("Last Name cannot be empty");
             else if(lastName.matches("(\\p{Upper})(\\p{Lower}){1,20}")){
                 this.lastName=lastName;
                 return this;
             }
-            else throw new ValidationException("Invalid Last Name Format");
+            else throw new EmployeeValidation("Invalid Last Name Format");
         }
 
         public HdKBuilder setAddress(String address){
@@ -88,13 +88,13 @@ public class HeadKeeper extends Keeper{
         }
 
         // the builder will return a HeadKeeper object
-        public HeadKeeper HBuilder() throws ValidationException{
+        public HeadKeeper HBuilder() throws EmployeeValidation{
             // check if a name is assigned
             if (this.firstName==null)
-                throw new ValidationException("Name cannot be empty");
+                throw new EmployeeValidation("Name cannot be empty");
             // check if a last name is assigned
             if (this.lastName==null)
-                throw new ValidationException("Name cannot be empty");
+                throw new EmployeeValidation("Name cannot be empty");
             // if no address was set, we assign a default value
             if (this.address==null)
                 this.address="To be updated";

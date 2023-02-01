@@ -1,3 +1,4 @@
+package employees;
 public class AssistantKeeper extends Keeper{
 
     // generic class, not used in the program as there is no requirements in the project for Assistant Keepers actions

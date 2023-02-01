@@ -1,3 +1,5 @@
+package employees;
+
 public class Administrator implements Employee{
     private String firstName;
     private String lastName;
