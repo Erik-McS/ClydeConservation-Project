@@ -12,7 +12,8 @@ public class TestClass {
 
 
 
-            Menus.mainMenu();
+            String s=erik.getClass().getName();
+            System.out.println(s);
 
 
 
