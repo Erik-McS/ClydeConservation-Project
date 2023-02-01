@@ -1,5 +1,8 @@
-import java.util.Scanner;
+package clydeconservationsystem;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import employees.*;
 // the Menus class will be used to propose the different menus of the app.
 // all variables and methods will be static ( except any private methods)
 // most methods will return an object or a primitive type.
@@ -75,7 +78,7 @@ public class Menus {
             // returning the selected profile
             return loggedAs;
         }
-        catch (ValidationException e){
+        catch (EmployeeValidation e){
             System.out.println(e.getMessage());
         }
         // this return will never happen, but needs to be here
@@ -85,7 +88,7 @@ public class Menus {
     // this function will return the choice selected in the main menu
     public static int mainMenu(){
         // do while to select a user's choice.
-        do {
+
             System.out.println("""
 
                     ----- Welcome to Clyde Conservation System -----
@@ -95,20 +98,27 @@ public class Menus {
                     2) Administrator Application
                     3) Exit
                     -->\s""");
-            choice=sc.nextInt();
-            // returning the selected choice from the user
-            return switch (choice){
-                case 1, 2 ->{yield choice;}
-                case 3->{
-                    exit=true;
-                    System.exit(0);
-                    yield 0;
-                }
-                default -> { yield 0;}
+            try{
+                choice=sc.nextInt();
+                // returning the selected choice from the user
+                return switch (choice){
+                    case 1, 2 ->{yield choice;}
+                    case 3->{
+                        exit=true;
+                        System.exit(0);
+                        yield 0;
+                    }
+                    default -> { yield 5;}
                 };
+            }
+            catch (InputMismatchException e){
+                System.out.println("Incorrect choice entered");
+                return 0;
+            }
+            finally {
+                sc.nextLine();
+            }
 
-
-        }while(!exit);
     }
 
     public static void headKeeperMenu(HeadKeeper headKeeper){
@@ -118,4 +128,122 @@ public class Menus {
     public static void administratorMenu(Administrator admin){
         System.out.println(admin.getDetails());
     }
+
+    // methods called to create an Animal object
+    // the setters from the animal class will call those methods to get the user input
+    public static String setAnimalCategory(){
+        // printing the menu choices
+        System.out.println("""
+                    
+                    Please select a category:
+                    1) Predator
+                    2) Prey
+                    -->\s""");
+        // try-catch in case the user enters characters
+        try{
+            // getting the user choice
+            choice=sc.nextInt();
+            // enhanced switch to return a valid category
+            return switch (choice){
+                case 1->{yield "Predator";}
+                case 2->{yield "Prey";}
+                // if incorrect choice, we return null
+                // this will signal the calling function to loop again
+                default -> {yield null;}
+            };
+        }
+        catch (InputMismatchException e){
+            System.out.println("Incorrect choice value entered");
+            return null;
+        }
+        // to avoid unexpected issues( like unexpected looping)
+        // we make sure that the Scanner object is cleared to be re-used
+        finally {
+            sc.nextLine();
+        }
+    }
+    // same logic as setAnimalCategory()
+    public static String setAnimalSex(){
+        System.out.println("""
+                    
+                    Please select a sex:
+                    1) Male
+                    2) Female
+                    -->\s""");
+        try{
+            choice=sc.nextInt();
+            return switch (choice){
+                case 1->{yield "Male";}
+                case 2->{yield "Female";}
+                default -> {yield null;}
+            };
+        }
+        catch (InputMismatchException e){
+            System.out.println("Incorrect choice entered");
+            return null;
+        }
+        finally {
+            sc.nextLine();
+        }
+    }
+
+    // same logic as setAnimalCategory()
+    public static String setAnimalName(){
+        System.out.println("""
+                
+                Please enter the animal's name
+                (Must contains at least one character)
+                -->\s""");
+        // this try-catch will make sure that the value entered is not just a number
+        try{
+            return sc.next();
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid name format");
+            return null;
+        }
+        finally {
+            sc.nextLine();
+        }
+    }
+    // same logic as setAnimalCategory()
+    public static String setAnimalDoB(){
+        System.out.println("""
+                
+                Please enter the animal's Date of Birth
+                ( dd/mm/yyyy)
+                -->\s""");
+        // this try-catch will make sure that the value entered is not just a number
+        try{
+            return sc.next();
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid DoB format");
+            return null;
+        }
+        finally {
+            sc.nextLine();
+        }
+    }
+
+    public static String setAnimalDoA(){
+        System.out.println("""
+                
+                Please enter the animal's Date of Acquisition
+                ( dd/mm/yyyy)
+                -->\s""");
+        // this try-catch will make sure that the value entered is not just a number
+        try{
+            return sc.next();
+        }
+        catch(InputMismatchException e){
+            System.out.println("Invalid DoA format");
+            return null;
+        }
+        finally {
+            sc.nextLine();
+        }
+    }
+
+// end of class
 }

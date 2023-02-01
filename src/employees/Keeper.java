@@ -1,3 +1,4 @@
+package employees;
 public class Keeper implements Employee{
 
     // attributes of the Keeper class
