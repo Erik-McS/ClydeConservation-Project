@@ -1,3 +1,5 @@
+package applicationEntry;
+
 import animals.Bird;
 import animals.Menagerie;
 import employees.*;

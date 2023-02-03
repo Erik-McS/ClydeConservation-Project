@@ -1,3 +1,5 @@
+package applicationEntry;
+
 import employees.*;
 import clydeconservationsystem.*;
 public class ClydeConservationDriver {
@@ -34,7 +36,6 @@ public class ClydeConservationDriver {
                     }
                     break;
                 default:
-                    exit=false;
                     break;
 
             }
