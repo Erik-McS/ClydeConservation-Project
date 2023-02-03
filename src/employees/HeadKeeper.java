@@ -1,16 +1,20 @@
 package employees;
+
+/**
+ * This class will use the Builder design pattern.
+ * This pattern allows a modular approach to constructor.
+ * A HeadKeeper object has to have a name and surname attributes.
+ * The rest of the attributes are optional and will be assigned default values if left empty at the object instantiation.
+ * The constructor is private to force the use of the nested builder class.
+ * It will receive an object of the builder class and assign its parameters to the HeadKeeper object.
+ * some resources:
+ * <a href="https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/">...</a>
+ * @author Erik
+ */
 public class HeadKeeper extends Keeper{
 
-    // this class will use the Builder design pattern
-    // this pattern allows a modular approach to constructor
-    // a HeadKeeper object has to have a name and surname attributes.
-    // the rest is optional.
-
-    // the constructor is private to force the use of the nested builder class
-    // it will receive an object of the builder class and assign its parameters to the HeadKeeper object
-
     // the ID is made final ,as it doesn't need to change once assigned.
-    private final int keeperID;
+    private final int KEEPER_ID;
     private HeadKeeper(HdKBuilder build){
         // the constructor will assign each attributes of the nested Builder  class to the HeadKeeper object
         this.setFirstName(build.firstName);
@@ -19,27 +23,35 @@ public class HeadKeeper extends Keeper{
         this.setContactNumber(build.contactNumber);
         // using a static variable from the parent class. this will assign a unique ID to the child object
         // also increment the static variable.
-        this.keeperID=KEEPER_ID_BASE++;
+        this.KEEPER_ID =KEEPER_ID_BASE++;
     }
 
-    // getter for the KeeperID, no setter as the ID is constant once created
-    public int getKeeperID() {
-        return keeperID;
+    /**
+     * getter for the KeeperID, no setter as the ID is constant once created
+     * @return the Employee number of the Keeper
+     */
+    public int getKEEPER_ID() {
+        return KEEPER_ID;
     }
 
     // override the getDetails() method to include the KeeperID;
     @Override
     public String getDetails() {
         return "\nKeeper details:"+
-                "\nKeeper ID: "+getKeeperID()+
+                "\nKeeper ID: "+ getKEEPER_ID()+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
                 "\nAddress: "+getAddress()+
                 "\nContact number: "+getContactNumber();
     }
 
-    // the builder class is nested and static
-    // being a static class allows to use its methods without having to create an oblject
+    /**
+     * The builder class is nested and static
+     * Being a static class allows to use its methods without having to create an object
+     * The class will have setters for each attribute
+     * They will check if the parameter has the correct format or throw an exception
+     * No getters needed for this class
+     */
     public static class HdKBuilder{
         // the class has the exact same attributes.
         private String firstName;
@@ -47,9 +59,13 @@ public class HeadKeeper extends Keeper{
         private String address;
         private String contactNumber;
 
-        // the class will have setters for each attribute
-        // they will check if the parameter has the correct format or throw an exception
-        // no getters needed for this class
+        /**
+         * Set the name of the Head Keeper.
+         * the method will check that the name has a correct format, or it will throw a validation exception.
+         * @param name Name of the Head Keeper
+         * @return returns the current HdKBuilder
+         * @throws EmployeeValidation Incorrect Name Format
+         */
         public HdKBuilder setName(String name) throws EmployeeValidation{
             // checking the name format
             if (name.equals(""))
@@ -62,9 +78,15 @@ public class HeadKeeper extends Keeper{
                 return this;
             }
             else throw new EmployeeValidation("Invalid Name Format");
-
         }
 
+        /**
+         * Set the lastname of the Head Keeper.
+         * the method will check that the name has a correct format, or it will throw a validation exception.
+         * @param lastName Lastname of the Head Keeper
+         * @return returns the current HdKBuilder
+         * @throws EmployeeValidation Incorrect Name Format
+         */
         public HdKBuilder setLastName(String lastName) throws EmployeeValidation{
             // same logic and checks than for the name
             if (lastName.equals(""))
@@ -76,18 +98,39 @@ public class HeadKeeper extends Keeper{
             else throw new EmployeeValidation("Invalid Last Name Format");
         }
 
+        /**
+         * Set the address of the Head Keeper.
+         * no validation on the address to keep simple
+         * @param address Name of the Head Keeper
+         * @return returns the current HdKBuilder
+         */
         public HdKBuilder setAddress(String address){
                 // no check for the address, to keep simple
                 this.address=address;
                 return this;
         }
+
+        /**
+         * Set the tel number of the Head Keeper.
+         * no validation on the tel to keep simple
+         * @param number Telephone number of the Head Keeper
+         * @return returns the current HdKBuilder
+         */
         public HdKBuilder setContactNumber(String number){
                 // no check for the number, to keep simple
                 this.contactNumber=number;
                 return this;
         }
 
-        // the builder will return a HeadKeeper object
+        /**
+         * This is the Builder method.
+         * It will check every attribute of the main class.
+         * If the name or lastname are empty, it will throw an exception as those are mandatory.
+         * Otherwise it will assign default values to the missing one.
+         * Once done, it will return the created HeadKeeper object.
+         * @return HeadKeeper object with all the values assigned.
+         * @throws EmployeeValidation Exception thrown if the name or lastname was not passed to the Builder.
+         */
         public HeadKeeper HBuilder() throws EmployeeValidation{
             // check if a name is assigned
             if (this.firstName==null)

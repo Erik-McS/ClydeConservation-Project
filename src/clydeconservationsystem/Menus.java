@@ -3,9 +3,14 @@ package clydeconservationsystem;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import employees.*;
-// the Menus class will be used to propose the different menus of the app.
-// all variables and methods will be static ( except any private methods)
-// most methods will return an object or a primitive type.
+
+/**
+ * The Menus class will be used to propose the different menus of the app.
+ * All variables and methods will be static ( except any private methods).
+ * Most methods will return an object or a primitive type.
+ * This class will have a private constructor to forbid the instantiation of an object.
+ * @author Erik
+ */
 public class Menus {
     // Scanner object to get the user's menu choice.
     private static final Scanner sc=new Scanner(System.in);
@@ -14,14 +19,21 @@ public class Menus {
     // exit condition used in the do-while
     private static boolean exit=false;
 
-    public static Employee logAsMenu(){
-        // this method will vaguely simulate a login
-        // it will create two profiles : Admin and Head Keeper
-        // and return the selected profile to the caller
+    // this private constructor will forbid the creation of Menus object as they are not needed.
+    // this will also forbid inheritance for this class.
+    private Menus(){}
 
-        // the Employee interface is used to contain the selected profile
+    /**
+     * This method will vaguely simulate a login.
+     * It will create two profiles : Admin and Head Keeper.
+     * and return the selected profile to the caller.
+     * The profile is sent back as Employee variable, which can contain any of its child class.
+     * @return The selected profile.
+     */
+    public static Employee logAsMenu(){
+        // the Employee interface is used to contain the selected profile.
         Employee loggedAs;
-        // this first try-catch is used in case of a validation issue while creating the Administrator or HeadKeeper object
+        // this first try-catch is used in case of a validation issue while creating the Administrator or HeadKeeper object.
         try {
 
             // creating two different profile to use
@@ -85,10 +97,13 @@ public class Menus {
         return null;
     }
 
-    // this function will return the choice selected in the main menu
+    /**
+     * This function will return the choice selected in the main menu.
+     * the function do not use a Do-While loop itself, this will be done where the function is called.
+     * @return The selected choice.
+     */
     public static int mainMenu(){
-        // do while to select a user's choice.
-
+        // printing the menu
             System.out.println("""
 
                     ----- Welcome to Clyde Conservation System -----
@@ -118,19 +133,32 @@ public class Menus {
             finally {
                 sc.nextLine();
             }
-
     }
 
+    /**
+     * This function will handle the options accessible to a Head Keeper.
+     * @param headKeeper the profile of the logged Head Keeper.
+     */
     public static void headKeeperMenu(HeadKeeper headKeeper){
         System.out.println(headKeeper.getDetails());
     }
 
+    /**
+     * This function will handle the options accessible to an Administrator.
+     * @param admin the profile of the logged Administrator.
+     */
     public static void administratorMenu(Administrator admin){
         System.out.println(admin.getDetails());
     }
 
-    // methods called to create an Animal object
-    // the setters from the animal class will call those methods to get the user input
+    // methods called to create an Animal object.
+    // the setters from the animal class will call those methods to get the user input.
+
+    /**
+     * Menu Method to select the animal's category.
+     * The looping of the menu in case of invalid input is done in the calling setter.
+     * @return The selected animal's category
+     */
     public static String setAnimalCategory(){
         // printing the menu choices
         System.out.println("""
@@ -163,6 +191,11 @@ public class Menus {
         }
     }
     // same logic as setAnimalCategory()
+    /**
+     * Menu Method to select the animal's sex.
+     * The looping of the menu in case of invalid input is done in the calling setter.
+     * @return The selected animal's sex
+     */
     public static String setAnimalSex(){
         System.out.println("""
                     
@@ -188,6 +221,11 @@ public class Menus {
     }
 
     // same logic as setAnimalCategory()
+    /**
+     * Menu Method to select the animal's name.
+     * The looping of the menu in case of invalid input is done in the calling setter.
+     * @return The selected animal's name
+     */
     public static String setAnimalName(){
         System.out.println("""
                 
@@ -207,6 +245,11 @@ public class Menus {
         }
     }
     // same logic as setAnimalCategory()
+    /**
+     * Menu Method to select the animal's Date of Birth
+     * the looping of the menu in case of invalid input is done in the calling setter
+     * @return The selected animal's Date of Birth
+     */
     public static String setAnimalDoB(){
         System.out.println("""
                 
@@ -226,6 +269,11 @@ public class Menus {
         }
     }
 
+    /**
+     * Menu Method to select the animal's Date of Acquisition
+     * the looping of the menu in case of invalid input is done in the calling setter
+     * @return The selected animal's Date of Acquisition
+     */
     public static String setAnimalDoA(){
         System.out.println("""
                 
