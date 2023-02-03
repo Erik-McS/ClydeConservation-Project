@@ -24,6 +24,12 @@ public class TestClass {
         Menagerie.addAnimal(robin);
         //Menagerie.addAnimal(blue);
 
+        Bird bird2=new Bird();
+        Menagerie.addAnimal(bird2);
+        Menagerie.saveMenagerie("menagerie.dat");
+        System.out.println("menagerie saved");
+        Menagerie.loadMenagerie("menagerie.dat");
+
         Menagerie.displayAnimals();
 
 

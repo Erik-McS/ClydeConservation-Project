@@ -1,11 +1,18 @@
 package animals;
-
+/**
+ * Class used to describe reptiles
+ * <p>
+ * it will be used as it own type, further developments could add children types to it
+ */
 public class Reptile extends Animal{
     // class for the Reptile type
     // unique ID for the animal
     private int animalID;
-    // the default constructor will use the setters implemented in the parent class
-    // those setters use the Menus class to get users input
+    /**
+     * The default constructor will use the setters implemented in the parent class
+     * <p>
+     * Those setters use the Menus class to get users input
+     */
     public Reptile(){
         setName();
         setCategory();
@@ -14,8 +21,19 @@ public class Reptile extends Animal{
         setDateOfAcquisition();
         // using the static variable from the parent class to produce a unique ID
         this.animalID= ANIMAL_ID_BASE++;
+        // the Animal is not assigned to a cage by default
+        setCaged(false);
     }
-    // constructor for internal use if implement files
+    /**
+     * Constructor to use for creating Reptile object from a file
+     * <p>
+     * may or may not be implemented at this stage
+     * @param name Name of the reptile
+     * @param category Category of the reptile
+     * @param sex Sex of the reptile
+     * @param doB Date of Birth of the reptile
+     * @param doA Date of Acquisition of the reptile
+     */
     public Reptile(String name,String category,String sex,String doB,String doA){
     try{
         setName(name);
@@ -24,12 +42,17 @@ public class Reptile extends Animal{
         setDateOfAcquisition(doA);
         setDateOfBirth(doB);
         this.animalID= ANIMAL_ID_BASE++;
+        // the Animal is not assigned to a cage by default
+        setCaged(false);
     }
         catch (AnimalValidation ex){
         System.out.println(ex.getMessage());
     }
     }
-    // getter for the ID
+    /**
+     * Getter method to get the Reptile's animal ID
+     * @return Animal ID
+     */
     public int getAnimalID() {
         return animalID;
     }

@@ -3,10 +3,13 @@ package employees;
 /**
  * This class will use the Builder design pattern.
  * This pattern allows a modular approach to constructor.
+ * <p>
  * A HeadKeeper object has to have a name and surname attributes.
  * The rest of the attributes are optional and will be assigned default values if left empty at the object instantiation.
+ * <p>
  * The constructor is private to force the use of the nested builder class.
  * It will receive an object of the builder class and assign its parameters to the HeadKeeper object.
+ * <p>
  * some resources:
  * <a href="https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/">...</a>
  * @author Erik
@@ -46,10 +49,13 @@ public class HeadKeeper extends Keeper{
     }
 
     /**
-     * The builder class is nested and static
-     * Being a static class allows to use its methods without having to create an object
-     * The class will have setters for each attribute
+     * The builder class is nested and static.
+     * <p>
+     * Being a static class allows to use its methods without having to create an object.
+     * <p>
+     * The class will have setters for each attribute.
      * They will check if the parameter has the correct format or throw an exception
+     * <p>
      * No getters needed for this class
      */
     public static class HdKBuilder{
@@ -61,6 +67,7 @@ public class HeadKeeper extends Keeper{
 
         /**
          * Set the name of the Head Keeper.
+         * <p>
          * the method will check that the name has a correct format, or it will throw a validation exception.
          * @param name Name of the Head Keeper
          * @return returns the current HdKBuilder
@@ -82,6 +89,7 @@ public class HeadKeeper extends Keeper{
 
         /**
          * Set the lastname of the Head Keeper.
+         * <p>
          * the method will check that the name has a correct format, or it will throw a validation exception.
          * @param lastName Lastname of the Head Keeper
          * @return returns the current HdKBuilder
@@ -100,6 +108,7 @@ public class HeadKeeper extends Keeper{
 
         /**
          * Set the address of the Head Keeper.
+         * <p>
          * no validation on the address to keep simple
          * @param address Name of the Head Keeper
          * @return returns the current HdKBuilder
@@ -112,6 +121,7 @@ public class HeadKeeper extends Keeper{
 
         /**
          * Set the tel number of the Head Keeper.
+         * <p>
          * no validation on the tel to keep simple
          * @param number Telephone number of the Head Keeper
          * @return returns the current HdKBuilder
@@ -125,8 +135,10 @@ public class HeadKeeper extends Keeper{
         /**
          * This is the Builder method.
          * It will check every attribute of the main class.
-         * If the name or lastname are empty, it will throw an exception as those are mandatory.
-         * Otherwise it will assign default values to the missing one.
+         * <p>
+         * If the name or lastname are empty, it will throw an exception as those are mandatory,
+         * otherwise it will assign default values to the missing one.
+         * <p>
          * Once done, it will return the created HeadKeeper object.
          * @return HeadKeeper object with all the values assigned.
          * @throws EmployeeValidation Exception thrown if the name or lastname was not passed to the Builder.

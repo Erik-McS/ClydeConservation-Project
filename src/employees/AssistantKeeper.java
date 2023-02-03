@@ -1,7 +1,8 @@
 package employees;
 
 /**
- * Generic class, not used in the program as there is no requirements in the project for Assistant Keepers actions
+ * Generic class, not used in the program as there is no requirements in the project for Assistant Keepers actions.
+ * <p>
  * No methods implemented to keep simple
  * @author Erik
  */

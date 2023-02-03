@@ -1,6 +1,7 @@
 package employees;
 /**
  * Interface used for Clyde Conservation employees.
+ * <p>
  * This will be used across the application to contain employee types.
  * @author Erik
  */
