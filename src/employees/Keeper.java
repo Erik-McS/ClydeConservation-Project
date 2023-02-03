@@ -1,13 +1,17 @@
 package employees;
 
+import java.io.Serializable;
+
 /**
  * This is the generic class for Clyde Conservation Keepers
- * This class do not have a specific constructor as it is designed with inheritance in mind
- * Because this class is used as a Parent class, it does not allow he use of a private constructor to restrict
- *  object creation
+ * <p>
+ * This class do not have a specific constructor as it is designed with inheritance in mind.
+ * <p>
+ * Because this class is used as a Parent class, it does not allow the use of a private constructor to restrict
+ * object creation
  * @author Erik
  */
-public class Keeper implements Employee{
+public class Keeper implements Employee, Serializable {
 
     // attributes of the Keeper class
     private String firstName;
@@ -85,6 +89,7 @@ public class Keeper implements Employee{
 
     /**
      * Dummy method to differentiate from Admin.
+     * <p>
      * Keepers are supposed to also care for the cages
      */
     public void cageCare(){

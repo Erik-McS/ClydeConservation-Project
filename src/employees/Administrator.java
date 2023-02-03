@@ -3,8 +3,11 @@ package employees;
 /**
  * The administrator class is used to give access to the Admin actions:
  * Add animal, add Keeper and add Cage.
+ * <p>
  * This class will use a simple constructor.
+ * <p>
  * no validations were set for this class as only one object will be created in the login simulation.
+ * <p>
  * for assessment purposes, data validation code is implemented in the HeadKeeper class
  */
 public class Administrator implements Employee{
