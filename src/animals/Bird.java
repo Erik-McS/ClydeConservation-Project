@@ -27,7 +27,7 @@ public class Bird extends Animal {
     }
 
     /**
-     * Construtor to use for creating Birds object from a file
+     * Constructor to use for creating Birds object from a file
      * <p>
      * may or may not be implemented at this stage
      * @param name Name of the bird

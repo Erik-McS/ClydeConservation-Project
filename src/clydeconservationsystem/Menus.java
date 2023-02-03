@@ -3,9 +3,9 @@ package clydeconservationsystem;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import animals.Menagerie;
 import animals.Bird;
 import animals.Mammal;
-import animals.Menagerie;
 import animals.Reptile;
 import employees.*;
 
@@ -45,8 +45,8 @@ public class Menus {
         try {
 
             // creating two different profile to use
-            Administrator mark=new Administrator("Mark","Smith","07722334455","1 Glasgow av");
-            HeadKeeper erik= new HeadKeeper.HdKBuilder().setName("Erik").setLastName("Mcseveney").setContactNumber("077667788").HBuilder();
+            Administrator adminProfile=new Administrator("Mark","Smith","07722334455","1 Glasgow av");
+            HeadKeeper HeadKeeperProfile= new HeadKeeper.HdKBuilder().setName("Erik").setLastName("Mcseveney").setContactNumber("077667788").HBuilder();
 
             // do-while loop for the menu
             do {
@@ -72,11 +72,11 @@ public class Menus {
                         case 1-> {
                             exit=true;
                             // returning the headKeeper profile
-                            yield erik;}
+                            yield HeadKeeperProfile;}
                         case 2-> {
                             exit=true;
                             // returning the Administrator profile
-                            yield mark;}
+                            yield adminProfile;}
                         case 3-> {
                             // existing the program
                             System.out.println("Exiting Clyde Conservation Application");
@@ -149,7 +149,7 @@ public class Menus {
      * @param headKeeper the profile of the logged Head Keeper.
      */
     public static void headKeeperMenu(HeadKeeper headKeeper){
-
+        // headKeeper menu to implement
         System.out.println(headKeeper.getDetails());
     }
 
@@ -160,7 +160,7 @@ public class Menus {
     public static void administratorMenu(Administrator admin){
         // exit condition for the Admin Menu
         int exit=0;
-        // we loop the menu until the suer select exist
+        // we loop the menu until the user select exit
         do {
             // switch to process choices from the admin menu
             switch (adminMenu()){
@@ -177,6 +177,8 @@ public class Menus {
                                 Bird bird=new Bird();
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(bird);
+                                // saving the menagerie collection
+                                Menagerie.saveMenagerie(Menagerie.getFileName());
                                 System.out.println("The following bird is now added in the system:");
                                 System.out.println(bird.getDetails());
                                 break;
@@ -186,6 +188,8 @@ public class Menus {
                                 Mammal mammal=new Mammal();
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(mammal);
+                                // saving the menagerie collection
+                                Menagerie.saveMenagerie(Menagerie.getFileName());
                                 System.out.println("The following mammal is now added in the system:");
                                 System.out.println(mammal.getDetails());
                                 break;
@@ -195,6 +199,8 @@ public class Menus {
                                 Reptile reptile=new Reptile();
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(reptile);
+                                // saving the menagerie collection
+                                Menagerie.saveMenagerie(Menagerie.getFileName());
                                 System.out.println("The following bird is now added in the system:");
                                 System.out.println(reptile.getDetails());
                                 break;
@@ -205,28 +211,81 @@ public class Menus {
                     }while (exit1!=4);
                     break;
                 case 2:
-                    System.out.println("Add Cage");
+                    // setting an exit conditions
+                    int exit2=0;
+                    // looping the options
+                    do {
+                        switch (adminAddCage()){
+                            case 1:
+                                // Adding a Large Cage
+                                largeCage largeCage=new largeCage();
+                                // add the cage to the cageCollection
+                                CagesCollection.addCage(largeCage);
+                                // save the CagesCollection in the file
+                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                // confirming the cage creation
+                                System.out.println("This cage was added to the collection");
+                                System.out.println(largeCage.getCageDetails());
+                                break;
+                            case 2:
+                                // adding a Medium Cage
+                                mediumCage mediumCage=new mediumCage();
+                                // add the cage to the cageCollection
+                                CagesCollection.addCage(mediumCage);
+                                // save the CagesCollection in the file
+                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                // confirming the cage creation
+                                System.out.println("This cage was added to the collection");
+                                System.out.println(mediumCage.getCageDetails());
+                                break;
+                            case 3:
+                                // adding a small Cage
+                                smallCage smallCage=new smallCage();
+                                // add the cage to the cageCollection
+                                CagesCollection.addCage(smallCage);
+                                // save the CagesCollection in the file
+                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                // confirming the cage creation
+                                System.out.println("This cage was added to the collection");
+                                System.out.println(smallCage.getCageDetails());
+                                break;
+                            case 4:
+                                exit2=4;
+                                break;
+                        }
+                    }
+                    while(exit2!=4);
                     break;
                 case 3:
-                    //System.out.println("Add Keeper");
                     int exit3=0;
                     do {
                         switch (adminAddKeeperMenu()){
                             case 1:
                                 // add an Assistant Keeper
+                                // the Keepers details are capture by the getKeeperDetails and passed in a String Array
                                 String[] keeperDetails=getKeeperDetails();
                                 AssistantKeeper assist=new AssistantKeeper(keeperDetails[0],keeperDetails[1],
                                         keeperDetails[2],keeperDetails[3]);
+                                // once created, the Assistant Keeper is added to the roster
                                 EmployeeRoster.addEmployee(assist);
+                                // the roster is saved locally
+                                EmployeeRoster.saveRoster(EmployeeRoster.getFileName());
+                                // confirming the record has been created
                                 System.out.println("The following employee is now added to the roster:");
                                 System.out.println(assist.getDetails());
                                 break;
                             case 2:
                                 // add a HeadKeeper
                                 String[] hKeeperDetails=getKeeperDetails();
+                                // try-catch to handle validation errors
                                 try{
+                                    // passing the Keeper details captured and passed with the array to the HeadKeeper builder
                                     HeadKeeper hKeeper=new HeadKeeper.HdKBuilder().setName(hKeeperDetails[0]).setLastName(hKeeperDetails[1])
                                             .setContactNumber(hKeeperDetails[2]).setAddress(hKeeperDetails[3]).HBuilder();
+                                    // adding the new HeadKeeper to the roster
+                                    EmployeeRoster.addEmployee(hKeeper);
+                                    // saving the roster
+                                    EmployeeRoster.saveRoster(EmployeeRoster.getFileName());
                                 }
                                 catch (EmployeeValidation e){
                                     System.out.println(e.getMessage());
@@ -240,12 +299,11 @@ public class Menus {
                     while (exit3!=3);
                     break;
                 case 4:
+                    // setting the condition to exit the menu
                     exit=4;
             }
         }
         while (exit!=4);
-
-        // System.out.println(admin.getDetails());
     }
 
     // methods called to create an Animal object.
@@ -405,7 +463,7 @@ public class Menus {
                     1) Add an Animal
                     2) Add a Cage
                     3) Add a Keeper
-                    4) Exit
+                    4) Return
                     -->\s""");
         try{
             choice=sc.nextInt();
@@ -432,7 +490,7 @@ public class Menus {
                     1) Add a Bird
                     2) Add a Mammal
                     3) Add a Reptile
-                    4) Exit
+                    4) Return
                     -->\s""");
         try{
             choice=sc.nextInt();
@@ -458,7 +516,7 @@ public class Menus {
                     Please select an option
                     1) Add an Assistant Keeper
                     2) Add a Head Keeper
-                    3) Exit
+                    3) Return
                     -->\s""");
         try{
             choice=sc.nextInt();
@@ -478,6 +536,7 @@ public class Menus {
     }
 
     private static String[] getKeeperDetails(){
+        // the keeper's details will be passed back in an array
         String [] keeper=new String[4];
         // getting each value and storing
         System.out.println("Please enter the keeper's first name: ");
@@ -491,5 +550,35 @@ public class Menus {
 
         return keeper;
     }
+
+    private static int adminAddCage(){
+        // printing the menu
+        System.out.println("""
+                    ----- Add a Cage ----- 
+                    Please select the Cage Capacity
+                    1) Large Cage
+                    2) Medium Cage
+                    3) Small Cage
+                    4) Return
+                    -->\s""");
+        try{
+            choice=sc.nextInt();
+            // returning the selected choice from the user
+            return switch (choice){
+                case 1, 2, 3, 4->{yield choice;}
+                default -> { yield 0;}
+            };
+        }
+        catch (InputMismatchException e){
+            System.out.println("Incorrect choice entered");
+            return 0;
+        }
+        finally {
+            sc.nextLine();
+        }
+
+    }
+
+
 // end of class
 }

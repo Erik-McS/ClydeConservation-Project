@@ -12,6 +12,7 @@ import java.util.Iterator;
 public class Menagerie {
 
     private static ArrayList<Animal> menagerie=new ArrayList<>();
+    private static final String fileName="menagerie.dat";
     // using a private constructor to prevent the creation of Menagerie objects
     private Menagerie(){}
     /**
@@ -66,6 +67,13 @@ public class Menagerie {
         }
     }
 
+    /**
+     * Function to return the filename for the Menagerie
+     * @return File name
+     */
+    public static String getFileName(){
+        return fileName;
+    }
     /**
      * This method will save the Menagerie ArrayList in a file
      * Link to resource found while searching for how-to

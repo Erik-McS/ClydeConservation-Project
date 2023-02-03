@@ -1,8 +1,8 @@
 package applicationEntry;
 
-import animals.Bird;
 import animals.Menagerie;
-import employees.*;
+import animals.Bird;
+
 public class TestClass {
     public static void main(String[] args) {
 
