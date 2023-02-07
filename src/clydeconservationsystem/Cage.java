@@ -2,11 +2,15 @@ package clydeconservationsystem;
 
 import animals.Animal;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * The Cage interface is used so cages objects can be store in one place
  * @author Erik
  */
 public abstract class Cage {
+
 
     public static int CAGE_ID_BASE=300;
     /**
@@ -28,5 +32,10 @@ public abstract class Cage {
     public abstract boolean isFull();
 
     public abstract String getCageDetails();
+
+    /**
+     * The method will display the details of all the animals in the collection.
+     */
+    public abstract void displayAssignedAnimals();
 
 }

@@ -1,5 +1,7 @@
 package employees;
 
+import clydeconservationsystem.ValidationException;
+
 /**
  * This class will use the Builder design pattern.
  * This pattern allows a modular approach to constructor.
@@ -11,7 +13,8 @@ package employees;
  * It will receive an object of the builder class and assign its parameters to the HeadKeeper object.
  * <p>
  * some resources:
- * <a href="https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/">...</a>
+ * <p>
+ * <a href="https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/">Builder Design Pattern</a>
  * @author Erik
  */
 public class HeadKeeper extends Keeper{
@@ -71,20 +74,20 @@ public class HeadKeeper extends Keeper{
          * the method will check that the name has a correct format, or it will throw a validation exception.
          * @param name Name of the Head Keeper
          * @return returns the current HdKBuilder
-         * @throws EmployeeValidation Incorrect Name Format
+         * @throws ValidationException Incorrect Name Format
          */
-        public HdKBuilder setName(String name) throws EmployeeValidation{
+        public HdKBuilder setName(String name) throws ValidationException {
             // checking the name format
             if (name.equals(""))
                 // if empty, throw exception
-                throw new EmployeeValidation("Name cannot be empty");
+                throw new ValidationException("Name cannot be empty");
             // using a regex to make sure there is no numbers or special characters
             else  if (name.matches("(\\p{Upper})(\\p{Lower}){1,10}")){
                 // if format is ok, assign the value to the builder attribute
                 this.firstName=name;
                 return this;
             }
-            else throw new EmployeeValidation("Invalid Name Format");
+            else throw new ValidationException("Invalid Name Format");
         }
 
         /**
@@ -93,17 +96,17 @@ public class HeadKeeper extends Keeper{
          * the method will check that the name has a correct format, or it will throw a validation exception.
          * @param lastName Lastname of the Head Keeper
          * @return returns the current HdKBuilder
-         * @throws EmployeeValidation Incorrect Name Format
+         * @throws ValidationException Incorrect Name Format
          */
-        public HdKBuilder setLastName(String lastName) throws EmployeeValidation{
+        public HdKBuilder setLastName(String lastName) throws ValidationException{
             // same logic and checks than for the name
             if (lastName.equals(""))
-                throw new EmployeeValidation("Last Name cannot be empty");
+                throw new ValidationException("Last Name cannot be empty");
             else if(lastName.matches("(\\p{Upper})(\\p{Lower}){1,20}")){
                 this.lastName=lastName;
                 return this;
             }
-            else throw new EmployeeValidation("Invalid Last Name Format");
+            else throw new ValidationException("Invalid Last Name Format");
         }
 
         /**
@@ -141,15 +144,15 @@ public class HeadKeeper extends Keeper{
          * <p>
          * Once done, it will return the created HeadKeeper object.
          * @return HeadKeeper object with all the values assigned.
-         * @throws EmployeeValidation Exception thrown if the name or lastname was not passed to the Builder.
+         * @throws ValidationException Exception thrown if the name or lastname was not passed to the Builder.
          */
-        public HeadKeeper HBuilder() throws EmployeeValidation{
+        public HeadKeeper HBuilder() throws ValidationException{
             // check if a name is assigned
             if (this.firstName==null)
-                throw new EmployeeValidation("Name cannot be empty");
+                throw new ValidationException("Name cannot be empty");
             // check if a last name is assigned
             if (this.lastName==null)
-                throw new EmployeeValidation("Name cannot be empty");
+                throw new ValidationException("Name cannot be empty");
             // if no address was set, we assign a default value
             if (this.address==null)
                 this.address="To be updated";

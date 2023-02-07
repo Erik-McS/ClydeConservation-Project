@@ -4,6 +4,7 @@ import animals.Animal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class to represent the large cages used at Clyde Conservation
@@ -14,16 +15,19 @@ public class largeCage extends Cage implements Serializable {
 
     // defining the cage capacity
     private final int CAPACITY=10;
-    // arraylist to contains the assigned animals
-    private ArrayList<Animal> assignedAnimals=new ArrayList<>();
+    private int cageID;
+    // Arraylist for the animals assigned to the cage
+    private ArrayList<Animal> assignedAnimals;
     // variable to store the category of the first animal assigned to it
     // this will allow to check if the animals added later are compatible
     private String cageCategory;
-    private int cageID;
+
 
     public largeCage(){
-        // assign a cageID to the new cage
-        this.cageID=CAGE_ID_BASE++;
+        // initialising the arraylist
+        assignedAnimals=new ArrayList<>();
+        // creating the ID
+        cageID=CAGE_ID_BASE++;
     }
 
     /**
@@ -53,6 +57,34 @@ public class largeCage extends Cage implements Serializable {
         return cageID;
     }
 
+    /**
+     * Method to return the cage capacity, to be used in tests in the AllocationTable class
+     * @return
+     */
+    public int getCAPACITY(){
+        return CAPACITY;
+    }
+
+    @Override
+    public void displayAssignedAnimals() {
+        // local variable to display the animal position in the collection.
+        int index=0;
+        // if empty, display status.
+        if (isEmpty())
+            System.out.println("There is no animals assigned to Large this cage");
+        else{
+            // using an iterator to loop over the animal collection.
+            Iterator<Animal> iter=assignedAnimals.iterator();
+            while (iter.hasNext()){
+                // displaying the index and the animal details.
+                Animal animal= iter.next();
+                System.out.println("Index: "+index);
+                System.out.println(animal.getDetails());
+                index++;
+            }
+        }
+    }
+
     @Override
     public boolean isEmpty() {
         return assignedAnimals.isEmpty();
@@ -61,7 +93,7 @@ public class largeCage extends Cage implements Serializable {
     @Override
     public void assignAnimal(Animal animal) {
         // we check if the cage is empty
-        if (assignedAnimals.isEmpty()){
+        if (isEmpty()){
             // if empty, we set the category of the cage to the animal category
             cageCategory= animal.getCategory();
             // we then add the animal to the cage
@@ -84,8 +116,7 @@ public class largeCage extends Cage implements Serializable {
                 System.out.println("This animal is a "+animal.getCategory()+" and is incompatible with the others in the cage");
         }
     }
-    @Override
-    public boolean isFull() {
+    @Override    public boolean isFull() {
         return assignedAnimals.size()==CAPACITY;
     }
 

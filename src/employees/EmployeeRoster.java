@@ -58,7 +58,8 @@ public class EmployeeRoster {
     /**
      * This method will save the Roster ArrayList in a file
      * Link to resource found while searching for how-to
-     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">...</a>
+     * <p>
+     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Saving ArrayList in a file</a>
      * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream
