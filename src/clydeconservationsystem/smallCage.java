@@ -4,6 +4,7 @@ import animals.Animal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class to represent the small cages used at Clyde Conservation
@@ -14,14 +15,17 @@ public class smallCage extends Cage implements Serializable {
 
     // Animal object to contain the assigned animal
     private Animal assignedAnimal;
-    private ArrayList<Animal> assignedAnimals=new ArrayList<>();
+    private ArrayList<Animal> assignedAnimals;
     // variable to store the category of the first animal assigned to it
     // this will allow to check if the animals added later are compatible
     private String cageCategory;
     private int cageID;
 
     public smallCage(){
-        this.cageID=CAGE_ID_BASE++;
+        // initialising the arraylist
+        assignedAnimals=new ArrayList<>();
+        // creating the ID
+        cageID=CAGE_ID_BASE++;
     }
 
     /**
@@ -49,6 +53,26 @@ public class smallCage extends Cage implements Serializable {
      */
     public String getCageCategory(){
         return cageCategory;
+    }
+
+    @Override
+    public void displayAssignedAnimals() {
+        // local variable to display the animal position in the collection.
+        int index=0;
+        // if empty, display status.
+        if (isEmpty())
+            System.out.println("There is no animal assigned to this Small cage");
+        else{
+            // using an iterator to loop over the animal collection.
+            Iterator<Animal> iter=assignedAnimals.iterator();
+            while (iter.hasNext()){
+                // displaying the index and the animal details.
+                Animal animal= iter.next();
+                System.out.println("Index: "+index);
+                System.out.println(animal.getDetails());
+                index++;
+            }
+        }
     }
 
     @Override

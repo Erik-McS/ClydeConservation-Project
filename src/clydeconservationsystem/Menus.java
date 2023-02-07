@@ -98,7 +98,7 @@ public class Menus {
             // returning the selected profile
             return loggedAs;
         }
-        catch (EmployeeValidation e){
+        catch (ValidationException e){
             System.out.println(e.getMessage());
         }
         // this return will never happen, but needs to be here
@@ -286,8 +286,11 @@ public class Menus {
                                     EmployeeRoster.addEmployee(hKeeper);
                                     // saving the roster
                                     EmployeeRoster.saveRoster(EmployeeRoster.getFileName());
+                                    // confirming the record has been created
+                                    System.out.println("The following employee is now added to the roster:");
+                                    System.out.println(hKeeper.getDetails());
                                 }
-                                catch (EmployeeValidation e){
+                                catch (ValidationException e){
                                     System.out.println(e.getMessage());
                                 }
                             case 3:

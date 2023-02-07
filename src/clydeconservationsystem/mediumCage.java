@@ -4,6 +4,7 @@ import animals.Animal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class to represent the medium cages used at Clyde Conservation
@@ -16,14 +17,17 @@ public class mediumCage extends Cage implements Serializable {
     // defining the cage capacity
     private final int CAPACITY=5;
     // arraylist to contains the assigned animals
-    private ArrayList<Animal> assignedAnimals=new ArrayList<>();
+    private ArrayList<Animal> assignedAnimals;
     // variable to store the category of the first animal assigned to it
     // this will allow to check if the animals added later are compatible
     private String cageCategory;
     private int cageID;
 
     public mediumCage(){
-
+        // initialising the arraylist
+        assignedAnimals=new ArrayList<>();
+        // creating the ID
+        cageID=CAGE_ID_BASE++;
     }
 
     /**
@@ -54,6 +58,26 @@ public class mediumCage extends Cage implements Serializable {
     }
 
     @Override
+    public void displayAssignedAnimals() {
+        // local variable to display the animal position in the collection.
+        int index=0;
+        // if empty, display status.
+        if (isEmpty())
+            System.out.println("There is no animals assigned to this Medium cage");
+        else{
+            // using an iterator to loop over the animal collection.
+            Iterator<Animal> iter=assignedAnimals.iterator();
+            while (iter.hasNext()){
+                // displaying the index and the animal details.
+                Animal animal= iter.next();
+                System.out.println("Index: "+index);
+                System.out.println(animal.getDetails());
+                index++;
+            }
+        }
+    }
+
+    @Override
     public boolean isEmpty() {
         return assignedAnimals.isEmpty();
     }
@@ -62,7 +86,7 @@ public class mediumCage extends Cage implements Serializable {
     public void assignAnimal(Animal animal) {
         // we check if the cage is empty
         if (assignedAnimals.isEmpty()){
-            // if empty, we set the category of the cage to the animal category
+            // if empty, we set the category of the cage to the animal's category
             cageCategory= animal.getCategory();
             // we then add the animal to the cage
             assignedAnimals.add(animal);

@@ -1,7 +1,7 @@
 package clydeconservationsystem;
 
 /**
- * Custom exception class to catch incorrect formats for the clydeconservationsystem package
+ * Custom exception class to catch incorrect values for the clydeconservationsystem package
  * @author Erik
  */
 public class ValidationException extends Exception{

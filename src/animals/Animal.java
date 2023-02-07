@@ -1,6 +1,7 @@
 package animals;
 
 import clydeconservationsystem.Menus;
+import clydeconservationsystem.ValidationException;
 
 import java.io.Serializable;
 
@@ -157,10 +158,10 @@ public abstract class Animal implements Serializable {
      * It will validate the data passed to it
      * @param sex Sex of the animal
      */
-    public void setSex(String sex) throws AnimalValidation{
+    public void setSex(String sex) throws ValidationException{
         if (sex.equals("Male")||sex.equals("Female"))
             this.sex=sex;
-        else throw new AnimalValidation("Invalid value for sex");
+        else throw new ValidationException("Invalid value for sex");
     }
 
     /**
@@ -191,10 +192,10 @@ public abstract class Animal implements Serializable {
      * It will validate the data passed to it
      * @param category Sex of the animal
      */
-    public void setCategory(String category) throws AnimalValidation{
+    public void setCategory(String category) throws ValidationException{
         if (category.equals("Predator")||category.equals("Prey"))
             this.category=category;
-        else throw new AnimalValidation("Invalid Category Value");
+        else throw new ValidationException("Invalid Category Value");
     }
 
     /**

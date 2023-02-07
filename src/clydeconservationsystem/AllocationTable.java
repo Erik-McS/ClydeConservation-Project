@@ -1,5 +1,12 @@
 package clydeconservationsystem;
 
+import employees.Keeper;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
 /**
  * This class holds the Cages-Keepers allocation.
  * <p>
@@ -10,5 +17,91 @@ package clydeconservationsystem;
  * all allocations are stored in an AllocationCollection object.
  * @author Erik
  */
-public class AllocationTable {
+public class AllocationTable implements Serializable {
+
+    // Variable to hold the Keeper
+    private Keeper assignedKeeper;
+    // Variable to hold the maximum number of cage a keeper can have
+    private final int MAX_ASSIGMENTS=4;
+    // arraylist to store the assigned cages.
+    ArrayList<Cage> assignedCages;
+
+    /**
+     * Constructor for the Allocation object.
+     * <p>
+     * A table must be created with a Keeper, even if it can be changed later if needed.
+     * @param keeper
+     */
+    public AllocationTable(Keeper keeper){
+        this.assignedKeeper=keeper;
+    }
+    /**
+     * Method to get the assigned Keeper of to allocation table
+     * @return The assigned Keeper.
+     */
+    public Keeper getAssignedKeeper() {
+        return assignedKeeper;
+    }
+
+    /**
+     * Method to assign get a Keeper to the allocation table
+     * <p>
+     * This should only be used if the existing keeper need to be replaced
+     * @param assignedKeeper
+     */
+    public void setAssignedKeeper(Keeper assignedKeeper) {
+        this.assignedKeeper = assignedKeeper;
+    }
+    private boolean isMaxedOut(){
+        // test if the keeper has room for more cage assignments.
+        // returns true if the size of the arraylist is greater or equal than the MAX_ASSIGNMENT constant
+        return assignedCages.size()>=MAX_ASSIGMENTS;
+    }
+    // function to check is the list is empty
+    private boolean isEmpty(){
+        return assignedCages.isEmpty();
+    }
+
+    /**
+     * Method to add a cage to a Keeper assignment
+     * @param cage
+     */
+    public void assignCage(Cage cage){
+        // we first test if the cage is empty
+        // if not, we check if the assigned cages of this keeper is not greater or equal than 4
+        if (cage.isEmpty())
+            System.out.println("This cage is empty. it cannot be assigned yet.");
+        else if(isMaxedOut())
+            System.out.println("This keeper cannot care for any more cages");
+        else
+            assignedCages.add(cage);
+    }
+
+    /**
+     * Method to remove a Cage from the Assignment
+     */
+    public void removeCage(){
+        System.out.println("----- Remove a cage from the assignment -----");
+        displayAssignment();
+        assignedCages.remove(new Scanner(System.in).nextInt());
+    }
+
+    /**
+     * Method to display the cages assigned in this Allocation Table
+     */
+    public void displayAssignment(){
+        int index=1;
+        if (isEmpty())
+            System.out.println("This keeper has no cages assigned");
+        else{
+            Iterator<Cage> iter= assignedCages.iterator();
+            while (iter.hasNext()){
+                Cage cge=iter.next();
+                System.out.println("----- Cage "+index+" -----");
+                System.out.println(cge.getCageDetails());
+            }
+        }
+    }
+
+// End of class
 }

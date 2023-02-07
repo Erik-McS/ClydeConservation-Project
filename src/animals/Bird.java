@@ -1,5 +1,7 @@
 package animals;
 
+import clydeconservationsystem.ValidationException;
+
 /**
  * Class used to describe birds
  * <p>
@@ -47,7 +49,7 @@ public class Bird extends Animal {
             // the Animal is not assigned to a cage by default
             setCaged(false);
         }
-        catch (AnimalValidation ex){
+        catch (ValidationException ex){
             System.out.println(ex.getMessage());
         }
     }

@@ -29,7 +29,8 @@ public class CagesCollection {
     /**
      * This method will save the Cages ArrayList in a file
      * Link to resource found while searching for how-to
-     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">...</a>
+     * <p>
+     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Java - How Can I Write My ArrayList to a file</a>
      * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream

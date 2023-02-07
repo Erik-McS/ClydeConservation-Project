@@ -8,10 +8,20 @@ import java.util.Iterator;
  * The Menagerie class will store all the animals in Clyde Conservation's care.
  * <p>
  * This class have static methods that will handle the collection of animals.
+ * <p>
+ * To check: seems I actually designed by chance a class using a Singleton design pattern:
+ * <p>
+ * <a href="https://www.javatpoint.com/singleton-design-pattern-in-java">Singleton design pattern in Java</a>
+ * <p>
+ * Missing a method to return the array though, but
+ *  it is not needed in my design
+ *
  */
 public class Menagerie {
 
+    // ArrayList to store the animals
     private static ArrayList<Animal> menagerie=new ArrayList<>();
+    // constant to hold the name of the menagerie file
     private static final String fileName="menagerie.dat";
     // using a private constructor to prevent the creation of Menagerie objects
     private Menagerie(){}
@@ -76,8 +86,9 @@ public class Menagerie {
     }
     /**
      * This method will save the Menagerie ArrayList in a file
-     * Link to resource found while searching for how-to
-     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">...</a>
+     * Link to resource found while searching for how-to:
+     * <p>
+     * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Java - How Can I Write My ArrayList to a file</a>
      * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream
