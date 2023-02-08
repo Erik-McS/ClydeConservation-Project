@@ -89,16 +89,15 @@ public class Menagerie {
      * Link to resource found while searching for how-to:
      * <p>
      * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Java - How Can I Write My ArrayList to a file</a>
-     * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream
      *
      */
-    public static void saveMenagerie(String filename){
+    public static void saveMenagerie(){
         // try-catch to get any IO errors
         try{
             // initialise an output stream for the file
-            FileOutputStream fos=new FileOutputStream(filename);
+            FileOutputStream fos=new FileOutputStream(fileName);
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(menagerie);
             oos.close();
@@ -110,15 +109,14 @@ public class Menagerie {
 
     /**
      * Method to load a saved menagerie from a file
-     * @param filename Name fo the file to load
      * @see FileInputStream
      * @see ObjectInputStream
      */
-    public static void loadMenagerie(String filename){
+    public static void loadMenagerie(){
 
         try{
 
-            FileInputStream fis=new FileInputStream(filename);
+            FileInputStream fis=new FileInputStream(fileName);
             ObjectInputStream ois=new ObjectInputStream(fis);
             menagerie.clear();
             try{
@@ -131,8 +129,6 @@ public class Menagerie {
         catch (IOException e){
             System.out.println(e.getMessage());
         }
-
     }
-
 // end of class
 }

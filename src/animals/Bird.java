@@ -8,9 +8,6 @@ import clydeconservationsystem.ValidationException;
  * it will be used as it own type, further developments could add children types to it
  */
 public class Bird extends Animal {
-    // unique ID for the animal
-    private int animalID;
-
     /**
      * The default constructor will use the setters implemented in the parent class
      * <p>
@@ -52,14 +49,6 @@ public class Bird extends Animal {
         catch (ValidationException ex){
             System.out.println(ex.getMessage());
         }
-    }
-
-    /**
-     * Getter method to get the Bird's animal ID
-     * @return Animal ID
-     */
-    public int getAnimalID() {
-        return animalID;
     }
 
     // custom toString()

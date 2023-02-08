@@ -11,7 +11,6 @@ import java.util.Iterator;
  * Class that will hold the employees of Clyde Conservation
  */
 public class EmployeeRoster {
-
     private static ArrayList<Employee> employees=new ArrayList<>();
     // setting a filename for the employee roster file
     private static final String fileName="roster.dat";
@@ -25,7 +24,7 @@ public class EmployeeRoster {
         int index=0;
         // if empty, display status.
         if (employees.isEmpty())
-            System.out.println("There is no animals stored");
+            System.out.println("There is no employees stored");
         else{
             // using an iterator to loop over the employee collection.
             Iterator<Employee> iter=employees.iterator();
@@ -38,9 +37,49 @@ public class EmployeeRoster {
             }
         }
     }
+    /**
+     * Method do display the keepers present in the Employee roster
+     */
+    public static void  displayKeepers(){
+        // if empty, display status.
+        if (employees.isEmpty())
+            System.out.println("There is no employees stored");
+        else{
+            // using an iterator to loop over the employee collection.
+            Iterator<Employee> iter=employees.iterator();
+            while (iter.hasNext()){
+                // displaying the index and the employee details.
+                Employee employee= iter.next();
+                if (employee.getClass()== Keeper.class){
+                    Keeper emp=(Keeper) employee;
+                    System.out.println("----- Keeper ID: "+emp.getKeeperID()+" -----");
+                    System.out.println("Name: "+emp.getFirstName()+"\nSurname: "+emp.getLastName());
+                }
+                else
+                    System.out.println("There are no keepers stored in the system");
+            }
+        }
+    }
+    /**
+     * Method to search the employee roster and return a keeper ogject corresponding to the passed keeperID
+     * @param keeperID
+     * @return the searched Keeper, or null if not found
+     */
+    public static Keeper getKeeper(int keeperID){
+        Iterator<Employee> iter= employees.iterator();
+        while (iter.hasNext()){
+            Employee employee=iter.next();
+            if (employee.getClass()== Keeper.class){
+               Keeper kp=(Keeper) employee;
+               if (kp.getKeeperID()==keeperID)
+                   return kp;
+            }
+        }
+        return null;
+    }
 
     /**
-     * Function to return the filename for the Menagerie
+     * Function to return the filename for the roster
      * @return File name
      */
     public static String getFileName(){
@@ -57,19 +96,19 @@ public class EmployeeRoster {
 
     /**
      * This method will save the Roster ArrayList in a file
-     * Link to resource found while searching for how-to
+     * <p>
+     * Link to resource found while searching for how-to:
      * <p>
      * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Saving ArrayList in a file</a>
-     * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream
      *
      */
-    public static void saveRoster(String filename){
+    public static void saveRoster(){
         // try-catch to get any IO errors
         try{
             // initialise a file output stream for the file
-            FileOutputStream fos=new FileOutputStream(filename);
+            FileOutputStream fos=new FileOutputStream(fileName);
             // create an object stream to write in the file stream
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             // writing the employee ArrayList in the file
@@ -83,15 +122,13 @@ public class EmployeeRoster {
 
     /**
      * Method to load a saved roster from a file
-     * @param filename Name fo the file to load
      * @see FileInputStream
      * @see ObjectInputStream
      */
-    public static void loadRoster(String filename){
+    public static void loadRoster(){
 
         try{
-
-            FileInputStream fis=new FileInputStream(filename);
+            FileInputStream fis=new FileInputStream(fileName);
             ObjectInputStream ois=new ObjectInputStream(fis);
             employees.clear();
             try{
@@ -104,8 +141,6 @@ public class EmployeeRoster {
         catch (IOException e){
             System.out.println(e.getMessage());
         }
-
     }
-
 // End of class
 }

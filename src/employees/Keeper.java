@@ -18,8 +18,17 @@ public class Keeper implements Employee, Serializable {
     private String lastName;
     private String address;
     private String contactNumber;
+
+    // protected variable that will be used to create an ID
+    protected int keeperID;
     // static variable used in child classes to generate unique ID
     public static int KEEPER_ID_BASE=100;
+
+    /**
+     * getter for the KeeperID, no setter as the ID is constant once created
+     * @return the Employee number of the Keeper
+     */
+    public int getKeeperID() {return keeperID;}
 
     // getter and setters
 

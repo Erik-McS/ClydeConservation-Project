@@ -15,15 +15,10 @@ public class smallCage extends Cage implements Serializable {
 
     // Animal object to contain the assigned animal
     private Animal assignedAnimal;
-    private ArrayList<Animal> assignedAnimals;
     // variable to store the category of the first animal assigned to it
-    // this will allow to check if the animals added later are compatible
     private String cageCategory;
-    private int cageID;
 
     public smallCage(){
-        // initialising the arraylist
-        assignedAnimals=new ArrayList<>();
         // creating the ID
         cageID=CAGE_ID_BASE++;
     }
@@ -60,19 +55,20 @@ public class smallCage extends Cage implements Serializable {
         // local variable to display the animal position in the collection.
         int index=0;
         // if empty, display status.
-        if (isEmpty())
+        if (assignedAnimal==null)
             System.out.println("There is no animal assigned to this Small cage");
-        else{
-            // using an iterator to loop over the animal collection.
-            Iterator<Animal> iter=assignedAnimals.iterator();
-            while (iter.hasNext()){
-                // displaying the index and the animal details.
-                Animal animal= iter.next();
-                System.out.println("Index: "+index);
-                System.out.println(animal.getDetails());
-                index++;
-            }
-        }
+        else
+            System.out.println(assignedAnimal.getDetails());
+    }
+
+    @Override
+    public boolean isPresent(Animal animal) {
+        if (assignedAnimal==null)
+            return false;
+        else if (assignedAnimal.getAnimalID()==animal.getAnimalID())
+                return true;
+        else
+            return false;
     }
 
     @Override
@@ -87,7 +83,7 @@ public class smallCage extends Cage implements Serializable {
             // if empty, we set the category of the cage to the animal category
             cageCategory= animal.getCategory();
             // we then add the animal to the cage
-            assignedAnimals.add(animal);
+            assignedAnimal=animal;
             // we confirm the assignment
             System.out.println("The following animal has successfully been added to the cage:");
             System.out.println(animal.getDetails());
@@ -104,6 +100,19 @@ public class smallCage extends Cage implements Serializable {
 
     @Override
     public String getCageDetails() {
-        return null;
-    }
+
+        if (isEmpty()) {
+            return "\nCage ID: " + cageID +
+                    "\n Cage Capacity: 1" +
+                    "\n Number of animals in the cage: 0" +
+                    "\n Cage Category: N/A";
+        }
+        else{
+            return "\nCage ID: "+cageID+
+                    "\n Cage Capacity: 1"+
+                    "\n Number of animals in the cage: 1"+
+                    "\n Cage Category: "+getCageCategory();
+            }
+        }
+// End of class
 }

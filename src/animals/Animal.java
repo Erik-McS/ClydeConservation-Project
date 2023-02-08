@@ -28,7 +28,13 @@ public abstract class Animal implements Serializable {
      * This variable is used to generate unique animal IDs
      */
     public static int ANIMAL_ID_BASE =200;
+    protected int animalID;
 
+    /**
+     * Method to return the animal ID
+     * @return The animal ID
+     */
+    public int getAnimalID(){return animalID;}
     /**
      * this method is a custom equivalent of the toString() method.
      * <p>
