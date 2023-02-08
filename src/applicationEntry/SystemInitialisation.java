@@ -1,0 +1,140 @@
+package applicationEntry;
+
+import animals.Bird;
+import animals.Mammal;
+import animals.Menagerie;
+import animals.Reptile;
+import clydeconservationsystem.*;
+import employees.Administrator;
+import employees.AssistantKeeper;
+import employees.EmployeeRoster;
+import employees.HeadKeeper;
+
+import java.io.File;
+
+/**
+ * This class is used to create and add some objects to the program collections.
+ * <p>
+ * it is not included in the class diagram as it is used to simulate previous activity or data entry from the paper system.
+ * <p>
+ * class is following the Singleton design pattern ( mostly private constructor and statics methods).
+ * @author Erik
+ */
+public class SystemInitialisation {
+    // empty and private constructor to prevent object creation.
+    private SystemInitialisation(){}
+
+    /**
+     * This method will check if each of the 4 files are present in the app folder. if not, it will create some data in the collections
+     * 'cages.dat': The charity cages collections
+     * 'roster.dat': The charity's employees
+     * 'menagerie.dat': The charity's animals
+     * 'assignments.dat': the assignments(Keeper-Cages), left empty is file is not created yet.
+     */
+    public static void initialiseData(){
+        // check animals
+        checkAnimalsFile();
+        // check employees
+        checkEmployeeFile();
+        // check cages
+        checkCagesFile();
+        // check assignments
+        checkAssignmentsFile();
+
+    }
+
+    private static void checkCagesFile(){
+        File f=new File("cages.dat");
+        if (!f.exists()){
+            createCageCollection();
+        }
+        else
+            CagesCollection.loadCagesCollection();
+    }
+    private static void checkEmployeeFile(){
+        File f=new File("roster.dat");
+        if (!f.exists()){
+            createCageCollection();
+        }
+        else
+            EmployeeRoster.loadRoster();
+    }
+
+    private static void checkAnimalsFile(){
+        File f=new File("menagerie.dat");
+        if (!f.exists()){
+            createMenagerie();
+        }
+        else
+            Menagerie.loadMenagerie();
+    }
+    private static void checkAssignmentsFile(){
+        File f=new File("assignments.dat");
+        if (f.exists())
+            AllocationsCollection.loadAssignment();
+    }
+
+    private static void createMenagerie(){
+        // create some animals
+        Menagerie.addAnimal(new Bird("Robin","Prey","Male","02/02/2021","05/01/2021"));
+        Menagerie.addAnimal(new Mammal("Spot","Predator","Male","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Reptile("Smiss","Predator","Male","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Mammal("Daisy","Prey","Female","04/02/2021","05/04/2021"));
+        Menagerie.saveMenagerie();
+        System.out.println("------ Menagerie ------");
+        Menagerie.displayAnimals();
+    }
+    private static void createEmployeeRoster(){
+        try{
+            // one Admin
+            EmployeeRoster.addEmployee(new Administrator("Mike","Tajid","0777223344","1 Glasgow av"));
+            // one HeadKeeper
+            EmployeeRoster.addEmployee(new HeadKeeper.HdKBuilder().setName("Erik").setLastName("Mseveney")
+                    .setContactNumber("07755667788").setAddress("2 Glasgow av").HBuilder());
+            // 4 Assistant Keepers
+            EmployeeRoster.addEmployee(new AssistantKeeper("John","Smith","07745362711","3 Glasgow av"));
+            EmployeeRoster.addEmployee(new AssistantKeeper("Tom","Tomas","07789653421","4 Glasgow av"));
+            EmployeeRoster.addEmployee(new AssistantKeeper("Daryl","Make","07745109876","5 Glasgow av"));
+            EmployeeRoster.addEmployee(new AssistantKeeper("Patrick","Brien","07794557789","6 Glasgow av"));
+            // Saving the roster in a file
+            EmployeeRoster.saveRoster();
+            // printing the roster.
+            System.out.println("------ Employee Roster ------");
+            EmployeeRoster.displayEmployees();
+        }
+        catch (ValidationException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    private static void createCageCollection(){
+        /**
+         * From the brief:
+         * We have five large cages with a capacity for ten animals, three medium
+         * cages with a capacity for five animals and seven small cages with a
+         * capacity for one animal.
+         * **/
+
+        // 5 large cages
+        CagesCollection.addCage(new largeCage());
+        CagesCollection.addCage(new largeCage());
+        CagesCollection.addCage(new largeCage());
+        CagesCollection.addCage(new largeCage());
+        CagesCollection.addCage(new largeCage());
+        // 3 medium cages
+        CagesCollection.addCage(new mediumCage());
+        CagesCollection.addCage(new mediumCage());
+        CagesCollection.addCage(new mediumCage());
+        // 7 small cages
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new smallCage());
+
+        CagesCollection.saveCagesCollection();
+        System.out.println("------ Cage Collections ------");
+        CagesCollection.displayAllCages();
+    }
+}

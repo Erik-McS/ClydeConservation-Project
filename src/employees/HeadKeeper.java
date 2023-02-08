@@ -20,7 +20,7 @@ import clydeconservationsystem.ValidationException;
 public class HeadKeeper extends Keeper{
 
     // the ID is made final ,as it doesn't need to change once assigned.
-    private final int KEEPER_ID;
+
     private HeadKeeper(HdKBuilder build){
         // the constructor will assign each attributes of the nested Builder  class to the HeadKeeper object
         this.setFirstName(build.firstName);
@@ -29,22 +29,15 @@ public class HeadKeeper extends Keeper{
         this.setContactNumber(build.contactNumber);
         // using a static variable from the parent class. this will assign a unique ID to the child object
         // also increment the static variable.
-        this.KEEPER_ID =KEEPER_ID_BASE++;
+        this.keeperID =KEEPER_ID_BASE++;
     }
 
-    /**
-     * getter for the KeeperID, no setter as the ID is constant once created
-     * @return the Employee number of the Keeper
-     */
-    public int getKEEPER_ID() {
-        return KEEPER_ID;
-    }
 
-    // override the getDetails() method to include the KeeperID;
+     // override the getDetails() method to include the KeeperID;
     @Override
     public String getDetails() {
         return "\nKeeper details:"+
-                "\nKeeper ID: "+ getKEEPER_ID()+
+                "\nKeeper ID: "+ getKeeperID()+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
                 "\nAddress: "+getAddress()+

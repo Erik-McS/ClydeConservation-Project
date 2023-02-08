@@ -1,5 +1,7 @@
 package clydeconservationsystem;
 
+import animals.Animal;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,35 +14,37 @@ public class CagesCollection {
     private static final String fileName="cages.dat";
     private static ArrayList<Cage> cagesCollection=new ArrayList<>();
 
+    /**
+     * Method to add a cage to the collection
+     * @param c Cage to add
+     */
     public static void addCage(Cage c){
         cagesCollection.add(c);
     }
+
+    /**
+     * Method to check if the collection is empty
+     * @return True or False
+     */
     public static boolean isEmpty(){
         return cagesCollection.isEmpty();
-    }
-    /**
-     * Function to return the filename for the Menagerie
-     * @return File name
-     */
-    public static String getFileName(){
-        return fileName;
     }
 
     /**
      * This method will save the Cages ArrayList in a file
+     * <p>
      * Link to resource found while searching for how-to
      * <p>
      * <a href="https://stackoverflow.com/questions/16111496/java-how-can-i-write-my-arraylist-to-a-file-and-read-load-that-file-to-the">Java - How Can I Write My ArrayList to a file</a>
-     * @param filename Name of the file
      * @see FileOutputStream
      * @see ObjectOutputStream
      *
      */
-    public static void saveCagesCollection(String filename){
+    public static void saveCagesCollection(){
         // try-catch to get any IO errors
         try{
             // initialise an output stream for the file
-            FileOutputStream fos=new FileOutputStream(filename);
+            FileOutputStream fos=new FileOutputStream(fileName);
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(cagesCollection);
             oos.close();
@@ -52,15 +56,14 @@ public class CagesCollection {
 
     /**
      * Method to load a saved cagesCollection from a file
-     * @param filename Name fo the file to load
      * @see FileInputStream
      * @see ObjectInputStream
      */
-    public static void loadCagesCollection(String filename){
+    public static void loadCagesCollection(){
 
         try{
 
-            FileInputStream fis=new FileInputStream(filename);
+            FileInputStream fis=new FileInputStream(fileName);
             ObjectInputStream ois=new ObjectInputStream(fis);
             cagesCollection.clear();
             try{
@@ -76,25 +79,111 @@ public class CagesCollection {
 
     }
     /**
-     * The method will display the details of all the animals in the collection.
+     * The method will display the details of all the cages in the collection.
      */
-    public static void displayCages(){
-        // local variable to display the cage position in the collection.
-        int index=0;
+    public static void displayAllCages(){
         // if empty, display status.
         if (cagesCollection.isEmpty())
             System.out.println("There is no cages stored");
         else{
-            // using an iterator to loop over the animal collection.
+            // using an iterator to loop over the cage collection.
+            System.out.println();
             Iterator<Cage> iter=cagesCollection.iterator();
             while (iter.hasNext()){
-                // displaying the index and the animal details.
+                // displaying the index and the cage details.
                 Cage cage= iter.next();
-                System.out.println("Index: "+index);
+                System.out.println("Cage ID: "+cage.getCageID());
                 System.out.println(cage.getCageDetails());
-                index++;
             }
         }
+    }
+
+    /**
+     * The method will display the details of the unassigned cages in the collection.
+     */
+    public static void displayUnassignedCages(){
+
+        if (cagesCollection.isEmpty())
+            System.out.println("There is no cages stored");
+        else{
+            // using an iterator to loop over the cage collection.
+            System.out.println();
+            Iterator<Cage> iter=cagesCollection.iterator();
+            while (iter.hasNext()){
+                // if not already in the assignment collections, the cage will be displayed
+                Cage cage= iter.next();
+                if (!AllocationsCollection.isAssigned(cage)){
+                    System.out.println("Cage ID: "+cage.getCageID());
+                    System.out.println(cage.getCageDetails());
+                }
+            }
+        }
+    }
+
+    /**
+     * Method to get the index of a cage in the collection
+     * <p>
+     * will return -1 if not found
+     * @param c Cage
+     * @return -1 or the index in the ArrayList
+     */
+    public static int getCageIndex(Cage c){
+        int index=0;
+        if (cagesCollection.isEmpty())
+            return -1;
+        else{
+            Iterator<Cage> iter=cagesCollection.iterator();
+            while (iter.hasNext()){
+                Cage cg= iter.next();
+                if (cg.getCageID()==c.getCageID())
+                    return index;
+                else
+                    index++;
+            }
+            return -1;
+
+        }
+
+    }
+    /**
+     * Method to return an cage by its ID
+     * @param cageID ID of the cage
+     * @return The searched cage
+     */
+    public static Cage getCage(int cageID){
+
+        if (cagesCollection.isEmpty())
+            return null;
+        else{
+            Iterator<Cage>iter=cagesCollection.iterator();
+            while (iter.hasNext()){
+                Cage cg=iter.next();
+                if (cg.getCageID()==cageID)
+                    return cg;
+            }
+            return null;
+        }
+
+    }
+
+    /**
+     * Method to check if an animal is present in a cage
+     * @param animal Animal to look for
+     * @return True or False
+     */
+    public static boolean isAssigned(Animal animal){
+        if (cagesCollection.isEmpty())
+            return false;
+        else {
+            Iterator<Cage> iter=cagesCollection.iterator();
+            while (iter.hasNext()){
+                Cage cage=iter.next();
+                if (cage.isPresent(animal))
+                    return true;
+            }
+            return false;
+        }
+
     }
 // End of class
 }

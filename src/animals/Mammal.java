@@ -9,8 +9,6 @@ import clydeconservationsystem.ValidationException;
  */
 public class Mammal extends Animal{
     // class for the Mammal type
-    // unique ID for the animal
-    private int animalID;
     /**
      * The default constructor will use the setters implemented in the parent class
      * <p>
@@ -51,13 +49,6 @@ public class Mammal extends Animal{
         catch (ValidationException ex){
             System.out.println(ex.getMessage());
         }
-    }
-    /**
-     * Getter method to get the Mammal's animal ID
-     * @return Animal ID
-     */
-    public int getAnimalID() {
-        return animalID;
     }
     // custom toString()
     @Override

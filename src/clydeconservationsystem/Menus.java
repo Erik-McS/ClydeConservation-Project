@@ -12,7 +12,10 @@ import employees.*;
 /**
  * The Menus class will be used to propose the different menus of the app.
  * <p>
+ * This is the largest class, relative to code length
+ * <p>
  * All variables and methods will be static ( except any private methods).
+ * <p>
  * Most methods will return an object or a primitive type.
  * <p>
  * This class will have a private constructor to forbid the instantiation of an object.
@@ -150,8 +153,33 @@ public class Menus {
      */
     public static void headKeeperMenu(HeadKeeper headKeeper){
         // headKeeper menu to implement
-        System.out.println(headKeeper.getDetails());
+        int exit=0;
+
+        do {
+
+            switch (hKeeperMenu()){
+
+                case 1:
+                    keeperCreateAssignment();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    assignCageToKeeper();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    exit=5;
+                    break;
+
+            }
+
+        }
+        while (exit!=5);
+
     }
+
 
     /**
      * This function will handle the options accessible to an Administrator.
@@ -178,7 +206,7 @@ public class Menus {
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(bird);
                                 // saving the menagerie collection
-                                Menagerie.saveMenagerie(Menagerie.getFileName());
+                                Menagerie.saveMenagerie();
                                 System.out.println("The following bird is now added in the system:");
                                 System.out.println(bird.getDetails());
                                 break;
@@ -189,7 +217,7 @@ public class Menus {
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(mammal);
                                 // saving the menagerie collection
-                                Menagerie.saveMenagerie(Menagerie.getFileName());
+                                Menagerie.saveMenagerie();
                                 System.out.println("The following mammal is now added in the system:");
                                 System.out.println(mammal.getDetails());
                                 break;
@@ -200,7 +228,7 @@ public class Menus {
                                 // we add the animal to the collection
                                 Menagerie.addAnimal(reptile);
                                 // saving the menagerie collection
-                                Menagerie.saveMenagerie(Menagerie.getFileName());
+                                Menagerie.saveMenagerie();
                                 System.out.println("The following bird is now added in the system:");
                                 System.out.println(reptile.getDetails());
                                 break;
@@ -222,7 +250,7 @@ public class Menus {
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(largeCage);
                                 // save the CagesCollection in the file
-                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                CagesCollection.saveCagesCollection();
                                 // confirming the cage creation
                                 System.out.println("This cage was added to the collection");
                                 System.out.println(largeCage.getCageDetails());
@@ -233,7 +261,7 @@ public class Menus {
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(mediumCage);
                                 // save the CagesCollection in the file
-                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                CagesCollection.saveCagesCollection();
                                 // confirming the cage creation
                                 System.out.println("This cage was added to the collection");
                                 System.out.println(mediumCage.getCageDetails());
@@ -244,7 +272,7 @@ public class Menus {
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(smallCage);
                                 // save the CagesCollection in the file
-                                CagesCollection.saveCagesCollection(CagesCollection.getFileName());
+                                CagesCollection.saveCagesCollection();
                                 // confirming the cage creation
                                 System.out.println("This cage was added to the collection");
                                 System.out.println(smallCage.getCageDetails());
@@ -269,7 +297,7 @@ public class Menus {
                                 // once created, the Assistant Keeper is added to the roster
                                 EmployeeRoster.addEmployee(assist);
                                 // the roster is saved locally
-                                EmployeeRoster.saveRoster(EmployeeRoster.getFileName());
+                                EmployeeRoster.saveRoster();
                                 // confirming the record has been created
                                 System.out.println("The following employee is now added to the roster:");
                                 System.out.println(assist.getDetails());
@@ -285,7 +313,7 @@ public class Menus {
                                     // adding the new HeadKeeper to the roster
                                     EmployeeRoster.addEmployee(hKeeper);
                                     // saving the roster
-                                    EmployeeRoster.saveRoster(EmployeeRoster.getFileName());
+                                    EmployeeRoster.saveRoster();
                                     // confirming the record has been created
                                     System.out.println("The following employee is now added to the roster:");
                                     System.out.println(hKeeper.getDetails());
@@ -458,6 +486,7 @@ public class Menus {
 
     // the following privates methods are used for internal menus
 
+    //Administrator Menu
     private static int adminMenu(){
         // printing the menu
         System.out.println("""
@@ -485,6 +514,36 @@ public class Menus {
         }
     }
 
+    // HeadKeeper Menu
+    private static int hKeeperMenu(){
+        System.out.println("""
+
+                    Please select an option
+                    1) Create an assigment
+                    2) Assign an Animal to a Cage
+                    3) Assign a cage to a Keeper
+                    4) Display the existing Assignments
+                    5) Return
+                    -->\s""");
+        try{
+            choice=sc.nextInt();
+            // returning the selected choice from the user
+            return switch (choice){
+                case 1, 2, 3, 4, 5 ->{yield choice;}
+                default -> { yield 6;}
+            };
+        }
+        // exception if something not an integer is entered
+        catch (InputMismatchException e){
+            System.out.println("Incorrect choice entered");
+            return 0;
+        }
+        finally {
+            sc.nextLine();
+        }
+    }
+
+    // Admin: add an animal
     private static int adminAddAnimalMenu(){
         // printing the menu
         System.out.println("""
@@ -512,6 +571,7 @@ public class Menus {
         }
     }
 
+    //Admin: add a Keeper
     private static int adminAddKeeperMenu(){
         // printing the menu
         System.out.println("""
@@ -550,10 +610,9 @@ public class Menus {
         keeper[2]=sc.next();
         System.out.println("Please enter the keeper's address:");
         keeper[3]=sc.next();
-
         return keeper;
     }
-
+    // Admin: Add a cage
     private static int adminAddCage(){
         // printing the menu
         System.out.println("""
@@ -581,6 +640,38 @@ public class Menus {
         }
 
     }
+
+    // Keeper: Create a new assignment
+    private static void keeperCreateAssignment(){
+        System.out.println("----- Clyde Conservation keepers -----");
+        EmployeeRoster.displayKeepers();
+        System.out.println("---------------------------------------");
+        System.out.println("Please enter the ID of the Keeper for the new assigment: ");
+        int id= sc.nextInt();
+        AllocationsCollection.addAssignment(EmployeeRoster.getKeeper(id));
+    }
+
+    //Keeper: Add animal to cage
+    private static void addAnimaltoCage(){
+
+    }
+
+    // Keeper: Assign cage to a keeper
+    private static void assignCageToKeeper(){
+        System.out.println("-------- Cage assignment --------");
+        System.out.println("***** Cages List *****");
+        CagesCollection.displayUnassignedCages();
+        System.out.println("Assignments List *****");
+        AllocationsCollection.displayAssignments();
+        System.out.println("Please enter the cage ID to assign: ");
+        int cageID= sc.nextInt();
+        System.out.println("Please enter the Assignment ID: ");
+        int assignID=sc.nextInt();
+        AllocationsCollection.addCageToAssignment(AllocationsCollection.getAssignmentIndex(AllocationsCollection.getAssigment(assignID)),
+                                                    CagesCollection.getCage(cageID));
+
+    }
+
 
 
 // end of class

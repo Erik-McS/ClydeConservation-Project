@@ -10,7 +10,7 @@ import clydeconservationsystem.ValidationException;
 public class Reptile extends Animal{
     // class for the Reptile type
     // unique ID for the animal
-    private int animalID;
+
     /**
      * The default constructor will use the setters implemented in the parent class
      * <p>
@@ -52,13 +52,7 @@ public class Reptile extends Animal{
         System.out.println(ex.getMessage());
     }
     }
-    /**
-     * Getter method to get the Reptile's animal ID
-     * @return Animal ID
-     */
-    public int getAnimalID() {
-        return animalID;
-    }
+
     // custom toString()
     @Override
     public String getDetails() {

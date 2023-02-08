@@ -21,7 +21,6 @@ public class mediumCage extends Cage implements Serializable {
     // variable to store the category of the first animal assigned to it
     // this will allow to check if the animals added later are compatible
     private String cageCategory;
-    private int cageID;
 
     public mediumCage(){
         // initialising the arraylist
@@ -108,6 +107,22 @@ public class mediumCage extends Cage implements Serializable {
                 System.out.println("This animal is a "+animal.getCategory()+" and is incompatible with the others in the cage");
         }
     }
+
+    @Override
+    public boolean isPresent(Animal animal) {
+        if (assignedAnimals.isEmpty())
+            return false;
+        else {
+            Iterator<Animal> iter= assignedAnimals.iterator();
+            while(iter.hasNext()){
+                Animal an= iter.next();
+                if (an.getAnimalID()==animal.getAnimalID())
+                    return true;
+            }
+            return false;
+        }
+    }
+
     @Override
     public boolean isFull() {
         return assignedAnimals.size()==CAPACITY;

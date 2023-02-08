@@ -1,6 +1,6 @@
 package clydeconservationsystem;
 
-import animals.Animal;
+import employees.Keeper;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,14 +17,6 @@ public class AllocationsCollection {
 
     // using a private constructor to prevent the creation of Assignment objects
     private AllocationsCollection(){}
-
-    /**
-     * Function to return the filename for the assignments
-     * @return File name
-     */
-    public static String getFileName(){
-        return fileName;
-    }
 
     /**
      * This method will save the assignment ArrayList in a file
@@ -76,7 +68,7 @@ public class AllocationsCollection {
     /**
      * Method do display all the assignments and their details.
      */
-    public void displayAssignments(){
+    public static void displayAssignments(){
 
         if (assignments.isEmpty())
             System.out.println("There is no assignments stored");
@@ -84,11 +76,109 @@ public class AllocationsCollection {
             Iterator<AllocationTable> iter= assignments.iterator();
             while (iter.hasNext()){
                 AllocationTable assign=iter.next();
-                System.out.println("----- Keeper "+assign.getAssignedKeeper().getFirstName()+
+                System.out.println("----- Assignment ID "+assign.getAssignmentID()+", Keeper "+assign.getAssignedKeeper().getFirstName()+
                         " "+assign.getAssignedKeeper().getLastName()+" -----");
                 assign.displayAssignment();
             }
         }
+    }
+    /**
+     * Method to create a new Assignment. it needs the keeper passed as parameter.
+     * @param keeper
+     */
+    public static void addAssignment(Keeper keeper){
+
+        if (isPresent(keeper))
+            System.out.println("This keeper already has an assignment");
+        else {
+            assignments.add(new AllocationTable(keeper));
+            saveAssigment();
+            System.out.println("The new assignment is now created");
+        }
+    }
+    // method to check if a keeper already has an assignment.
+    private static boolean isPresent(Keeper keeper){
+
+        Iterator<AllocationTable> iter=assignments.iterator();
+
+        while (iter.hasNext()){
+            AllocationTable assignment=iter.next();
+            if (keeper.getKeeperID()==assignment.getAssignedKeeper().getKeeperID())
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method will check if the cage is already assigned somewhere
+     * @param cage
+     * @return
+     */
+    public static boolean isAssigned(Cage cage){
+        if (assignments.isEmpty())
+            return false;
+        else {
+            Iterator<AllocationTable> iter=assignments.iterator();
+            while (iter.hasNext()){
+                AllocationTable assign=iter.next();
+                if (assign.cageIsPresent(cage))
+                    return true;
+            }
+            return false;
+        }
+    }
+
+    /**
+     * Method to get the index of an assignment in the collection
+     * will return -1 if not found
+     * @param at Assigment
+     * @return -1 or the index in the ArrayList
+     */
+    public static int getAssignmentIndex(AllocationTable at){
+        if (assignments.isEmpty())
+            return -1;
+        else{
+            int index=0;
+            Iterator<AllocationTable> iter=assignments.iterator();
+            while (iter.hasNext()){
+                AllocationTable assign=iter.next();
+                if (assign.getAssignmentID()==at.getAssignmentID())
+                    return index;
+                else
+                    index++;
+            }
+            return -1;
+        }
+    }
+
+    /**
+     * Method to assign a cage to an existing assignment
+     * @param assignmentIndex index of the assignment
+     * @param cage Cage to add
+     */
+    public static void addCageToAssignment(int assignmentIndex,Cage cage){
+        assignments.get(assignmentIndex).assignCage(cage);
+    }
+
+    /**
+     * Method to return an assignment by its ID
+     * @param assignmentID ID of the assigment
+     * @return The searched assignment
+     */
+    public static AllocationTable getAssigment(int assignmentID){
+
+        if (assignments.isEmpty())
+            return null;
+        else{
+            Iterator<AllocationTable> iter=assignments.iterator();
+            while (iter.hasNext()){
+                AllocationTable assign=iter.next();
+                if (assign.getAssignmentID()==assignmentID)
+                    return assign;
+            }
+            return null;
+        }
+
     }
 //End of class
 }

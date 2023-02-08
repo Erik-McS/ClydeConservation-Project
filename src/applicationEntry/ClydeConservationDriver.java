@@ -2,12 +2,19 @@ package applicationEntry;
 
 import employees.*;
 import clydeconservationsystem.*;
+
+import javax.swing.*;
+import java.io.File;
+
 public class ClydeConservationDriver {
 
     public static void main(String[] args) {
 
         // using the logAsMenu to simulate an Employee login and store the profile in a variable
         Employee loggedAs=Menus.logAsMenu();
+        // initialise data/files
+        SystemInitialisation.initialiseData();
+
 
         // this loop has no exit condition by itself as the exit option will be handled
         // by the Menus class itself
@@ -52,4 +59,5 @@ public class ClydeConservationDriver {
         }
         while(true);
     }
+
 }

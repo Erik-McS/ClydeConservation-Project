@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 /**
  * Class to represent the large cages used at Clyde Conservation
+ * <p>
  * the class also implements the Serializable interface so objects can be saved via a stream in a file
  * @author Erik
  */
@@ -15,7 +16,6 @@ public class largeCage extends Cage implements Serializable {
 
     // defining the cage capacity
     private final int CAPACITY=10;
-    private int cageID;
     // Arraylist for the animals assigned to the cage
     private ArrayList<Animal> assignedAnimals;
     // variable to store the category of the first animal assigned to it
@@ -114,6 +114,25 @@ public class largeCage extends Cage implements Serializable {
             else
                 // otherwise, error message
                 System.out.println("This animal is a "+animal.getCategory()+" and is incompatible with the others in the cage");
+        }
+    }
+
+    /**
+     * Method to check if an animal is in the cage
+     * @param animal Animal to look for
+     * @return True or False
+     */
+    public boolean isPresent(Animal animal) {
+        if (assignedAnimals.isEmpty())
+            return false;
+        else {
+            Iterator<Animal> iter= assignedAnimals.iterator();
+            while(iter.hasNext()){
+                Animal an= iter.next();
+                if (an.getAnimalID()==animal.getAnimalID())
+                    return true;
+            }
+            return false;
         }
     }
     @Override    public boolean isFull() {

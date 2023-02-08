@@ -25,6 +25,10 @@ public class AllocationTable implements Serializable {
     private final int MAX_ASSIGMENTS=4;
     // arraylist to store the assigned cages.
     ArrayList<Cage> assignedCages;
+    // static variable to create an ID;
+    private static int ASSIGNMENT_ID_BASE=500;
+    private final int assignmentID;
+
 
     /**
      * Constructor for the Allocation object.
@@ -34,6 +38,7 @@ public class AllocationTable implements Serializable {
      */
     public AllocationTable(Keeper keeper){
         this.assignedKeeper=keeper;
+        assignmentID=ASSIGNMENT_ID_BASE++;
     }
     /**
      * Method to get the assigned Keeper of to allocation table
@@ -41,6 +46,14 @@ public class AllocationTable implements Serializable {
      */
     public Keeper getAssignedKeeper() {
         return assignedKeeper;
+    }
+
+    /**
+     * Method to return the assignment ID
+     * @return
+     */
+    public int getAssignmentID() {
+        return assignmentID;
     }
 
     /**
@@ -83,7 +96,8 @@ public class AllocationTable implements Serializable {
     public void removeCage(){
         System.out.println("----- Remove a cage from the assignment -----");
         displayAssignment();
-        assignedCages.remove(new Scanner(System.in).nextInt());
+        System.out.println("Please enter the Cage number to remove: ");
+        assignedCages.remove(new Scanner(System.in).nextInt()-1);
     }
 
     /**
@@ -95,12 +109,46 @@ public class AllocationTable implements Serializable {
             System.out.println("This keeper has no cages assigned");
         else{
             Iterator<Cage> iter= assignedCages.iterator();
+            System.out.println("----- Assignment ID: "+getAssignmentID()+" -----");
+            System.out.println("Keeper: "+assignedKeeper.getFirstName()+" "+assignedKeeper.getLastName());
             while (iter.hasNext()){
                 Cage cge=iter.next();
                 System.out.println("----- Cage "+index+" -----");
                 System.out.println(cge.getCageDetails());
             }
         }
+    }
+
+    /**
+     * Method to return the number of cages assigned to the table.
+     * @return Number of cage (0-4).
+     */
+    public int assignedCages(){
+        if (assignedCages.isEmpty())
+            return 0;
+        else
+            return assignedCages.size();
+    }
+
+    /**
+     * Method to check if a Cage is already assigned in the table
+     * @param cage
+     * @return True or False
+     */
+    public boolean cageIsPresent(Cage cage){
+
+        if (assignedCages.isEmpty())
+            return false;
+        else{
+            Iterator<Cage> it=assignedCages.iterator();
+            while (it.hasNext()){
+                Cage cage1=it.next();
+                if (cage1.getCageID()==cage.getCageID())
+                    return true;
+            }
+            return false;
+        }
+
     }
 
 // End of class
