@@ -24,6 +24,11 @@ public class Keeper implements Employee, Serializable {
     // static variable used in child classes to generate unique ID
     public static int KEEPER_ID_BASE=100;
 
+    @Override
+    public int getID() {
+        return keeperID;
+    }
+
     /**
      * getter for the KeeperID, no setter as the ID is constant once created
      * @return the Employee number of the Keeper

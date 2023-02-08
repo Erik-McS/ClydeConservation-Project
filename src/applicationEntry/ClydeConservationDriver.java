@@ -8,6 +8,10 @@ import java.io.File;
 
 public class ClydeConservationDriver {
 
+    /**
+     * Main method
+     * @param args No parameters needed
+     */
     public static void main(String[] args) {
 
         // using the logAsMenu to simulate an Employee login and store the profile in a variable

@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * Class that will hold the employees of Clyde Conservation
  */
-public class EmployeeRoster {
+public class EmployeeRoster implements Serializable{
     private static ArrayList<Employee> employees=new ArrayList<>();
     // setting a filename for the employee roster file
     private static final String fileName="roster.dat";
@@ -21,7 +21,6 @@ public class EmployeeRoster {
      */
     public static void displayEmployees(){
         // local variable to display the Employee position in the collection.
-        int index=0;
         // if empty, display status.
         if (employees.isEmpty())
             System.out.println("There is no employees stored");
@@ -31,9 +30,8 @@ public class EmployeeRoster {
             while (iter.hasNext()){
                 // displaying the index and the employee details.
                 Employee employee= iter.next();
-                System.out.println("Index: "+index);
+                System.out.println("Employee ID: "+employee.getID());
                 System.out.println(employee.getDetails());
-                index++;
             }
         }
     }
@@ -42,21 +40,20 @@ public class EmployeeRoster {
      */
     public static void  displayKeepers(){
         // if empty, display status.
-        if (employees.isEmpty())
-            System.out.println("There is no employees stored");
+        if (employees.isEmpty()){
+            System.out.println("There is no employees stored in the system");}
         else{
             // using an iterator to loop over the employee collection.
             Iterator<Employee> iter=employees.iterator();
             while (iter.hasNext()){
                 // displaying the index and the employee details.
                 Employee employee= iter.next();
-                if (employee.getClass()== Keeper.class){
+                System.out.println("-----------------------------------------------------");
+                if (employee instanceof Keeper){
                     Keeper emp=(Keeper) employee;
                     System.out.println("----- Keeper ID: "+emp.getKeeperID()+" -----");
                     System.out.println("Name: "+emp.getFirstName()+"\nSurname: "+emp.getLastName());
                 }
-                else
-                    System.out.println("There are no keepers stored in the system");
             }
         }
     }
@@ -69,7 +66,7 @@ public class EmployeeRoster {
         Iterator<Employee> iter= employees.iterator();
         while (iter.hasNext()){
             Employee employee=iter.next();
-            if (employee.getClass()== Keeper.class){
+            if (employee instanceof Keeper){
                Keeper kp=(Keeper) employee;
                if (kp.getKeeperID()==keeperID)
                    return kp;

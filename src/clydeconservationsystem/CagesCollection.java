@@ -50,7 +50,7 @@ public class CagesCollection {
             oos.close();
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("CageCollections:"+e.getMessage());
         }
     }
 
@@ -70,11 +70,11 @@ public class CagesCollection {
                 cagesCollection=(ArrayList<Cage>) ois.readObject();
             }
             catch (ClassNotFoundException e){
-                System.out.println(e.getMessage());
+                System.out.println("CageCollections:"+e.getMessage());
             }
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("CageCollections:"+e.getMessage());
         }
 
     }
@@ -121,13 +121,25 @@ public class CagesCollection {
     }
 
     /**
+     * Method to display a list of cages that aren't full
+     */
+    public static void displayNonFullCages(){
+        Iterator<Cage> iter=cagesCollection.iterator();
+        while (iter.hasNext()){
+            Cage cfg=iter.next();
+            if (!cfg.isFull())
+                System.out.println(cfg.getCageDetails());
+        }
+    }
+
+    /**
      * Method to get the index of a cage in the collection
      * <p>
      * will return -1 if not found
-     * @param c Cage
+     * @param cageID Cage
      * @return -1 or the index in the ArrayList
      */
-    public static int getCageIndex(Cage c){
+    public static int getCageIndex(int cageID){
         int index=0;
         if (cagesCollection.isEmpty())
             return -1;
@@ -135,15 +147,13 @@ public class CagesCollection {
             Iterator<Cage> iter=cagesCollection.iterator();
             while (iter.hasNext()){
                 Cage cg= iter.next();
-                if (cg.getCageID()==c.getCageID())
+                if (cg.getCageID()==cageID)
                     return index;
                 else
                     index++;
             }
             return -1;
-
         }
-
     }
     /**
      * Method to return an cage by its ID
@@ -165,7 +175,6 @@ public class CagesCollection {
         }
 
     }
-
     /**
      * Method to check if an animal is present in a cage
      * @param animal Animal to look for
@@ -185,5 +194,16 @@ public class CagesCollection {
         }
 
     }
+
+    /**
+     * Method to add an animal to an existing cage
+     * @param cageID The Cage ID
+     * @param animal The animal to add
+     */
+    public static void addAnimalToCage(int cageID,Animal animal){
+
+        cagesCollection.get(cageID).assignAnimal(animal);
+    }
+
 // End of class
 }
