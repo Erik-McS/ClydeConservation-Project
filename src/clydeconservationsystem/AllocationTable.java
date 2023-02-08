@@ -24,7 +24,7 @@ public class AllocationTable implements Serializable {
     // Variable to hold the maximum number of cage a keeper can have
     private final int MAX_ASSIGMENTS=4;
     // arraylist to store the assigned cages.
-    ArrayList<Cage> assignedCages;
+    private ArrayList<Cage> assignedCages=new ArrayList<>();
     // static variable to create an ID;
     private static int ASSIGNMENT_ID_BASE=500;
     private final int assignmentID;
@@ -34,7 +34,7 @@ public class AllocationTable implements Serializable {
      * Constructor for the Allocation object.
      * <p>
      * A table must be created with a Keeper, even if it can be changed later if needed.
-     * @param keeper
+     * @param keeper Keeper to assign to the table
      */
     public AllocationTable(Keeper keeper){
         this.assignedKeeper=keeper;
@@ -50,17 +50,17 @@ public class AllocationTable implements Serializable {
 
     /**
      * Method to return the assignment ID
-     * @return
+     * @return assignment ID
      */
     public int getAssignmentID() {
         return assignmentID;
     }
 
     /**
-     * Method to assign get a Keeper to the allocation table
+     * Method to assign a Keeper to the allocation table
      * <p>
      * This should only be used if the existing keeper need to be replaced
-     * @param assignedKeeper
+     * @param assignedKeeper Keeper to assign
      */
     public void setAssignedKeeper(Keeper assignedKeeper) {
         this.assignedKeeper = assignedKeeper;
@@ -77,7 +77,7 @@ public class AllocationTable implements Serializable {
 
     /**
      * Method to add a cage to a Keeper assignment
-     * @param cage
+     * @param cage Cage to add
      */
     public void assignCage(Cage cage){
         // we first test if the cage is empty

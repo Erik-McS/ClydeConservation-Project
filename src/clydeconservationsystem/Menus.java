@@ -149,25 +149,35 @@ public class Menus {
 
     /**
      * This function will handle the options accessible to a Head Keeper.
+     * <p>
+     * it will call the following private functions of the Menus class
+     * <p>
+     * - hKeeperMenu()
+     * <p>
+     * - addAnimalToCage()
+     * <p>
+     * - assignCageToKeeper()
      * @param headKeeper the profile of the logged Head Keeper.
      */
     public static void headKeeperMenu(HeadKeeper headKeeper){
-        // headKeeper menu to implement
+        // exit condition for the headkeeper menu
         int exit=0;
-
+        //looping the menu
         do {
-
+            // switch that will take the value returned by the hKeeperMenu
             switch (hKeeperMenu()){
 
                 case 1:
                     keeperCreateAssignment();
                     break;
                 case 2:
+                    addAnimalToCage();
                     break;
                 case 3:
                     assignCageToKeeper();
                     break;
                 case 4:
+                    AllocationsCollection.displayAssignments();
                     break;
                 case 5:
                     exit=5;
@@ -183,6 +193,16 @@ public class Menus {
 
     /**
      * This function will handle the options accessible to an Administrator.
+     * <p>
+     * it will call the following private functions of the Menus class:
+     * <p>
+     * - adminMenu()
+     * <p>
+     * - adminAddAnimalMenu()
+     * <p>
+     * - adminAddCage()
+     * <p>
+     * - adminAddKeeperMenu()
      * @param admin the profile of the logged Administrator.
      */
     public static void administratorMenu(Administrator admin){
@@ -638,37 +658,61 @@ public class Menus {
         finally {
             sc.nextLine();
         }
-
     }
 
     // Keeper: Create a new assignment
     private static void keeperCreateAssignment(){
         System.out.println("----- Clyde Conservation keepers -----");
+        // display the Keepers in the system
         EmployeeRoster.displayKeepers();
         System.out.println("---------------------------------------");
         System.out.println("Please enter the ID of the Keeper for the new assigment: ");
         int id= sc.nextInt();
+        // add a new assignment to the assignment collection
         AllocationsCollection.addAssignment(EmployeeRoster.getKeeper(id));
+        // save the allocations collections
+        AllocationsCollection.saveAssigment();
     }
 
     //Keeper: Add animal to cage
-    private static void addAnimaltoCage(){
-
+    private static void addAnimalToCage(){
+        // display the unassigned animals
+        System.out.println("-------- Animal assignment --------");
+        System.out.println("***** Animal List *****");
+        Menagerie.displayUnassignedAnimals();
+        // display cages that aren't full
+        System.out.println("***** Cage List ******");
+        CagesCollection.displayNonFullCages();
+        // getting user choices
+        System.out.println("Please enter the Animal ID: ");
+        int animalID=sc.nextInt();
+        System.out.println("Please enter the Cage ID: ");
+        int cageID=sc.nextInt();
+        // adding the animal to the cage
+       CagesCollection.addAnimalToCage(CagesCollection.getCageIndex(cageID),Menagerie.getAnimal(animalID));
+       // saving the modified cage collection
+        CagesCollection.saveCagesCollection();
     }
 
     // Keeper: Assign cage to a keeper
     private static void assignCageToKeeper(){
         System.out.println("-------- Cage assignment --------");
         System.out.println("***** Cages List *****");
+        // display the unassigned cages
         CagesCollection.displayUnassignedCages();
         System.out.println("Assignments List *****");
+        // display the existing assignments
         AllocationsCollection.displayAssignments();
+        // get user choices
         System.out.println("Please enter the cage ID to assign: ");
         int cageID= sc.nextInt();
         System.out.println("Please enter the Assignment ID: ");
         int assignID=sc.nextInt();
+        // adding the selected cage to the existing assignment.
         AllocationsCollection.addCageToAssignment(AllocationsCollection.getAssignmentIndex(AllocationsCollection.getAssigment(assignID)),
                                                     CagesCollection.getCage(cageID));
+        // saving the modified assignments
+        AllocationsCollection.saveAssigment();
 
     }
 

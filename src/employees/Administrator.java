@@ -1,5 +1,7 @@
 package employees;
 
+import java.io.Serializable;
+
 /**
  * The administrator class is used to give access to the Admin actions:
  * Add animal, add Keeper and add Cage.
@@ -10,7 +12,7 @@ package employees;
  * <p>
  * for assessment purposes, data validation code is implemented in the HeadKeeper class
  */
-public class Administrator implements Employee{
+public class Administrator implements Employee, Serializable {
 
     // class variables.
     private String firstName;
@@ -108,16 +110,21 @@ public class Administrator implements Employee{
 
     /**
      * Set the Administrator's telephone numbers
-     * @param contactNumber
+     * @param contactNumber Admin's telephone number
      */
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
+    public int getID(){
+        return ADMIN_ID;
+    }
+
     // custom version of the toString() method
     @Override
     public String getDetails() {
-        return "\nKeeper details:"+
+        return "\nAdministrator details:"+
+                "\nID: "+getID()+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
                 "\nAddress: "+getAddress()+

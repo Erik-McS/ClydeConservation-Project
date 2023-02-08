@@ -11,4 +11,5 @@ public interface Employee {
      * @return The details of the employee.
      */
     public String getDetails();
+    public int getID();
 }

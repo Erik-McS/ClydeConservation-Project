@@ -61,7 +61,7 @@ public class AllocationsCollection {
             }
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("AllocationCollection: "+e.getMessage());
         }
     }
 
@@ -84,7 +84,8 @@ public class AllocationsCollection {
     }
     /**
      * Method to create a new Assignment. it needs the keeper passed as parameter.
-     * @param keeper
+     * The method will create a new AllocationTable object with the Keeper
+     * @param keeper The keeper to assign to the AllocationTable
      */
     public static void addAssignment(Keeper keeper){
 
@@ -100,19 +101,23 @@ public class AllocationsCollection {
     private static boolean isPresent(Keeper keeper){
 
         Iterator<AllocationTable> iter=assignments.iterator();
-
-        while (iter.hasNext()){
-            AllocationTable assignment=iter.next();
-            if (keeper.getKeeperID()==assignment.getAssignedKeeper().getKeeperID())
-                return true;
+        if (assignments.isEmpty())
+            return false;
+        else {
+            while (iter.hasNext()){
+                AllocationTable assignment=iter.next();
+                Keeper kp=assignment.getAssignedKeeper();
+                if (keeper.getKeeperID()== kp.getKeeperID())
+                    return true;
+            }
         }
         return false;
     }
 
     /**
      * This method will check if the cage is already assigned somewhere
-     * @param cage
-     * @return
+     * @param cage Cage to check
+     * @return True or false
      */
     public static boolean isAssigned(Cage cage){
         if (assignments.isEmpty())

@@ -1,5 +1,7 @@
 package animals;
 
+import clydeconservationsystem.CagesCollection;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,13 +24,13 @@ public class Menagerie {
     // ArrayList to store the animals
     private static ArrayList<Animal> menagerie=new ArrayList<>();
     // constant to hold the name of the menagerie file
-    private static final String fileName="menagerie.dat";
+    private static final String fileN="menagerie.dat";
     // using a private constructor to prevent the creation of Menagerie objects
     private Menagerie(){}
     /**
      * The method will display the details of all the animals in the collection.
      */
-    public static void displayAnimals(){
+    public static void displayAllAnimals(){
         // local variable to display the animal position in the collection.
         int index=0;
         // if empty, display status.
@@ -44,6 +46,18 @@ public class Menagerie {
                 System.out.println(animal.getDetails());
                 index++;
             }
+        }
+    }
+
+    /**
+     * Method to display all the unassigned animals
+     */
+    public static void displayUnassignedAnimals(){
+        Iterator<Animal>iter= menagerie.iterator();
+        while (iter.hasNext()){
+            Animal an= iter.next();
+            if (!CagesCollection.isAssigned(an))
+                an.getDetails();
         }
     }
 
@@ -78,13 +92,6 @@ public class Menagerie {
     }
 
     /**
-     * Function to return the filename for the Menagerie
-     * @return File name
-     */
-    public static String getFileName(){
-        return fileName;
-    }
-    /**
      * This method will save the Menagerie ArrayList in a file
      * Link to resource found while searching for how-to:
      * <p>
@@ -97,16 +104,15 @@ public class Menagerie {
         // try-catch to get any IO errors
         try{
             // initialise an output stream for the file
-            FileOutputStream fos=new FileOutputStream(fileName);
+            FileOutputStream fos=new FileOutputStream(fileN);
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(menagerie);
             oos.close();
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("Save_Menagerie: "+e.getMessage());
         }
     }
-
     /**
      * Method to load a saved menagerie from a file
      * @see FileInputStream
@@ -116,18 +122,50 @@ public class Menagerie {
 
         try{
 
-            FileInputStream fis=new FileInputStream(fileName);
+            FileInputStream fis=new FileInputStream(fileN);
             ObjectInputStream ois=new ObjectInputStream(fis);
             menagerie.clear();
             try{
-                menagerie=(ArrayList<Animal>) ois.readObject();
+                menagerie=(ArrayList<Animal>)ois.readObject();
             }
             catch (ClassNotFoundException e){
-                System.out.println(e.getMessage());
+                System.out.println("Load_Menagerie1: "+e.getMessage());
             }
         }
         catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("Load_Menagerie2: "+e.getMessage());
+        }
+    }
+
+    /**
+     * Method to check if an animal exists in the menagerie
+     * @param animal Animal to check
+     * @return True or False
+     */
+    public static boolean isPresent(Animal animal){
+        if (menagerie.isEmpty())
+            return false;
+        else{
+            Iterator<Animal> iter= menagerie.iterator();
+            while (iter.hasNext()){
+                Animal an= iter.next();
+                if (an.getAnimalID()==animal.getAnimalID())
+                    return true;
+            }
+            return false;
+        }
+    }
+    public static Animal getAnimal(int animalID){
+        if (menagerie.isEmpty())
+            return null;
+        else{
+            Iterator<Animal> iter= menagerie.iterator();
+            while (iter.hasNext()){
+                Animal an= iter.next();
+                if (an.getAnimalID()==animalID)
+                    return an;
+            }
+            return null;
         }
     }
 // end of class

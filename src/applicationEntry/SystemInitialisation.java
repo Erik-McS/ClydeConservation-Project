@@ -26,9 +26,13 @@ public class SystemInitialisation {
 
     /**
      * This method will check if each of the 4 files are present in the app folder. if not, it will create some data in the collections
+     * <p>
      * 'cages.dat': The charity cages collections
+     * <p>
      * 'roster.dat': The charity's employees
+     * <p>
      * 'menagerie.dat': The charity's animals
+     * <p>
      * 'assignments.dat': the assignments(Keeper-Cages), left empty is file is not created yet.
      */
     public static void initialiseData(){
@@ -54,7 +58,7 @@ public class SystemInitialisation {
     private static void checkEmployeeFile(){
         File f=new File("roster.dat");
         if (!f.exists()){
-            createCageCollection();
+            createEmployeeRoster();
         }
         else
             EmployeeRoster.loadRoster();
@@ -82,7 +86,7 @@ public class SystemInitialisation {
         Menagerie.addAnimal(new Mammal("Daisy","Prey","Female","04/02/2021","05/04/2021"));
         Menagerie.saveMenagerie();
         System.out.println("------ Menagerie ------");
-        Menagerie.displayAnimals();
+        Menagerie.displayAllAnimals();
     }
     private static void createEmployeeRoster(){
         try{

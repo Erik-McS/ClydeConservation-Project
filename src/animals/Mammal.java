@@ -2,12 +2,14 @@ package animals;
 
 import clydeconservationsystem.ValidationException;
 
+import java.io.Serializable;
+
 /**
  * Class used to describe mammals
  * <p>
  * it will be used as it own type, further developments could add children types to it
  */
-public class Mammal extends Animal{
+public class Mammal extends Animal {
     // class for the Mammal type
     /**
      * The default constructor will use the setters implemented in the parent class
