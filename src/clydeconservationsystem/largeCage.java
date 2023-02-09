@@ -50,14 +50,6 @@ public class largeCage extends Cage implements Serializable {
     }
 
     /**
-     * Method to get the cage ID
-     * @return the cage ID
-     */
-    public int getCageID() {
-        return cageID;
-    }
-
-    /**
      * Method to return the cage capacity, to be used in tests in the AllocationTable class
      * @return
      */
@@ -141,7 +133,7 @@ public class largeCage extends Cage implements Serializable {
 
     @Override
     public String getCageDetails() {
-        return "\nCage ID: "+cageID+
+        return "\n Cage ID: "+cageID+
                 "\n Cage Capacity: "+CAPACITY+
                 "\n Number of animals in the cage: "+assignedAnimals.size()+
                 "\n Cage Category: "+getCageCategory();

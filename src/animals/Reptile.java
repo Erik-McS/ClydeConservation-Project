@@ -56,7 +56,7 @@ public class Reptile extends Animal{
     // custom toString()
     @Override
     public String getDetails() {
-        return "\nType: Bird"+
+        return "\nType: Reptile"+
                 "\nName: "+getName()+
                 "\nCategory: "+getCategory()+
                 "\nSex: "+getSex()+

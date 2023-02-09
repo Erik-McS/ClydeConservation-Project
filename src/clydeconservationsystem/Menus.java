@@ -667,11 +667,20 @@ public class Menus {
         EmployeeRoster.displayKeepers();
         System.out.println("---------------------------------------");
         System.out.println("Please enter the ID of the Keeper for the new assigment: ");
-        int id= sc.nextInt();
-        // add a new assignment to the assignment collection
-        AllocationsCollection.addAssignment(EmployeeRoster.getKeeper(id));
-        // save the allocations collections
-        AllocationsCollection.saveAssigment();
+        try {
+            int id= sc.nextInt();
+            // add a new assignment to the assignment collection
+            try {
+                AllocationsCollection.addAssignment(EmployeeRoster.getKeeper(id));
+                // save the allocations collections
+                AllocationsCollection.saveAssigment();
+            }
+            catch (ValidationException e){
+                System.out.println(e.getMessage());
+            }
+        }catch (InputMismatchException w){
+            System.out.println("Incorrect choice entered");
+        }
     }
 
     //Keeper: Add animal to cage
@@ -679,40 +688,62 @@ public class Menus {
         // display the unassigned animals
         System.out.println("-------- Animal assignment --------");
         System.out.println("***** Animal List *****");
-        Menagerie.displayUnassignedAnimals();
-        // display cages that aren't full
-        System.out.println("***** Cage List ******");
-        CagesCollection.displayNonFullCages();
-        // getting user choices
-        System.out.println("Please enter the Animal ID: ");
-        int animalID=sc.nextInt();
-        System.out.println("Please enter the Cage ID: ");
-        int cageID=sc.nextInt();
-        // adding the animal to the cage
-       CagesCollection.addAnimalToCage(CagesCollection.getCageIndex(cageID),Menagerie.getAnimal(animalID));
-       // saving the modified cage collection
-        CagesCollection.saveCagesCollection();
+
+        if (Menagerie.countUnassignedAnimals()!=0) {
+            try {
+                Menagerie.displayUnassignedAnimals();
+                // display cages that aren't full
+                System.out.println("***** Cage List ******");
+                CagesCollection.displayNonFullCages();
+                // getting user choices
+                System.out.println("Please enter the Animal ID: ");
+                int animalID=sc.nextInt();
+                System.out.println("Please enter the Cage ID: ");
+                int cageID=sc.nextInt();
+                // adding the animal to the cage
+                CagesCollection.addAnimalToCage(CagesCollection.getCageIndex(cageID),Menagerie.getAnimal(animalID));
+                // saving the modified cage collection
+                CagesCollection.saveCagesCollection();
+            }
+            catch (InputMismatchException e){
+                System.out.println("Incorrect choice entered");
+            }
+
+        }
+        else
+            System.out.println("there is no unassigned animals");
     }
 
     // Keeper: Assign cage to a keeper
     private static void assignCageToKeeper(){
         System.out.println("-------- Cage assignment --------");
-        System.out.println("***** Cages List *****");
+
         // display the unassigned cages
-        CagesCollection.displayUnassignedCages();
-        System.out.println("Assignments List *****");
-        // display the existing assignments
-        AllocationsCollection.displayAssignments();
-        // get user choices
-        System.out.println("Please enter the cage ID to assign: ");
-        int cageID= sc.nextInt();
-        System.out.println("Please enter the Assignment ID: ");
-        int assignID=sc.nextInt();
-        // adding the selected cage to the existing assignment.
-        AllocationsCollection.addCageToAssignment(AllocationsCollection.getAssignmentIndex(AllocationsCollection.getAssigment(assignID)),
-                                                    CagesCollection.getCage(cageID));
-        // saving the modified assignments
-        AllocationsCollection.saveAssigment();
+        if (CagesCollection.countUnassignedCages()==0)
+            System.out.println("There is no unassigned cages");
+        else {
+            System.out.println("***** Cages List *****");
+            CagesCollection.displayUnassignedCages();
+            System.out.println("***** Assignments List *****");
+            // display the existing assignments
+            AllocationsCollection.displayAssignments();
+            // get user choices
+            System.out.println("Please enter the cage ID to assign: ");
+            try {
+                int cageID= sc.nextInt();
+                System.out.println("Please enter the Assignment ID: ");
+                int assignID=sc.nextInt();
+                // adding the selected cage to the existing assignment.
+                AllocationsCollection.addCageToAssignment(AllocationsCollection.getAssignmentIndex(AllocationsCollection.getAssigment(assignID)),
+                        CagesCollection.getCage(cageID));
+                // saving the modified assignments
+                AllocationsCollection.saveAssigment();
+            }
+            catch (InputMismatchException e){
+                System.out.println("Incorrect choice entered");
+            }
+        }
+
 
     }
 

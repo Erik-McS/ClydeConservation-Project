@@ -113,7 +113,7 @@ public class AllocationTable implements Serializable {
             System.out.println("Keeper: "+assignedKeeper.getFirstName()+" "+assignedKeeper.getLastName());
             while (iter.hasNext()){
                 Cage cge=iter.next();
-                System.out.println("----- Cage "+index+" -----");
+                System.out.println("----- Cage ID"+cge.getCageID()+" -----");
                 System.out.println(cge.getCageDetails());
             }
         }

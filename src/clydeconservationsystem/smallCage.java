@@ -24,14 +24,6 @@ public class smallCage extends Cage implements Serializable {
     }
 
     /**
-     * Method to get the cage ID
-     * @return the cage ID
-     */
-    public int getCageID() {
-        return cageID;
-    }
-
-    /**
      * Method to return the cage Category
      * <p>
      * the Category is determined by the first animal placed in the cage.
@@ -102,13 +94,13 @@ public class smallCage extends Cage implements Serializable {
     public String getCageDetails() {
 
         if (isEmpty()) {
-            return "\nCage ID: " + cageID +
+            return "\nCage ID: " + getCageID() +
                     "\n Cage Capacity: 1" +
                     "\n Number of animals in the cage: 0" +
                     "\n Cage Category: N/A";
         }
         else{
-            return "\nCage ID: "+cageID+
+            return "\nCage ID: "+getCageID()+
                     "\n Cage Capacity: 1"+
                     "\n Number of animals in the cage: 1"+
                     "\n Cage Category: "+getCageCategory();
