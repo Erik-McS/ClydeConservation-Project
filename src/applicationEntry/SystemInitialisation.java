@@ -85,8 +85,8 @@ public class SystemInitialisation {
         Menagerie.addAnimal(new Reptile("Smiss","Predator","Male","04/02/2021","05/04/2021"));
         Menagerie.addAnimal(new Mammal("Daisy","Prey","Female","04/02/2021","05/04/2021"));
         Menagerie.saveMenagerie();
-        System.out.println("------ Menagerie ------");
-        Menagerie.displayAllAnimals();
+        System.out.println("------ Menagerie Created ------");
+
     }
     private static void createEmployeeRoster(){
         try{
@@ -103,8 +103,8 @@ public class SystemInitialisation {
             // Saving the roster in a file
             EmployeeRoster.saveRoster();
             // printing the roster.
-            System.out.println("------ Employee Roster ------");
-            EmployeeRoster.displayEmployees();
+            System.out.println("------ Employee Roster Created ------");
+
         }
         catch (ValidationException e){
             System.out.println(e.getMessage());
@@ -138,7 +138,7 @@ public class SystemInitialisation {
         CagesCollection.addCage(new smallCage());
 
         CagesCollection.saveCagesCollection();
-        System.out.println("------ Cage Collections ------");
-        CagesCollection.displayAllCages();
+        System.out.println("------ Cage Collections Created ------");
+
     }
 }

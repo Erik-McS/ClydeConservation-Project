@@ -107,7 +107,6 @@ public class CagesCollection {
             System.out.println("There is no cages stored");
         else{
             // using an iterator to loop over the cage collection.
-            System.out.println();
             Iterator<Cage> iter=cagesCollection.iterator();
             while (iter.hasNext()){
                 // if not already in the assignment collections, the cage will be displayed
@@ -117,6 +116,27 @@ public class CagesCollection {
                     System.out.println(cage.getCageDetails());
                 }
             }
+        }
+    }
+
+    /**
+     * Returns the number of unassigned cages
+     * @return Unassigned cages
+     */
+    public static int countUnassignedCages(){
+        if (cagesCollection.isEmpty())
+            return 0;
+        else{
+            // using an iterator to loop over the cage collection.
+            Iterator<Cage> iter=cagesCollection.iterator();
+            int count=0;
+            while (iter.hasNext()){
+                Cage cage= iter.next();
+                if (!AllocationsCollection.isAssigned(cage)){
+                    count++;
+                }
+            }
+            return count;
         }
     }
 

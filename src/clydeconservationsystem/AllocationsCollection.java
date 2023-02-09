@@ -87,15 +87,16 @@ public class AllocationsCollection {
      * The method will create a new AllocationTable object with the Keeper
      * @param keeper The keeper to assign to the AllocationTable
      */
-    public static void addAssignment(Keeper keeper){
+    public static void addAssignment(Keeper keeper) throws ValidationException{
 
         if (isPresent(keeper))
             System.out.println("This keeper already has an assignment");
-        else {
+        else if (keeper!=null){
             assignments.add(new AllocationTable(keeper));
             saveAssigment();
             System.out.println("The new assignment is now created");
         }
+        else throw new ValidationException("Unknown Keeper ID entered");
     }
     // method to check if a keeper already has an assignment.
     private static boolean isPresent(Keeper keeper){
@@ -103,12 +104,15 @@ public class AllocationsCollection {
         Iterator<AllocationTable> iter=assignments.iterator();
         if (assignments.isEmpty())
             return false;
+        else if (keeper==null) {
+            return false;
+        }
         else {
             while (iter.hasNext()){
                 AllocationTable assignment=iter.next();
                 Keeper kp=assignment.getAssignedKeeper();
-                if (keeper.getKeeperID()== kp.getKeeperID())
-                    return true;
+                if(keeper.getKeeperID()==kp.getKeeperID());
+                return true;
             }
         }
         return false;

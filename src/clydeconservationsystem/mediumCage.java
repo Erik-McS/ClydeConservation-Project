@@ -30,14 +30,6 @@ public class mediumCage extends Cage implements Serializable {
     }
 
     /**
-     * Method to get the cage ID
-     * @return the cage ID
-     */
-    public int getCageID() {
-        return cageID;
-    }
-
-    /**
      * Method to return the cage Category
      * <p>
      * the Category is determined by the first animal placed in the cage.
@@ -130,7 +122,7 @@ public class mediumCage extends Cage implements Serializable {
 
     @Override
     public String getCageDetails() {
-        return "\nCage ID: "+cageID+
+        return "\nCage ID: "+getCageID()+
                 "\n Cage Capacity: "+CAPACITY+
                 "\n Number of animals in the cage: "+assignedAnimals.size()+
                 "\n Cage Category: "+getCageCategory();

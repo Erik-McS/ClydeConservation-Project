@@ -32,7 +32,6 @@ public class Menagerie {
      */
     public static void displayAllAnimals(){
         // local variable to display the animal position in the collection.
-        int index=0;
         // if empty, display status.
         if (menagerie.isEmpty())
             System.out.println("There is no animals stored");
@@ -42,9 +41,7 @@ public class Menagerie {
             while (iter.hasNext()){
                 // displaying the index and the animal details.
                 Animal animal= iter.next();
-                System.out.println("Index: "+index);
                 System.out.println(animal.getDetails());
-                index++;
             }
         }
     }
@@ -53,12 +50,24 @@ public class Menagerie {
      * Method to display all the unassigned animals
      */
     public static void displayUnassignedAnimals(){
+            Iterator<Animal>iter= menagerie.iterator();
+
+            while (iter.hasNext()) {
+                Animal an = iter.next();
+                if (!CagesCollection.isAssigned(an))
+                    System.out.println(an.getDetails());
+
+            }
+    }
+    public static int countUnassignedAnimals(){
+        int count=0;
         Iterator<Animal>iter= menagerie.iterator();
-        while (iter.hasNext()){
-            Animal an= iter.next();
+        while (iter.hasNext()) {
+            Animal an = iter.next();
             if (!CagesCollection.isAssigned(an))
-                an.getDetails();
+                count++;
         }
+        return count;
     }
 
     /**
