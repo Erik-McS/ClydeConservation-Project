@@ -1,13 +1,5 @@
 package applicationEntry;
 
-import animals.Menagerie;
-import animals.Bird;
-import clydeconservationsystem.AllocationsCollection;
-import clydeconservationsystem.CagesCollection;
-import employees.AssistantKeeper;
-import employees.EmployeeRoster;
-import employees.HeadKeeper;
-
 /**
  * Test class, used in some unit testing
  */
@@ -26,15 +18,15 @@ public class TestClass {
 
             //String s=erik.getClass().getName();
             //System.out.println(s);
-    SystemInitialisation.initialiseData();
+   // SystemInitialisation.initialiseData();
 
         // Menagerie.displayAllAnimals();
         // EmployeeRoster.displayEmployees();
          //EmployeeRoster.displayKeepers();
-        //AllocationsCollection.displayAssignments();
+        //AssignmentsCollection.displayAssignments();
         //CagesCollection.displayAllCages();
-        //AllocationsCollection.addAssignment(assistantKeeper);
-       // AllocationsCollection.displayAssignments();
-        Menagerie.displayUnassignedAnimals();
+        //AssignmentsCollection.addAssignment(assistantKeeper);
+       // AssignmentsCollection.displayAssignments();
+       //Menagerie.displayUnassignedAnimals();
     }
 }

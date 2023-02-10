@@ -66,7 +66,14 @@ public class Menus {
                         3) Exit
                         -->\s""");
                     // getting user's input
-                    choice=sc.nextInt();
+                    try{
+                        choice=sc.nextInt();
+                    }catch (InputMismatchException e){
+                        choice=0;
+                    }
+                    finally {
+                        sc.nextLine();
+                    }
                     // using the 'enhanced switch' which allows to get a parameter in return. for info:
                     // https://www.geeksforgeeks.org/enhancements-for-switch-statement-in-java-13/
                     // the Employee variable loggedAs will receive either an Administrator or headKeeper object as a result.
@@ -94,7 +101,7 @@ public class Menus {
                 catch (ValidationException e){
                     exit=false;
                     loggedAs=null;
-                    System.out.println(e.getMessage());
+                    System.out.println("Incorrect choice value");
                 }
             }
             while (!exit);
@@ -107,7 +114,6 @@ public class Menus {
         // this return will never happen, but needs to be here
         return null;
     }
-
     /**
      * This function will return the choice selected in the main menu.
      * <p>
@@ -146,7 +152,6 @@ public class Menus {
                 sc.nextLine();
             }
     }
-
     /**
      * This function will handle the options accessible to a Head Keeper.
      * <p>
@@ -177,20 +182,15 @@ public class Menus {
                     assignCageToKeeper();
                     break;
                 case 4:
-                    AllocationsCollection.displayAssignments();
+                    AssignmentsCollection.displayAssignments();
                     break;
                 case 5:
                     exit=5;
                     break;
-
             }
-
         }
         while (exit!=5);
-
     }
-
-
     /**
      * This function will handle the options accessible to an Administrator.
      * <p>
@@ -671,15 +671,18 @@ public class Menus {
             int id= sc.nextInt();
             // add a new assignment to the assignment collection
             try {
-                AllocationsCollection.addAssignment(EmployeeRoster.getKeeper(id));
+                AssignmentsCollection.addAssignment(EmployeeRoster.getKeeper(id));
                 // save the allocations collections
-                AllocationsCollection.saveAssigment();
+                AssignmentsCollection.saveAssigment();
             }
             catch (ValidationException e){
                 System.out.println(e.getMessage());
             }
         }catch (InputMismatchException w){
             System.out.println("Incorrect choice entered");
+        }
+        finally {
+            sc.nextLine();
         }
     }
 
@@ -708,7 +711,9 @@ public class Menus {
             catch (InputMismatchException e){
                 System.out.println("Incorrect choice entered");
             }
-
+            finally {
+                sc.nextLine();
+            }
         }
         else
             System.out.println("there is no unassigned animals");
@@ -726,7 +731,7 @@ public class Menus {
             CagesCollection.displayUnassignedCages();
             System.out.println("***** Assignments List *****");
             // display the existing assignments
-            AllocationsCollection.displayAssignments();
+            AssignmentsCollection.displayAssignments();
             // get user choices
             System.out.println("Please enter the cage ID to assign: ");
             try {
@@ -734,13 +739,16 @@ public class Menus {
                 System.out.println("Please enter the Assignment ID: ");
                 int assignID=sc.nextInt();
                 // adding the selected cage to the existing assignment.
-                AllocationsCollection.addCageToAssignment(AllocationsCollection.getAssignmentIndex(AllocationsCollection.getAssigment(assignID)),
+                AssignmentsCollection.addCageToAssignment(AssignmentsCollection.getAssignmentIndex(AssignmentsCollection.getAssigment(assignID)),
                         CagesCollection.getCage(cageID));
                 // saving the modified assignments
-                AllocationsCollection.saveAssigment();
+                AssignmentsCollection.saveAssigment();
             }
             catch (InputMismatchException e){
                 System.out.println("Incorrect choice entered");
+            }
+            finally {
+                sc.nextLine();
             }
         }
 

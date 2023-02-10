@@ -75,7 +75,7 @@ public class SystemInitialisation {
     private static void checkAssignmentsFile(){
         File f=new File("assignments.dat");
         if (f.exists())
-            AllocationsCollection.loadAssignment();
+            AssignmentsCollection.loadAssignment();
     }
 
     private static void createMenagerie(){
@@ -84,8 +84,13 @@ public class SystemInitialisation {
         Menagerie.addAnimal(new Mammal("Spot","Predator","Male","04/02/2021","05/04/2021"));
         Menagerie.addAnimal(new Reptile("Smiss","Predator","Male","04/02/2021","05/04/2021"));
         Menagerie.addAnimal(new Mammal("Daisy","Prey","Female","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Bird("Catch","Prey","Female","02/02/2021","05/01/2021"));
+        Menagerie.addAnimal(new Mammal("Squish","Prey","Male","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Mammal("Tiger","Predator","Female","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Reptile("Spot","Predator","Male","04/02/2021","05/04/2021"));
+        Menagerie.addAnimal(new Bird("Blue","Prey","Male","04/02/2021","05/04/2021"));
         Menagerie.saveMenagerie();
-        System.out.println("------ Menagerie Created ------");
+        System.out.println("------ Menagerie Created: 9 animals added ------");
 
     }
     private static void createEmployeeRoster(){
@@ -103,7 +108,7 @@ public class SystemInitialisation {
             // Saving the roster in a file
             EmployeeRoster.saveRoster();
             // printing the roster.
-            System.out.println("------ Employee Roster Created ------");
+            System.out.println("------ Employee Roster Created: 1 Admin, 1 HeadKeeper, 4 Assistant Keepers ------");
 
         }
         catch (ValidationException e){
@@ -138,7 +143,7 @@ public class SystemInitialisation {
         CagesCollection.addCage(new smallCage());
 
         CagesCollection.saveCagesCollection();
-        System.out.println("------ Cage Collections Created ------");
+        System.out.println("------ Cage Collections Created: 5 Large Cages, 3 Medium Cages, 7 Small Cages ------");
 
     }
 }

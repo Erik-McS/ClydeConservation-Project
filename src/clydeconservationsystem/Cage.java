@@ -2,8 +2,6 @@ package clydeconservationsystem;
 
 import animals.Animal;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * The Cage class defines the basics of cages in the application.
@@ -12,8 +10,22 @@ import java.util.Iterator;
  */
 public abstract class Cage {
 
+    /**
+     * Base to create unique IDs for cages.
+     * <p>
+     * it is public and has setters as it needs to be modified when loading the Cage collection file
+     */
+    protected static int CAGE_ID_BASE=300;
 
-    public static int CAGE_ID_BASE=300;
+    public int getCAGE_ID_BASE() {
+        return CAGE_ID_BASE;
+    }
+
+    public void setCAGE_ID_BASE(int CAGE_ID_BASE) {
+        this.CAGE_ID_BASE = CAGE_ID_BASE;
+    }
+
+
     protected int cageID;
 
     /**

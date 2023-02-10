@@ -59,6 +59,10 @@ public class Menagerie {
 
             }
     }
+    /**
+     * Method to count all the unassigned animals, the result will be used as a test condition
+     * @return Number of unassigned animals
+     */
     public static int countUnassignedAnimals(){
         int count=0;
         Iterator<Animal>iter= menagerie.iterator();
@@ -136,6 +140,8 @@ public class Menagerie {
             menagerie.clear();
             try{
                 menagerie=(ArrayList<Animal>)ois.readObject();
+                // modifying the ID_base to account for saved animal
+                Animal.ANIMAL_ID_BASE=Animal.ANIMAL_ID_BASE+menagerie.size();
             }
             catch (ClassNotFoundException e){
                 System.out.println("Load_Menagerie1: "+e.getMessage());

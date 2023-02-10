@@ -121,6 +121,7 @@ public class Keeper implements Employee, Serializable {
     @Override
     public String getDetails() {
         return "\nKeeper details:"+
+                "\n Keeper ID:  "+getKeeperID()+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
                 "\nAddress: "+getAddress()+
