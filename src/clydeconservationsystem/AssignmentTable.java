@@ -8,16 +8,16 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * This class holds the Cages-Keepers allocation.
+ * This class holds the Cages-Keepers assignments.
  * <p>
- * An allocation needs to be assigned a Keeper(mandatory) and can be assigned up to 4 cages.
+ * An assignment needs to be assigned a Keeper(mandatory) and can be assigned up to 4 cages.
  * <p>
- * A keeper cannot be assigned to an allocation if he's already in another one.
+ * A keeper cannot be assigned to an assignment if he's already in another one.
  * <p>
- * all allocations are stored in an AllocationCollection object.
+ * all assignment are stored in an AllocationCollection object.
  * @author Erik
  */
-public class AllocationTable implements Serializable {
+public class AssignmentTable implements Serializable {
 
     // Variable to hold the Keeper
     private Keeper assignedKeeper;
@@ -31,12 +31,12 @@ public class AllocationTable implements Serializable {
 
 
     /**
-     * Constructor for the Allocation object.
+     * Constructor for the assignment object.
      * <p>
      * A table must be created with a Keeper, even if it can be changed later if needed.
      * @param keeper Keeper to assign to the table
      */
-    public AllocationTable(Keeper keeper){
+    public AssignmentTable(Keeper keeper){
         this.assignedKeeper=keeper;
         assignmentID=ASSIGNMENT_ID_BASE++;
     }
@@ -101,7 +101,7 @@ public class AllocationTable implements Serializable {
     }
 
     /**
-     * Method to display the cages assigned in this Allocation Table
+     * Method to display the cages assigned in this assignment Table
      */
     public void displayAssignment(){
         int index=1;

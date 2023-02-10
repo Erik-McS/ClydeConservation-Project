@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * This class will contain all the AllocationsTable objects created by the Head Keeper
+ * This class will contain all the AssignmentTable objects created by the Head Keeper
  * @author Erik
  */
-public class AllocationsCollection {
+public class AssignmentsCollection {
 
-    private static ArrayList<AllocationTable>assignments=new ArrayList<>();
+    private static ArrayList<AssignmentTable>assignments=new ArrayList<>();
     private static final String fileName="assignments.dat";
 
     // using a private constructor to prevent the creation of Assignment objects
-    private AllocationsCollection(){}
+    private AssignmentsCollection(){}
 
     /**
      * This method will save the assignment ArrayList in a file
@@ -54,7 +54,7 @@ public class AllocationsCollection {
             ObjectInputStream ois=new ObjectInputStream(fis);
             assignments.clear();
             try{
-                assignments=(ArrayList<AllocationTable>) ois.readObject();
+                assignments=(ArrayList<AssignmentTable>) ois.readObject();
             }
             catch (ClassNotFoundException e){
                 System.out.println(e.getMessage());
@@ -73,9 +73,9 @@ public class AllocationsCollection {
         if (assignments.isEmpty())
             System.out.println("There is no assignments stored");
         else {
-            Iterator<AllocationTable> iter= assignments.iterator();
+            Iterator<AssignmentTable> iter= assignments.iterator();
             while (iter.hasNext()){
-                AllocationTable assign=iter.next();
+                AssignmentTable assign=iter.next();
                 System.out.println("----- Assignment ID "+assign.getAssignmentID()+", Keeper "+assign.getAssignedKeeper().getFirstName()+
                         " "+assign.getAssignedKeeper().getLastName()+" -----");
                 assign.displayAssignment();
@@ -84,15 +84,15 @@ public class AllocationsCollection {
     }
     /**
      * Method to create a new Assignment. it needs the keeper passed as parameter.
-     * The method will create a new AllocationTable object with the Keeper
-     * @param keeper The keeper to assign to the AllocationTable
+     * The method will create a new AssignmentTable object with the Keeper
+     * @param keeper The keeper to assign to the AssignmentTable
      */
     public static void addAssignment(Keeper keeper) throws ValidationException{
 
         if (isPresent(keeper))
             System.out.println("This keeper already has an assignment");
         else if (keeper!=null){
-            assignments.add(new AllocationTable(keeper));
+            assignments.add(new AssignmentTable(keeper));
             saveAssigment();
             System.out.println("The new assignment is now created");
         }
@@ -101,7 +101,7 @@ public class AllocationsCollection {
     // method to check if a keeper already has an assignment.
     private static boolean isPresent(Keeper keeper){
 
-        Iterator<AllocationTable> iter=assignments.iterator();
+        Iterator<AssignmentTable> iter=assignments.iterator();
         if (assignments.isEmpty())
             return false;
         else if (keeper==null) {
@@ -109,7 +109,7 @@ public class AllocationsCollection {
         }
         else {
             while (iter.hasNext()){
-                AllocationTable assignment=iter.next();
+                AssignmentTable assignment=iter.next();
                 Keeper kp=assignment.getAssignedKeeper();
                 if(keeper.getKeeperID()==kp.getKeeperID());
                 return true;
@@ -127,9 +127,9 @@ public class AllocationsCollection {
         if (assignments.isEmpty())
             return false;
         else {
-            Iterator<AllocationTable> iter=assignments.iterator();
+            Iterator<AssignmentTable> iter=assignments.iterator();
             while (iter.hasNext()){
-                AllocationTable assign=iter.next();
+                AssignmentTable assign=iter.next();
                 if (assign.cageIsPresent(cage))
                     return true;
             }
@@ -143,14 +143,14 @@ public class AllocationsCollection {
      * @param at Assigment
      * @return -1 or the index in the ArrayList
      */
-    public static int getAssignmentIndex(AllocationTable at){
+    public static int getAssignmentIndex(AssignmentTable at){
         if (assignments.isEmpty())
             return -1;
         else{
             int index=0;
-            Iterator<AllocationTable> iter=assignments.iterator();
+            Iterator<AssignmentTable> iter=assignments.iterator();
             while (iter.hasNext()){
-                AllocationTable assign=iter.next();
+                AssignmentTable assign=iter.next();
                 if (assign.getAssignmentID()==at.getAssignmentID())
                     return index;
                 else
@@ -174,14 +174,14 @@ public class AllocationsCollection {
      * @param assignmentID ID of the assigment
      * @return The searched assignment
      */
-    public static AllocationTable getAssigment(int assignmentID){
+    public static AssignmentTable getAssigment(int assignmentID){
 
         if (assignments.isEmpty())
             return null;
         else{
-            Iterator<AllocationTable> iter=assignments.iterator();
+            Iterator<AssignmentTable> iter=assignments.iterator();
             while (iter.hasNext()){
-                AllocationTable assign=iter.next();
+                AssignmentTable assign=iter.next();
                 if (assign.getAssignmentID()==assignmentID)
                     return assign;
             }

@@ -67,7 +67,10 @@ public class CagesCollection {
             ObjectInputStream ois=new ObjectInputStream(fis);
             cagesCollection.clear();
             try{
+                // replacing the existing arraylist by the saved one
                 cagesCollection=(ArrayList<Cage>) ois.readObject();
+                // adding the number of cages to the CAGE_ID_BASE so new cages ID start after the last created one
+                Cage.CAGE_ID_BASE=Cage.CAGE_ID_BASE+cagesCollection.size();
             }
             catch (ClassNotFoundException e){
                 System.out.println("CageCollections:"+e.getMessage());
@@ -111,7 +114,7 @@ public class CagesCollection {
             while (iter.hasNext()){
                 // if not already in the assignment collections, the cage will be displayed
                 Cage cage= iter.next();
-                if (!AllocationsCollection.isAssigned(cage)){
+                if (!AssignmentsCollection.isAssigned(cage)){
                     System.out.println("Cage ID: "+cage.getCageID());
                     System.out.println(cage.getCageDetails());
                 }
@@ -132,7 +135,7 @@ public class CagesCollection {
             int count=0;
             while (iter.hasNext()){
                 Cage cage= iter.next();
-                if (!AllocationsCollection.isAssigned(cage)){
+                if (!AssignmentsCollection.isAssigned(cage)){
                     count++;
                 }
             }

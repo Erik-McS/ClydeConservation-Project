@@ -58,6 +58,29 @@ public class EmployeeRoster implements Serializable{
         }
     }
     /**
+     * Method used to get the number of Keepers in the roster.
+     * <p>
+     * this is used when loading the roster from file, to update the ID_BASE so we don't get duplicate IDs
+     * @return Number of Keepers in roster
+     */
+    public static int countKeepers(){
+        if (employees.isEmpty())
+            return 0;
+        else{
+            int count=0;
+            // using an iterator to loop over the employee collection.
+            Iterator<Employee> iter=employees.iterator();
+            while (iter.hasNext()){
+                // displaying the index and the employee details.
+                Employee employee= iter.next();
+                if (employee instanceof Keeper){
+                    count++;
+                }
+            }
+            return count;
+        }
+    }
+    /**
      * Method to search the employee roster and return a keeper ogject corresponding to the passed keeperID
      * @param keeperID
      * @return the searched Keeper, or null if not found
@@ -127,9 +150,13 @@ public class EmployeeRoster implements Serializable{
         try{
             FileInputStream fis=new FileInputStream(fileName);
             ObjectInputStream ois=new ObjectInputStream(fis);
+            // clearing the ArrayList to make room to the new one
             employees.clear();
             try{
+                // loading the roster
                 employees=(ArrayList<Employee>) ois.readObject();
+                // modifying the ID_base to account for saved animal
+                Keeper.KEEPER_ID_BASE=Keeper.KEEPER_ID_BASE+countKeepers();
             }
             catch (ClassNotFoundException e){
                 System.out.println(e.getMessage());

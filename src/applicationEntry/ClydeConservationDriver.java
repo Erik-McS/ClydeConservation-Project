@@ -14,11 +14,21 @@ public class ClydeConservationDriver {
      */
     public static void main(String[] args) {
 
-        // using the logAsMenu to simulate an Employee login and store the profile in a variable
-        Employee loggedAs=Menus.logAsMenu();
         // initialise data/files
+        // if not found, this will create the following 3 files in the folder:
+        // - cages.dat
+        // - menagerie.dat
+        // - roster.dat
+        // this files contain some cages, animals, employees to add to the system to play with
+        // the assignment.dat file will be added once the first Cage-Keeper Assignment will be created in-app
+        // any operation that 'add','assign','create' will add the new object to the respective file.
+        // this will allow data persistence when using the app
+        // to clear the collections, delete the 4 files.
+        // to start with no data at all in the collections, delete or add // to the next line
         SystemInitialisation.initialiseData();
 
+        // using the logAsMenu to simulate an Employee login and store the profile in a variable
+        Employee loggedAs=Menus.logAsMenu();
 
         // this loop has no exit condition by itself as the exit option will be handled
         // by the Menus class itself
@@ -26,13 +36,12 @@ public class ClydeConservationDriver {
             // the switch statement takes the value returned by Menus.mainMenu() as parameter
             switch (Menus.mainMenu()){
                 case 1:
-                    try {
-                        // we cast the profile stored in the loggedAS variable as a HeadKeeper
-                        // if the types match, the Headkeeper menu will display
-                        // else it means the user is an administrator and can't access the menu
+                    // checking if the logged profile is a Keeper
+                    if (loggedAs instanceof Keeper){
+                        // entering the Head Keeper menu
                         Menus.headKeeperMenu((HeadKeeper)loggedAs);
                     }
-                    catch (ClassCastException cce){
+                    else{
                         // unauthorised access message
                         System.out.println("""
                                             You do not have the correct accreditation to access the selected application.
@@ -41,13 +50,12 @@ public class ClydeConservationDriver {
                     }
                     break;
                 case 2:
-                    try {
-                        // we cast the profile stored in the loggedAS variable as an Administrator
-                        // if the types match, the Administrator menu will display
-                        // else it means the user is a Keeper and can't access the menu
+                    // checking if the logged profile is a Keeper
+                    if (loggedAs instanceof Administrator){
+                        // entering the Admin menu
                         Menus.administratorMenu((Administrator)loggedAs);
                     }
-                    catch (ClassCastException cce){
+                    else{
                         // unauthorised access message
                         System.out.println("""
                                             You do not have the correct accreditation to access the selected application.

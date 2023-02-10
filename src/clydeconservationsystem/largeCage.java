@@ -50,7 +50,7 @@ public class largeCage extends Cage implements Serializable {
     }
 
     /**
-     * Method to return the cage capacity, to be used in tests in the AllocationTable class
+     * Method to return the cage capacity, to be used in tests in the AssignmentTable class
      * @return
      */
     public int getCAPACITY(){
