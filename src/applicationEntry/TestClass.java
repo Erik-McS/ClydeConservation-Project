@@ -1,5 +1,8 @@
 package applicationEntry;
 
+import animals.Menagerie;
+import clydeconservationsystem.CagesCollection;
+
 /**
  * Test class, used in some unit testing
  */
@@ -24,9 +27,13 @@ public class TestClass {
         // EmployeeRoster.displayEmployees();
          //EmployeeRoster.displayKeepers();
         //AssignmentsCollection.displayAssignments();
-        //CagesCollection.displayAllCages();
+        CagesCollection.loadCagesCollection();
+        CagesCollection.displayAllCages();
+
         //AssignmentsCollection.addAssignment(assistantKeeper);
        // AssignmentsCollection.displayAssignments();
        //Menagerie.displayUnassignedAnimals();
+
+
     }
 }

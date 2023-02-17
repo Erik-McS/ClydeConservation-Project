@@ -78,16 +78,21 @@ public class AssignmentTable implements Serializable {
     /**
      * Method to add a cage to a Keeper assignment
      * @param cage Cage to add
+     * @return True or false
      */
-    public void assignCage(Cage cage){
+    public boolean assignCage(Cage cage){
         // we first test if the cage is empty
         // if not, we check if the assigned cages of this keeper is not greater or equal than 4
-        if (cage.isEmpty())
+        if (cage.isEmpty()){
             System.out.println("This cage is empty. it cannot be assigned yet.");
-        else if(isMaxedOut())
+            return false;}
+        else if(isMaxedOut()){
             System.out.println("This keeper cannot care for any more cages");
-        else
+            return false;}
+        else {
             assignedCages.add(cage);
+            return true;
+        }
     }
 
     /**

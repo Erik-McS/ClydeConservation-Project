@@ -3,9 +3,6 @@ package applicationEntry;
 import employees.*;
 import clydeconservationsystem.*;
 
-import javax.swing.*;
-import java.io.File;
-
 public class ClydeConservationDriver {
 
     /**
@@ -14,14 +11,14 @@ public class ClydeConservationDriver {
      */
     public static void main(String[] args) {
 
-        // initialise data/files
+        // initialising data files
         // if not found, this will create the following 3 files in the folder:
         // - cages.dat
         // - menagerie.dat
         // - roster.dat
         // this files contain some cages, animals, employees to add to the system to play with
-        // the assignment.dat file will be added once the first Cage-Keeper Assignment will be created in-app
-        // any operation that 'add','assign','create' will add the new object to the respective file.
+        // the assignment.dat file will be added once the first Cage-Keeper Assignment is created in-app
+        // any operation that 'add','assign','create' will add the new objects to the respective file.
         // this will allow data persistence when using the app
         // to clear the collections, delete the 4 files.
         // to start with no data at all in the collections, delete or add // to the next line

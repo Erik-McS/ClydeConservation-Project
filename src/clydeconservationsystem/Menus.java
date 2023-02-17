@@ -154,7 +154,7 @@ public class Menus {
     }
     /**
      * This function will handle the options accessible to a Head Keeper.
-     * <p>
+     * <p>E
      * it will call the following private functions of the Menus class
      * <p>
      * - hKeeperMenu()
@@ -525,6 +525,7 @@ public class Menus {
                 default -> { yield 5;}
             };
         }
+        // exception if something not an integer is entered
         catch (InputMismatchException e){
             System.out.println("Incorrect choice entered");
             return 0;
@@ -567,7 +568,7 @@ public class Menus {
     private static int adminAddAnimalMenu(){
         // printing the menu
         System.out.println("""
-                    ----- Add an Animal -----  
+                    ----- Add an Animal -----
                     Please select an option
                     1) Add a Bird
                     2) Add a Mammal
@@ -582,6 +583,7 @@ public class Menus {
                 default -> { yield 0;}
             };
         }
+        // exception if something not an integer is entered
         catch (InputMismatchException e){
             System.out.println("Incorrect choice entered");
             return 0;
@@ -595,7 +597,7 @@ public class Menus {
     private static int adminAddKeeperMenu(){
         // printing the menu
         System.out.println("""
-                    ----- Add a Keeper -----  
+                    ----- Add a Keeper -----
                     Please select an option
                     1) Add an Assistant Keeper
                     2) Add a Head Keeper
@@ -636,7 +638,7 @@ public class Menus {
     private static int adminAddCage(){
         // printing the menu
         System.out.println("""
-                    ----- Add a Cage ----- 
+                    ----- Add a Cage -----
                     Please select the Cage Capacity
                     1) Large Cage
                     2) Medium Cage
@@ -697,7 +699,8 @@ public class Menus {
                 Menagerie.displayUnassignedAnimals();
                 // display cages that aren't full
                 System.out.println("***** Cage List ******");
-                CagesCollection.displayNonFullCages();
+                //CagesCollection.displayNonFullCages();
+                CagesCollection.displayAllCages();
                 // getting user choices
                 System.out.println("Please enter the Animal ID: ");
                 int animalID=sc.nextInt();
@@ -739,10 +742,14 @@ public class Menus {
                 System.out.println("Please enter the Assignment ID: ");
                 int assignID=sc.nextInt();
                 // adding the selected cage to the existing assignment.
-                AssignmentsCollection.addCageToAssignment(AssignmentsCollection.getAssignmentIndex(AssignmentsCollection.getAssigment(assignID)),
-                        CagesCollection.getCage(cageID));
-                // saving the modified assignments
-                AssignmentsCollection.saveAssigment();
+                if(AssignmentsCollection.addCageToAssignment(AssignmentsCollection.getAssignmentIndex(AssignmentsCollection.getAssigment(assignID)),
+                        CagesCollection.getCage(cageID))){
+                    // saving the modified assignments
+                    AssignmentsCollection.saveAssigment();
+                    System.out.println("The cage is now added to Assignment "+assignID);
+                    AssignmentsCollection.getAssigment(assignID).displayAssignment();
+
+                }
             }
             catch (InputMismatchException e){
                 System.out.println("Incorrect choice entered");

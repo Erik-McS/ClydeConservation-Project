@@ -26,7 +26,7 @@ public class mediumCage extends Cage implements Serializable {
         // initialising the arraylist
         assignedAnimals=new ArrayList<>();
         // creating the ID
-        cageID=CAGE_ID_BASE++;
+        this.cageID=CAGE_ID_BASE++;
     }
 
     /**
@@ -67,7 +67,6 @@ public class mediumCage extends Cage implements Serializable {
             }
         }
     }
-
     @Override
     public boolean isEmpty() {
         return assignedAnimals.isEmpty();
@@ -114,7 +113,6 @@ public class mediumCage extends Cage implements Serializable {
             return false;
         }
     }
-
     @Override
     public boolean isFull() {
         return assignedAnimals.size()==CAPACITY;
