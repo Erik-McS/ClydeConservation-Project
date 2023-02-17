@@ -26,15 +26,15 @@ public class Administrator implements Employee, Serializable {
 
     /**
      * Constructor for the Administrator class
-     * @param name Name of the Administrator
+     * @param firstName Name of the Administrator
      * @param lastName Lastname of the Administrator
      * @param number Telephone number of the Administrator
-     * @param Address Address of the Administrator
+     * @param address address of the Administrator
      */
-    public Administrator(String name,String lastName,String number, String Address){
+    public Administrator(String firstName,String lastName,String number, String address){
         // assigning all parameters to the class variables
-        this.setAddress(Address);
-        this.setFirstName(name);
+        this.setAddress(address);
+        this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setContactNumber(number);
         // assigning an admin ID and incrementing the base by 1

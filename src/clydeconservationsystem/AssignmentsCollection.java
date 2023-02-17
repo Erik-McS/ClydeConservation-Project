@@ -8,6 +8,8 @@ import java.util.Iterator;
 
 /**
  * This class will contain all the AssignmentTable objects created by the Head Keeper
+ * <p>
+ * all the collections classes uses the singleton design patter: private constructor and static methods.
  * @author Erik
  */
 public class AssignmentsCollection {
@@ -165,8 +167,10 @@ public class AssignmentsCollection {
      * @param assignmentIndex index of the assignment
      * @param cage Cage to add
      */
-    public static void addCageToAssignment(int assignmentIndex,Cage cage){
-        assignments.get(assignmentIndex).assignCage(cage);
+    public static boolean addCageToAssignment(int assignmentIndex,Cage cage){
+        if (assignments.get(assignmentIndex).assignCage(cage))
+            return true;
+        else return false;
     }
 
     /**

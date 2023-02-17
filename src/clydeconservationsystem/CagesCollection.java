@@ -68,7 +68,7 @@ public class CagesCollection {
             cagesCollection.clear();
             try{
                 // replacing the existing arraylist by the saved one
-                cagesCollection=(ArrayList<Cage>) ois.readObject();
+                cagesCollection=(ArrayList<Cage>)ois.readObject();
                 // adding the number of cages to the CAGE_ID_BASE so new cages ID start after the last created one
                 Cage.CAGE_ID_BASE=Cage.CAGE_ID_BASE+cagesCollection.size();
             }
@@ -95,7 +95,7 @@ public class CagesCollection {
             while (iter.hasNext()){
                 // displaying the index and the cage details.
                 Cage cage= iter.next();
-                System.out.println("Cage ID: "+cage.getCageID());
+                //System.out.println("Cage ID: "+cage.getCageID());
                 System.out.println(cage.getCageDetails());
             }
         }
@@ -115,7 +115,7 @@ public class CagesCollection {
                 // if not already in the assignment collections, the cage will be displayed
                 Cage cage= iter.next();
                 if (!AssignmentsCollection.isAssigned(cage)){
-                    System.out.println("Cage ID: "+cage.getCageID());
+                    //System.out.println("Cage ID: "+cage.getCageID());
                     System.out.println(cage.getCageDetails());
                 }
             }

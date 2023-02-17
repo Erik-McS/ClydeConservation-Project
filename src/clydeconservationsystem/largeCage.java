@@ -27,7 +27,7 @@ public class largeCage extends Cage implements Serializable {
         // initialising the arraylist
         assignedAnimals=new ArrayList<>();
         // creating the ID
-        cageID=CAGE_ID_BASE++;
+        this.cageID=CAGE_ID_BASE++;
     }
 
     /**

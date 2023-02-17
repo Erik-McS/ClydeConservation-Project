@@ -25,12 +25,10 @@ public class EmployeeRoster implements Serializable{
         if (employees.isEmpty())
             System.out.println("There is no employees stored");
         else{
-            // using an iterator to loop over the employee collection.
-            Iterator<Employee> iter=employees.iterator();
-            while (iter.hasNext()){
+            // displaying the employees
+            for (Employee employee : employees) {
                 // displaying the index and the employee details.
-                Employee employee= iter.next();
-                System.out.println("Employee ID: "+employee.getID());
+                System.out.println("----- Employee ID: " + employee.getID()+" -----");
                 System.out.println(employee.getDetails());
             }
         }

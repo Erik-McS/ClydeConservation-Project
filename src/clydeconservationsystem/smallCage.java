@@ -3,8 +3,7 @@ package clydeconservationsystem;
 import animals.Animal;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 
 /**
  * Class to represent the small cages used at Clyde Conservation
@@ -20,7 +19,7 @@ public class smallCage extends Cage implements Serializable {
 
     public smallCage(){
         // creating the ID
-        cageID=CAGE_ID_BASE++;
+        this.cageID=CAGE_ID_BASE++;
     }
 
     /**

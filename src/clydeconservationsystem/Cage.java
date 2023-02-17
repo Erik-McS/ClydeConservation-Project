@@ -2,13 +2,15 @@ package clydeconservationsystem;
 
 import animals.Animal;
 
+import java.io.Serializable;
+
 
 /**
  * The Cage class defines the basics of cages in the application.
  *
  * @author Erik
  */
-public abstract class Cage {
+public abstract class Cage implements Serializable {
 
     /**
      * Base to create unique IDs for cages.
