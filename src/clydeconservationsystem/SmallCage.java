@@ -10,36 +10,17 @@ import java.io.Serializable;
  * the class also implements the Serializable interface so objects can be saved via a stream in a file
  * @author Erik
  */
-public class smallCage extends Cage implements Serializable {
+public class SmallCage extends Cage implements Serializable {
 
     // Animal object to contain the assigned animal
     private Animal assignedAnimal;
-    // variable to store the category of the first animal assigned to it
-    private String cageCategory;
 
-    public smallCage(){
+
+    public SmallCage(){
         // creating the ID
         this.cageID=CAGE_ID_BASE++;
     }
 
-    /**
-     * Method to return the cage Category
-     * <p>
-     * the Category is determined by the first animal placed in the cage.
-     * <p>
-     * it can be:
-     * <p>
-     * - null: the cage has no animals assigned yet
-     * <p>
-     * - 'Predator': the first assigned animal was a predator type, cage can only house predators now
-     * <p>
-     * - 'Prey': the first assigned animal was a prey type, cage can only house prey now
-     *
-     * @return 'Predator', 'Prey', null
-     */
-    public String getCageCategory(){
-        return cageCategory;
-    }
 
     @Override
     public void displayAssignedAnimals() {
@@ -93,17 +74,19 @@ public class smallCage extends Cage implements Serializable {
     public String getCageDetails() {
 
         if (isEmpty()) {
-            return "\nCage ID: " + getCageID() +
-                    "\n Cage Capacity: 1" +
+            return "\n Cage Size: " +getCageSize()+
                     "\n Number of animals in the cage: 0" +
                     "\n Cage Category: N/A";
         }
         else{
-            return "\nCage ID: "+getCageID()+
-                    "\n Cage Capacity: 1"+
+            return "\n Cage Size: "+getCageSize()+
                     "\n Number of animals in the cage: 1"+
                     "\n Cage Category: "+getCageCategory();
             }
         }
+
+    @Override
+    public String getCageSize(){return "Small";}
+
 // End of class
 }

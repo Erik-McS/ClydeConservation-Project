@@ -8,6 +8,11 @@ import java.util.Iterator;
 
 /**
  * Class to hold the cages owned by Clyde Conservation
+ * <p>
+ * The class have methods to load and save the cages collection
+ * <p>
+ * it also has methods to display info on the cages it holds
+ * @author Erik
  */
 public class CagesCollection {
 
@@ -79,7 +84,6 @@ public class CagesCollection {
         catch (IOException e){
             System.out.println("CageCollections:"+e.getMessage());
         }
-
     }
     /**
      * The method will display the details of all the cages in the collection.
@@ -95,8 +99,20 @@ public class CagesCollection {
             while (iter.hasNext()){
                 // displaying the index and the cage details.
                 Cage cage= iter.next();
-                //System.out.println("Cage ID: "+cage.getCageID());
-                System.out.println(cage.getCageDetails());
+                // checking if the cage is for predator or prey, based on the first animal assigned
+                String type;
+                if (cage.isEmpty())
+                    type="No Animal in cage";
+                else
+                    type= cage.getCageCategory();
+                // testing if the cage is full or not
+                String capacity;
+                if (cage.isFull())
+                    capacity="Yes";
+                else
+                    capacity="No";
+                System.out.println("----- Cage ID: "+cage.cageID+"--- Cage Size: "+cage.getCageSize()+"--- Animal Type: "+type+
+                        "--- At full Capacity? "+capacity);
             }
         }
     }
@@ -112,11 +128,23 @@ public class CagesCollection {
             // using an iterator to loop over the cage collection.
             Iterator<Cage> iter=cagesCollection.iterator();
             while (iter.hasNext()){
-                // if not already in the assignment collections, the cage will be displayed
+                // if not already in the assignment collections, the cage will be displayed, provided it's also not empty
                 Cage cage= iter.next();
-                if (!AssignmentsCollection.isAssigned(cage)){
-                    //System.out.println("Cage ID: "+cage.getCageID());
-                    System.out.println(cage.getCageDetails());
+                if (!AssignmentsCollection.isAssigned(cage)&& !cage.isEmpty()){
+                    // checking if the cage is for predator or prey, based on the first animal assigned
+                    String type;
+                    if (cage.isEmpty())
+                        type="No Animal in cage";
+                    else
+                        type= cage.getCageCategory();
+                    // testing if the cage is full or not
+                    String capacity;
+                    if (cage.isFull())
+                        capacity="Yes";
+                    else
+                        capacity="No";
+                    System.out.println("----- Cage ID: "+cage.cageID+"--- Cage Size: "+cage.getCageSize()+"--- Animal Type: "+type+
+                            "--- At full Capacity? "+capacity);
                 }
             }
         }
@@ -140,18 +168,6 @@ public class CagesCollection {
                 }
             }
             return count;
-        }
-    }
-
-    /**
-     * Method to display a list of cages that aren't full
-     */
-    public static void displayNonFullCages(){
-        Iterator<Cage> iter=cagesCollection.iterator();
-        while (iter.hasNext()){
-            Cage cfg=iter.next();
-            if (!cfg.isFull())
-                System.out.println(cfg.getCageDetails());
         }
     }
 
@@ -196,7 +212,6 @@ public class CagesCollection {
             }
             return null;
         }
-
     }
     /**
      * Method to check if an animal is present in a cage
@@ -215,7 +230,6 @@ public class CagesCollection {
             }
             return false;
         }
-
     }
 
     /**

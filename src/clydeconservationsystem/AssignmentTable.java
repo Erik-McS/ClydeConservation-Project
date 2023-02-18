@@ -118,7 +118,7 @@ public class AssignmentTable implements Serializable {
             System.out.println("Keeper: "+assignedKeeper.getFirstName()+" "+assignedKeeper.getLastName());
             while (iter.hasNext()){
                 Cage cge=iter.next();
-                System.out.println("----- Cage ID"+cge.getCageID()+" -----");
+                System.out.println("----- Cage ID "+cge.getCageID()+" -----");
                 System.out.println(cge.getCageDetails());
             }
         }

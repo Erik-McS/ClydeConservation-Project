@@ -124,23 +124,23 @@ public class SystemInitialisation {
          * **/
 
         // 5 large cages
-        CagesCollection.addCage(new largeCage());
-        CagesCollection.addCage(new largeCage());
-        CagesCollection.addCage(new largeCage());
-        CagesCollection.addCage(new largeCage());
-        CagesCollection.addCage(new largeCage());
+        CagesCollection.addCage(new LargeCage());
+        CagesCollection.addCage(new LargeCage());
+        CagesCollection.addCage(new LargeCage());
+        CagesCollection.addCage(new LargeCage());
+        CagesCollection.addCage(new LargeCage());
         // 3 medium cages
-        CagesCollection.addCage(new mediumCage());
-        CagesCollection.addCage(new mediumCage());
-        CagesCollection.addCage(new mediumCage());
+        CagesCollection.addCage(new MediumCage());
+        CagesCollection.addCage(new MediumCage());
+        CagesCollection.addCage(new MediumCage());
         // 7 small cages
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
-        CagesCollection.addCage(new smallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
+        CagesCollection.addCage(new SmallCage());
 
         CagesCollection.saveCagesCollection();
         System.out.println("------ Cage Collections Created: 5 Large Cages, 3 Medium Cages, 7 Small Cages ------");

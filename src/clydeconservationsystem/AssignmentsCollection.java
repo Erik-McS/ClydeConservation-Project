@@ -191,7 +191,17 @@ public class AssignmentsCollection {
             }
             return null;
         }
+    }
 
+    /**
+     * Method to check if there are any assignments created
+     * @return
+     */
+    public static boolean isEmpty(){
+        if (assignments.isEmpty())
+            return true;
+        else
+            return false;
     }
 //End of class
 }

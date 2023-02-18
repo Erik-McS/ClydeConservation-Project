@@ -7,7 +7,7 @@ import clydeconservationsystem.CagesCollection;
  * Test class, used in some unit testing
  */
 public class TestClass {
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
 
 
             //HeadKeeper erik= new HeadKeeper.HdKBuilder().setName("Erik").setLastName("Mcsev").HBuilder();
@@ -27,13 +27,13 @@ public class TestClass {
         // EmployeeRoster.displayEmployees();
          //EmployeeRoster.displayKeepers();
         //AssignmentsCollection.displayAssignments();
-        CagesCollection.loadCagesCollection();
-        CagesCollection.displayAllCages();
+        //CagesCollection.loadCagesCollection();
+       // CagesCollection.displayAllCages();
 
         //AssignmentsCollection.addAssignment(assistantKeeper);
        // AssignmentsCollection.displayAssignments();
        //Menagerie.displayUnassignedAnimals();
 
 
-    }
+   // }
 }

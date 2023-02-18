@@ -11,7 +11,8 @@ public class ClydeConservationDriver {
      */
     public static void main(String[] args) {
 
-        // initialising data files
+        // initialising data
+        // files
         // if not found, this will create the following 3 files in the folder:
         // - cages.dat
         // - menagerie.dat
@@ -21,7 +22,7 @@ public class ClydeConservationDriver {
         // any operation that 'add','assign','create' will add the new objects to the respective file.
         // this will allow data persistence when using the app
         // to clear the collections, delete the 4 files.
-        // to start with no data at all in the collections, delete or add // to the next line
+        // to start with no data at all1 in the collections, delete or add // to the next line
         SystemInitialisation.initialiseData();
 
         // using the logAsMenu to simulate an Employee login and store the profile in a variable
