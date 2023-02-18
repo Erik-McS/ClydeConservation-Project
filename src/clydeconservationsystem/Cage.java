@@ -18,6 +18,27 @@ public abstract class Cage implements Serializable {
      * it is public and has setters as it needs to be modified when loading the Cage collection file
      */
     protected static int CAGE_ID_BASE=300;
+    // variable to store the category of the first animal assigned to it
+    // this will allow to check if the animals added later are compatible
+    protected String cageCategory;
+    /**
+     * Method to return the cage Category
+     * <p>
+     * the Category is determined by the first animal placed in the cage.
+     * <p>
+     * it can be:
+     * <p>
+     * - null: the cage has no animals assigned yet
+     * <p>
+     * - 'Predator': the first assigned animal was a predator type, cage can only house predators now
+     * <p>
+     * - 'Prey': the first assigned animal was a prey type, cage can only house prey now
+     *
+     * @return 'Predator', 'Prey', null
+     */
+    public String getCageCategory(){
+        return cageCategory;
+    }
 
     public int getCAGE_ID_BASE() {
         return CAGE_ID_BASE;
@@ -69,5 +90,11 @@ public abstract class Cage implements Serializable {
      * The method will display the details of all the animals in the collection.
      */
     public abstract void displayAssignedAnimals();
+
+    /**
+     * Method to get the Cage size : Large, Medium or Small
+     * @return Cage's Size
+     */
+    public abstract String getCageSize();
 
 }

@@ -266,7 +266,7 @@ public class Menus {
                         switch (adminAddCage()){
                             case 1:
                                 // Adding a Large Cage
-                                largeCage largeCage=new largeCage();
+                                LargeCage largeCage=new LargeCage();
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(largeCage);
                                 // save the CagesCollection in the file
@@ -277,7 +277,7 @@ public class Menus {
                                 break;
                             case 2:
                                 // adding a Medium Cage
-                                mediumCage mediumCage=new mediumCage();
+                                MediumCage mediumCage=new MediumCage();
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(mediumCage);
                                 // save the CagesCollection in the file
@@ -288,7 +288,7 @@ public class Menus {
                                 break;
                             case 3:
                                 // adding a small Cage
-                                smallCage smallCage=new smallCage();
+                                SmallCage smallCage=new SmallCage();
                                 // add the cage to the cageCollection
                                 CagesCollection.addCage(smallCage);
                                 // save the CagesCollection in the file
@@ -726,10 +726,21 @@ public class Menus {
     private static void assignCageToKeeper(){
         System.out.println("-------- Cage assignment --------");
 
-        // display the unassigned cages
-        if (CagesCollection.countUnassignedCages()==0)
+        // check if there are any unassigned cages
+        if (CagesCollection.countUnassignedCages()==0) {
+            System.out.println("***** Cages List *****");
             System.out.println("There is no unassigned cages");
-        else {
+        }
+        // check if there are any available assignments
+        else if(AssignmentsCollection.isEmpty()){
+            {
+                System.out.println("***** Assignments List *****");
+                System.out.println("There are no Assignments available, please create one.");
+            }
+        }
+        // display the unassigned cages
+        else
+        {
             System.out.println("***** Cages List *****");
             CagesCollection.displayUnassignedCages();
             System.out.println("***** Assignments List *****");
@@ -748,7 +759,6 @@ public class Menus {
                     AssignmentsCollection.saveAssigment();
                     System.out.println("The cage is now added to Assignment "+assignID);
                     AssignmentsCollection.getAssigment(assignID).displayAssignment();
-
                 }
             }
             catch (InputMismatchException e){
@@ -758,8 +768,6 @@ public class Menus {
                 sc.nextLine();
             }
         }
-
-
     }
 
 
