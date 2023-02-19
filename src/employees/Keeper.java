@@ -51,8 +51,13 @@ public class Keeper implements Employee, Serializable {
      * Set the Keeper's firstname.
      * @param firstName Keeper's firstname.
      */
-    public void setFirstName(String firstName)  {
-            this.firstName = firstName;
+    public void setFirstName(String firstName)  throws ValidationException{
+        String nameValidation="(\\p{Upper})(\\p{Lower}){1,12}";
+
+        if (firstName.matches(nameValidation))
+             this.firstName = firstName;
+        else
+            throw new ValidationException("Invalid name format");
     }
 
     /**
@@ -67,8 +72,13 @@ public class Keeper implements Employee, Serializable {
      * Set the Keeper's lastname
      * @param lastName Keeper's lastname
      */
-    public void setLastName(String lastName){
+    public void setLastName(String lastName) throws ValidationException{
+        String nameValidation="(\\p{Upper})(\\p{Lower}){1,12}";
+
+        if (lastName.matches(nameValidation))
             this.lastName = lastName;
+        else
+            throw new ValidationException("Invalid surname format");
     }
 
     /**

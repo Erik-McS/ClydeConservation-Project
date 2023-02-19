@@ -19,8 +19,8 @@ public class TestClass {
             //System.out.println(stan.getDetails());
            // Administrator mike=new Administrator("Mike","Smith","22222222","avenue");
         //
-        AssistantKeeper assistantKeeper=new AssistantKeeper("Tommy","Tomas","07745362711","3 Glasgow av");
-        //EmployeeRoster.addEmployee(assistantKeeper);
+        AssistantKeeper assistantKeeper=new AssistantKeeper("Max","Tomas","07745362711","3 Glasgow av");
+        EmployeeRoster.addEmployee(assistantKeeper);
 
             //String s=erik.getClass().getName();
             //System.out.println(s);
@@ -38,6 +38,6 @@ public class TestClass {
        //Menagerie.displayUnassignedAnimals()
     EmployeeRoster.loadRoster();
     EmployeeRoster.displayEmployees();
-    EmployeeRoster.addEmployee(assistantKeeper);
+    //EmployeeRoster.addEmployee(assistantKeeper);
     }
 }

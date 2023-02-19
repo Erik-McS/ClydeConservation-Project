@@ -315,7 +315,6 @@ public class Menus {
                                     String[] keeperDetails=getKeeperDetails();
                                     AssistantKeeper assist=new AssistantKeeper(keeperDetails[0],keeperDetails[1],
                                             keeperDetails[2],keeperDetails[3]);
-
                                     // once created, the Assistant Keeper is added to the roster
                                     EmployeeRoster.addEmployee(assist);
                                     // confirming the record has been created
@@ -626,23 +625,28 @@ public class Menus {
         String [] keeper=new String[4];
         // getting each value and storing
         System.out.println("Please enter the keeper's first name: ");
-        keeper[0]=sc.next();
+        keeper[0]=sc.nextLine();
         // checking the name is not empty
         if (keeper[0]==null)
             throw new ValidationException("Name cannot be empty");
         // checking it is in the proper format
-        else if (!keeper[0].matches("\\p{Upper}(\\p{Lower}){2,12}}"))
+        else if (!keeper[0].matches("(\\p{Upper})(\\p{Lower}){2,12}"))
             throw new ValidationException("Incorrect name format");
         System.out.println("Please enter the keeper's last name: ");
-        keeper[1]=sc.next();
+        keeper[1]=sc.nextLine();
         // checking the name is not empty
         if (keeper[1]==null)
             throw new ValidationException("Surname cannot be empty");
             // checking it is in the proper format
-        else if (!keeper[1].matches("\\p{Upper}(\\p{Lower}){2,12}}"))
+        else if (!keeper[1].matches("(\\p{Upper})(\\p{Lower}){2,12}"))
             throw new ValidationException("Incorrect Surname format");
         System.out.println("Please enter the keeper's last contact number: ");
-        keeper[2]=sc.next();
+        keeper[2]=sc.nextLine();
+        if (keeper[2]==null)
+            throw new ValidationException("Phone number cannot be empty");
+        else if (!keeper[2].matches("(\\d){10}")) {
+            throw new ValidationException("Telephone numbers must be 10 digits long");
+        }
         System.out.println("Please enter the keeper's address:");
         keeper[3]=sc.next();
         return keeper;
