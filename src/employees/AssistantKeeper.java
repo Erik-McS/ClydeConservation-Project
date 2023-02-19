@@ -1,5 +1,7 @@
 package employees;
 
+import clydeconservationsystem.ValidationException;
+
 /**
  * Generic class, just usedto fill the employee roster and be assigned to a group of cage.
  * <p>
@@ -20,6 +22,8 @@ public class AssistantKeeper extends Keeper{
         this.setAddress(Address);
         this.setFirstName(name);
         this.setLastName(lastName);
+
+
         this.setContactNumber(number);
         // using a static variable from the parent class. this will assign a unique ID to the child object
         // also increment the static variable.

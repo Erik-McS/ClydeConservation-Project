@@ -311,36 +311,37 @@ public class Menus {
                             case 1:
                                 // add an Assistant Keeper
                                 // the Keepers details are capture by the getKeeperDetails and passed in a String Array
-                                String[] keeperDetails=getKeeperDetails();
-                                AssistantKeeper assist=new AssistantKeeper(keeperDetails[0],keeperDetails[1],
-                                        keeperDetails[2],keeperDetails[3]);
-                                // once created, the Assistant Keeper is added to the roster
-                                EmployeeRoster.addEmployee(assist);
-                                // the roster is saved locally
-                                EmployeeRoster.saveRoster();
-                                // confirming the record has been created
-                                System.out.println("The following employee is now added to the roster:");
-                                System.out.println(assist.getDetails());
+                                try{
+                                    String[] keeperDetails=getKeeperDetails();
+                                    AssistantKeeper assist=new AssistantKeeper(keeperDetails[0],keeperDetails[1],
+                                            keeperDetails[2],keeperDetails[3]);
+
+                                    // once created, the Assistant Keeper is added to the roster
+                                    EmployeeRoster.addEmployee(assist);
+                                    // confirming the record has been created
+                                    System.out.println("\nThe following employee is now added to the roster:");
+                                    System.out.println(assist.getDetails());
+                                }
+                                catch (ValidationException e){
+                                    System.out.println(e.getMessage());
+                                }
                                 break;
                             case 2:
                                 // add a HeadKeeper
-                                String[] hKeeperDetails=getKeeperDetails();
                                 // try-catch to handle validation errors
                                 try{
+                                    String[] hKeeperDetails=getKeeperDetails();
                                     // passing the Keeper details captured and passed with the array to the HeadKeeper builder
                                     HeadKeeper hKeeper=new HeadKeeper.HdKBuilder().setName(hKeeperDetails[0]).setLastName(hKeeperDetails[1])
                                             .setContactNumber(hKeeperDetails[2]).setAddress(hKeeperDetails[3]).HBuilder();
                                     // adding the new HeadKeeper to the roster
                                     EmployeeRoster.addEmployee(hKeeper);
                                     // saving the roster
-                                    EmployeeRoster.saveRoster();
-                                    // confirming the record has been created
-                                    System.out.println("The following employee is now added to the roster:");
-                                    System.out.println(hKeeper.getDetails());
-                                }
-                                catch (ValidationException e){
-                                    System.out.println(e.getMessage());
-                                }
+                                    }
+                                    catch (ValidationException e){
+                                        System.out.println(e.getMessage());
+                                    }
+                                break;
                             case 3:
                                 // exiting the menu
                                 exit3=3;
@@ -620,14 +621,26 @@ public class Menus {
         }
     }
 
-    private static String[] getKeeperDetails(){
+    private static String[] getKeeperDetails() throws ValidationException{
         // the keeper's details will be passed back in an array
         String [] keeper=new String[4];
         // getting each value and storing
         System.out.println("Please enter the keeper's first name: ");
         keeper[0]=sc.next();
+        // checking the name is not empty
+        if (keeper[0]==null)
+            throw new ValidationException("Name cannot be empty");
+        // checking it is in the proper format
+        else if (!keeper[0].matches("\\p{Upper}(\\p{Lower}){2,12}}"))
+            throw new ValidationException("Incorrect name format");
         System.out.println("Please enter the keeper's last name: ");
         keeper[1]=sc.next();
+        // checking the name is not empty
+        if (keeper[1]==null)
+            throw new ValidationException("Surname cannot be empty");
+            // checking it is in the proper format
+        else if (!keeper[1].matches("\\p{Upper}(\\p{Lower}){2,12}}"))
+            throw new ValidationException("Incorrect Surname format");
         System.out.println("Please enter the keeper's last contact number: ");
         keeper[2]=sc.next();
         System.out.println("Please enter the keeper's address:");

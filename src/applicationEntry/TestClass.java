@@ -2,12 +2,14 @@ package applicationEntry;
 
 import animals.Menagerie;
 import clydeconservationsystem.CagesCollection;
+import employees.AssistantKeeper;
+import employees.EmployeeRoster;
 
 /**
  * Test class, used in some unit testing
  */
 public class TestClass {
-    //public static void main(String[] args) {
+    public static void main(String[] args) {
 
 
             //HeadKeeper erik= new HeadKeeper.HdKBuilder().setName("Erik").setLastName("Mcsev").HBuilder();
@@ -16,7 +18,8 @@ public class TestClass {
                     //.setContactNumber("1234567890").HBuilder();
             //System.out.println(stan.getDetails());
            // Administrator mike=new Administrator("Mike","Smith","22222222","avenue");
-        //AssistantKeeper assistantKeeper=new AssistantKeeper("John","Smith","07745362711","3 Glasgow av");
+        //
+        AssistantKeeper assistantKeeper=new AssistantKeeper("Tommy","Tomas","07745362711","3 Glasgow av");
         //EmployeeRoster.addEmployee(assistantKeeper);
 
             //String s=erik.getClass().getName();
@@ -32,8 +35,9 @@ public class TestClass {
 
         //AssignmentsCollection.addAssignment(assistantKeeper);
        // AssignmentsCollection.displayAssignments();
-       //Menagerie.displayUnassignedAnimals();
-
-
-   // }
+       //Menagerie.displayUnassignedAnimals()
+    EmployeeRoster.loadRoster();
+    EmployeeRoster.displayEmployees();
+    EmployeeRoster.addEmployee(assistantKeeper);
+    }
 }

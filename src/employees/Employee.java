@@ -11,5 +11,22 @@ public interface Employee {
      * @return The details of the employee.
      */
     public String getDetails();
+
+    /**
+     * Method to get the employee ID
+     * @return Employee ID
+     */
     public int getID();
+
+    /**
+     * Method to get the employee name
+     * @return Employee name
+     */
+    public String getName();
+
+    /**
+     * Employee to get the employee surname
+     * @return Employee surname
+     */
+    public String getSurname();
 }
