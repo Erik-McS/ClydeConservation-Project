@@ -20,10 +20,14 @@ public class AssistantKeeper extends Keeper{
     public AssistantKeeper(String name,String lastName,String number, String Address){
         // assigning class variables
         this.setAddress(Address);
-        this.setFirstName(name);
-        this.setLastName(lastName);
 
-
+        try {
+            this.setFirstName(name);
+            this.setLastName(lastName);
+        }
+        catch (ValidationException e){
+            System.out.println(e.getMessage()  );
+        }
         this.setContactNumber(number);
         // using a static variable from the parent class. this will assign a unique ID to the child object
         // also increment the static variable.

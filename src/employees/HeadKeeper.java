@@ -23,9 +23,14 @@ public class HeadKeeper extends Keeper{
 
     private HeadKeeper(HdKBuilder build){
         // the constructor will assign each attributes of the nested Builder  class to the HeadKeeper object
+        try{
+            this.setFirstName(build.firstName);
+            this.setLastName(build.lastName);
+        }
+        catch (ValidationException e){
+            System.out.println(e.getMessage());
+        }
 
-        this.setFirstName(build.firstName);
-        this.setLastName(build.lastName);
         this.setAddress(build.address);
         this.setContactNumber(build.contactNumber);
         // using a static variable from the parent class. this will assign a unique ID to the child object
