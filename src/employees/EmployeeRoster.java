@@ -109,7 +109,13 @@ public class EmployeeRoster implements Serializable{
      * @param employee Employee to add to the roster
      */
     public static void addEmployee(Employee employee){
-        employees.add(employee);
+        // testing if the person is in the roster
+        if (!newEmployeeExists(employee.getName(), employee.getSurname())) {
+            employees.add(employee);
+            EmployeeRoster.saveRoster();
+        }
+        else
+            System.out.println("\n----- This person is already in the roster -----");
     }
 
     /**
@@ -163,6 +169,24 @@ public class EmployeeRoster implements Serializable{
         catch (IOException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Method to test if someone with that name and surname is already in the roster.
+     * <p>
+     * this will be, by design choice, considered a duplicate and refused at record creation
+     * @param name Name of the employee
+     * @param surname Surname of the employee
+     * @return Exists or not.
+     */
+    public static boolean newEmployeeExists(String name, String surname){
+
+        for (Employee emp:employees){
+            if (emp.getName().equals(name)&&emp.getSurname().equals(surname)){
+                return true;
+            }
+        }
+        return false;
     }
 // End of class
 }

@@ -1,5 +1,7 @@
 package employees;
 
+import clydeconservationsystem.ValidationException;
+
 import java.io.Serializable;
 
 /**
@@ -49,8 +51,8 @@ public class Keeper implements Employee, Serializable {
      * Set the Keeper's firstname.
      * @param firstName Keeper's firstname.
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String firstName)  {
+            this.firstName = firstName;
     }
 
     /**
@@ -65,8 +67,8 @@ public class Keeper implements Employee, Serializable {
      * Set the Keeper's lastname
      * @param lastName Keeper's lastname
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lastName){
+            this.lastName = lastName;
     }
 
     /**
@@ -111,8 +113,16 @@ public class Keeper implements Employee, Serializable {
         System.out.println("Animals fed");
     }
 
-    // custom version of the toString() method
 
+    @Override
+    public String getName() {
+        return firstName;
+    }
+
+    @Override
+    public String getSurname() {
+        return lastName;
+    }
     /**
      * This function will create a Keeper's profile, including the Keeper's employee number
      * and return it as a string

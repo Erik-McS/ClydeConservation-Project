@@ -120,6 +120,16 @@ public class Administrator implements Employee, Serializable {
         return ADMIN_ID;
     }
 
+    @Override
+    public String getName() {
+        return firstName;
+    }
+
+    @Override
+    public String getSurname() {
+        return lastName;
+    }
+
     // custom version of the toString() method
     @Override
     public String getDetails() {
