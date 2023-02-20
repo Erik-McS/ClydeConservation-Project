@@ -37,6 +37,7 @@ public class AssignmentsCollection {
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(assignments);
             oos.close();
+            fos.close();
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -57,6 +58,8 @@ public class AssignmentsCollection {
             assignments.clear();
             try{
                 assignments=(ArrayList<AssignmentTable>) ois.readObject();
+                ois.close();
+                fis.close();
             }
             catch (ClassNotFoundException e){
                 System.out.println(e.getMessage());

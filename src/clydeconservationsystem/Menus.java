@@ -623,6 +623,7 @@ public class Menus {
     private static String[] getKeeperDetails() throws ValidationException{
         // the keeper's details will be passed back in an array
         String [] keeper=new String[4];
+        boolean exit=false;
         // getting each value and storing
         System.out.println("Please enter the keeper's first name: ");
         keeper[0]=sc.nextLine();
