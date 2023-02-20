@@ -53,6 +53,7 @@ public class CagesCollection {
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(cagesCollection);
             oos.close();
+            fos.close();
         }
         catch (IOException e){
             System.out.println("CageCollections:"+e.getMessage());
@@ -76,6 +77,8 @@ public class CagesCollection {
                 cagesCollection=(ArrayList<Cage>)ois.readObject();
                 // adding the number of cages to the CAGE_ID_BASE so new cages ID start after the last created one
                 Cage.CAGE_ID_BASE=Cage.CAGE_ID_BASE+cagesCollection.size();
+                ois.close();
+                fis.close();
             }
             catch (ClassNotFoundException e){
                 System.out.println("CageCollections:"+e.getMessage());

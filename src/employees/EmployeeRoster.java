@@ -138,6 +138,7 @@ public class EmployeeRoster implements Serializable{
             // writing the employee ArrayList in the file
             oos.writeObject(employees);
             oos.close();
+            fos.close();
         }
         catch (IOException e){
             System.out.println(e.getMessage());
@@ -161,6 +162,8 @@ public class EmployeeRoster implements Serializable{
                 employees=(ArrayList<Employee>) ois.readObject();
                 // modifying the ID_base to account for saved animal
                 Keeper.KEEPER_ID_BASE=Keeper.KEEPER_ID_BASE+countKeepers();
+                ois.close();
+                fis.close();
             }
             catch (ClassNotFoundException e){
                 System.out.println(e.getMessage());

@@ -24,7 +24,7 @@ public class Menagerie {
     // ArrayList to store the animals
     private static ArrayList<Animal> menagerie=new ArrayList<>();
     // constant to hold the name of the menagerie file
-    private static final String fileN="menagerie.dat";
+    private static final String fileName ="menagerie.dat";
     // using a private constructor to prevent the creation of Menagerie objects
     private Menagerie(){}
     /**
@@ -117,10 +117,11 @@ public class Menagerie {
         // try-catch to get any IO errors
         try{
             // initialise an output stream for the file
-            FileOutputStream fos=new FileOutputStream(fileN);
+            FileOutputStream fos=new FileOutputStream(fileName);
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(menagerie);
             oos.close();
+            fos.close();
         }
         catch (IOException e){
             System.out.println("Save_Menagerie: "+e.getMessage());
@@ -135,13 +136,15 @@ public class Menagerie {
 
         try{
 
-            FileInputStream fis=new FileInputStream(fileN);
+            FileInputStream fis=new FileInputStream(fileName);
             ObjectInputStream ois=new ObjectInputStream(fis);
             menagerie.clear();
             try{
                 menagerie=(ArrayList<Animal>)ois.readObject();
                 // modifying the ID_base to account for saved animal
                 Animal.ANIMAL_ID_BASE=Animal.ANIMAL_ID_BASE+menagerie.size();
+                ois.close();
+                fis.close();
             }
             catch (ClassNotFoundException e){
                 System.out.println("Load_Menagerie1: "+e.getMessage());
