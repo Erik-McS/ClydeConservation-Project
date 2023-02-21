@@ -173,6 +173,25 @@ public class Menagerie {
             return false;
         }
     }
+
+    /**
+     * Method to check if an object with this id exist in the arraylist
+     * @param id
+     * @return exists or not
+     */
+    public static boolean idExist(int id){
+        if (menagerie.isEmpty())
+            return false;
+        else{
+            Iterator<Animal> iter= menagerie.iterator();
+            while (iter.hasNext()){
+                Animal an= iter.next();
+                if (an.getAnimalID()==id)
+                    return true;
+            }
+            return false;
+        }
+    }
     public static Animal getAnimal(int animalID){
         if (menagerie.isEmpty())
             return null;

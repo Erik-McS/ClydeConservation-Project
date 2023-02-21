@@ -26,7 +26,7 @@ public class AssignmentTable implements Serializable {
     // arraylist to store the assigned cages.
     private ArrayList<Cage> assignedCages=new ArrayList<>();
     // static variable to create an ID;
-    private static int ASSIGNMENT_ID_BASE=500;
+    protected static int ASSIGNMENT_ID_BASE=500;
     private final int assignmentID;
 
 
@@ -83,13 +83,16 @@ public class AssignmentTable implements Serializable {
     public boolean assignCage(Cage cage){
         // we first test if the cage is empty
         // if not, we check if the assigned cages of this keeper is not greater or equal than 4
-        if (cage.isEmpty()){
-            System.out.println("This cage is empty. it cannot be assigned yet.");
+        if (cage==null){
+            System.out.println("Cage do not exists");
             return false;}
         else if(isMaxedOut()){
             System.out.println("This keeper cannot care for any more cages");
             return false;}
-        else {
+        else if (cage.isEmpty()) {
+            System.out.println("This cage is empty. it cannot be assigned yet.");
+            return false;
+        } else {
             assignedCages.add(cage);
             return true;
         }
@@ -114,12 +117,12 @@ public class AssignmentTable implements Serializable {
             System.out.println("This keeper has no cages assigned");
         else{
             Iterator<Cage> iter= assignedCages.iterator();
-            System.out.println("----- Assignment ID: "+getAssignmentID()+" -----");
-            System.out.println("Keeper: "+assignedKeeper.getFirstName()+" "+assignedKeeper.getLastName());
+            //System.out.println("----- Assignment ID: "+getAssignmentID()+" -----");
+           //System.out.println("Keeper: "+assignedKeeper.getFirstName()+" "+assignedKeeper.getLastName());
             while (iter.hasNext()){
                 Cage cge=iter.next();
-                System.out.println("----- Cage ID "+cge.getCageID()+" -----");
-                System.out.println(cge.getCageDetails());
+                System.out.println("\n----- Cage ID "+cge.getCageID()+" -----");
+                System.out.println(CagesCollection.getCage(cge.getCageID()).getCageDetails());
             }
         }
     }

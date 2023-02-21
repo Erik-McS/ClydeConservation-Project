@@ -39,16 +39,6 @@ public abstract class Cage implements Serializable {
     public String getCageCategory(){
         return cageCategory;
     }
-
-    public int getCAGE_ID_BASE() {
-        return CAGE_ID_BASE;
-    }
-
-    public void setCAGE_ID_BASE(int CAGE_ID_BASE) {
-        this.CAGE_ID_BASE = CAGE_ID_BASE;
-    }
-
-
     protected int cageID;
 
     /**

@@ -4,6 +4,8 @@ import clydeconservationsystem.Menus;
 import clydeconservationsystem.ValidationException;
 
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This the parent class of the animals handled by Clyde Conservation.
@@ -70,7 +72,14 @@ public abstract class Animal implements Serializable {
      */
     public void setName(){
         do {
-            this.name=Menus.setAnimalName();
+            String nameValidation="(\\p{Upper})(\\p{Lower}){1,12}";
+            String name=Menus.setAnimalName();
+            if (name.matches(nameValidation))
+                this.name=name;
+            else {
+                System.out.println("Invalid Animal name format");
+                this.name=null;
+            }
         }
         while (this.name==null);
     }
@@ -97,11 +106,23 @@ public abstract class Animal implements Serializable {
     /**
      * This set method will get a user choice by calling the corresponding menu from the Menus class.
      * <p>
+     *  Future improvement could be done by checking the correct date format is entered
+     *   <a href=https://howtodoinjava.com/java/regex/java-regex-date-format-validation/">Regex for date validations</a>
      * @see Menus#setAnimalDoB()
      */
     public void setDateOfBirth(){
         do {
-            this.dateOfBirth=Menus.setAnimalDoB();
+            // trying to get valid date
+            Pattern validation=Pattern.compile("^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$");
+            String date=Menus.setAnimalDoB();
+            Matcher match= validation.matcher(date);
+
+            if (match.matches())
+                this.dateOfBirth=date;
+            else{
+                System.out.println("Invalid date format: please use dd/mm/yyyy");
+                date=null;
+            }
         }while (this.dateOfBirth==null);
     }
 
@@ -118,7 +139,7 @@ public abstract class Animal implements Serializable {
      * <p>
      * This method should be used when creating an object from a file.
      * <p>
-     * It will not validate the data by itself
+     * It will not validate the data by itself. Future improvement could be done by checking the correct date format is entered
      * @param dateOfAcquisition DoA of the animal
      */
     public void setDateOfAcquisition(String dateOfAcquisition) {
@@ -132,7 +153,16 @@ public abstract class Animal implements Serializable {
      */
     public void setDateOfAcquisition(){
         do {
-            this.dateOfAcquisition=Menus.setAnimalDoA();
+            // trying to get valid date
+            Pattern validation=Pattern.compile("^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$");
+            String date=Menus.setAnimalDoA();
+            Matcher match= validation.matcher(date);
+
+            if (match.matches())
+                this.dateOfAcquisition=date;
+            else{
+                System.out.println("Invalid date format: please use dd/mm/yyyy");
+            }
         }while (this.dateOfAcquisition==null);
     }
 
