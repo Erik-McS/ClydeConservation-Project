@@ -58,6 +58,7 @@ public class AssignmentsCollection {
             assignments.clear();
             try{
                 assignments=(ArrayList<AssignmentTable>) ois.readObject();
+                AssignmentTable.ASSIGNMENT_ID_BASE=AssignmentTable.ASSIGNMENT_ID_BASE+assignments.size();
                 ois.close();
                 fis.close();
             }
@@ -81,7 +82,7 @@ public class AssignmentsCollection {
             Iterator<AssignmentTable> iter= assignments.iterator();
             while (iter.hasNext()){
                 AssignmentTable assign=iter.next();
-                System.out.println("----- Assignment ID "+assign.getAssignmentID()+", Keeper "+assign.getAssignedKeeper().getFirstName()+
+                System.out.println("\n----- Assignment ID "+assign.getAssignmentID()+", Keeper "+assign.getAssignedKeeper().getFirstName()+
                         " "+assign.getAssignedKeeper().getLastName()+" -----");
                 assign.displayAssignment();
             }
@@ -116,11 +117,12 @@ public class AssignmentsCollection {
             while (iter.hasNext()){
                 AssignmentTable assignment=iter.next();
                 Keeper kp=assignment.getAssignedKeeper();
-                if(keeper.getKeeperID()==kp.getKeeperID());
-                return true;
+                if(keeper.getID()==kp.getID())
+                    return true;
             }
+            return false;
         }
-        return false;
+
     }
 
     /**

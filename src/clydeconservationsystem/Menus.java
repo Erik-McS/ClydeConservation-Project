@@ -218,7 +218,7 @@ public class Menus {
                     int exit1=0;
                     // looping the options
                     do {
-                        switch (adminAddAnimalMenu()){
+                         switch (adminAddAnimalMenu()){
                             case 1:
                                 // adding a bird
                                 // the default constructor will call the menus to create the object.
@@ -443,6 +443,7 @@ public class Menus {
                 -->\s""");
         // this try-catch will make sure that the value entered is not just a number
         try{
+
             return sc.next();
         }
         catch(InputMismatchException e){
@@ -629,7 +630,7 @@ public class Menus {
         keeper[0]=sc.nextLine();
         // checking the name is not empty
         if (keeper[0]==null)
-            throw new ValidationException("Name cannot be empty");
+            throw new ValidationException("Firstname cannot be empty");
         // checking it is in the proper format
         else if (!keeper[0].matches("(\\p{Upper})(\\p{Lower}){2,12}"))
             throw new ValidationException("Incorrect name format");
@@ -691,15 +692,22 @@ public class Menus {
             int id= sc.nextInt();
             // add a new assignment to the assignment collection
             try {
-                AssignmentsCollection.addAssignment(EmployeeRoster.getKeeper(id));
-                // save the allocations collections
-                AssignmentsCollection.saveAssigment();
+                Keeper kp=EmployeeRoster.getKeeper(id);
+                if (kp==null)
+                    System.out.println("Incorrect Keeper ID");
+                else{
+                    AssignmentsCollection.addAssignment(EmployeeRoster.getKeeper(id));
+                    // save the allocations collections
+                    AssignmentsCollection.saveAssigment();
+                }
+
+
             }
             catch (ValidationException e){
                 System.out.println(e.getMessage());
             }
         }catch (InputMismatchException w){
-            System.out.println("Incorrect choice entered");
+            System.out.println("Incorrect ID entered -- Returning to menu entered");
         }
         finally {
             sc.nextLine();
@@ -722,15 +730,24 @@ public class Menus {
                 // getting user choices
                 System.out.println("Please enter the Animal ID: ");
                 int animalID=sc.nextInt();
+                if (!Menagerie.idExist(animalID)){
+                    System.out.println("This animal ID do not exists");
+                    return;
+                }
                 System.out.println("Please enter the Cage ID: ");
                 int cageID=sc.nextInt();
+                if (CagesCollection.getCage(cageID)==null)
+                {
+                    System.out.println("This Cage ID do not exists");
+                    return;
+                }
                 // adding the animal to the cage
                 CagesCollection.addAnimalToCage(CagesCollection.getCageIndex(cageID),Menagerie.getAnimal(animalID));
                 // saving the modified cage collection
                 CagesCollection.saveCagesCollection();
             }
             catch (InputMismatchException e){
-                System.out.println("Incorrect choice entered");
+                System.out.println("Incorrect ID entered -- Returning to menu");
             }
             finally {
                 sc.nextLine();
@@ -745,9 +762,9 @@ public class Menus {
         System.out.println("-------- Cage assignment --------");
 
         // check if there are any unassigned cages
-        if (CagesCollection.countUnassignedCages()==0) {
+        if (CagesCollection.countUnassignedAndEmptyCages()==0) {
             System.out.println("***** Cages List *****");
-            System.out.println("There is no unassigned cages");
+            System.out.println("There is no unassigned cages with animals");
         }
         // check if there are any available assignments
         else if(AssignmentsCollection.isEmpty()){

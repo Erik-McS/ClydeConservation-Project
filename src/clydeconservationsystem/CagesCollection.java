@@ -121,7 +121,7 @@ public class CagesCollection {
     }
 
     /**
-     * The method will display the details of the unassigned cages in the collection.
+     * The method will display the details of the unassigned and not empty cages in the collection.
      */
     public static void displayUnassignedCages(){
 
@@ -133,6 +133,7 @@ public class CagesCollection {
             while (iter.hasNext()){
                 // if not already in the assignment collections, the cage will be displayed, provided it's also not empty
                 Cage cage= iter.next();
+
                 if (!AssignmentsCollection.isAssigned(cage)&& !cage.isEmpty()){
                     // checking if the cage is for predator or prey, based on the first animal assigned
                     String type;
@@ -167,6 +168,27 @@ public class CagesCollection {
             while (iter.hasNext()){
                 Cage cage= iter.next();
                 if (!AssignmentsCollection.isAssigned(cage)){
+                    count++;
+                }
+            }
+            return count;
+        }
+    }
+
+    /**
+     * Returns the number of unassigned and empty cages
+     * @return Unassigned cages
+     */
+    public static int countUnassignedAndEmptyCages(){
+        if (cagesCollection.isEmpty())
+            return 0;
+        else{
+            // using an iterator to loop over the cage collection.
+            Iterator<Cage> iter=cagesCollection.iterator();
+            int count=0;
+            while (iter.hasNext()){
+                Cage cage= iter.next();
+                if (!AssignmentsCollection.isAssigned(cage) && !cage.isEmpty()){
                     count++;
                 }
             }

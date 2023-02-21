@@ -43,7 +43,7 @@ public class HeadKeeper extends Keeper{
     @Override
     public String getDetails() {
         return "\nKeeper details:"+
-                "\nKeeper ID: "+ getKeeperID()+
+                "\nKeeper ID: "+ getID()+
                 "\nFirst name: "+getFirstName()+
                 "\nLast name:"+getLastName()+
                 "\nAddress: "+getAddress()+

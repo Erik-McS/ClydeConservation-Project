@@ -49,7 +49,7 @@ public class EmployeeRoster implements Serializable{
                 System.out.println("-----------------------------------------------------");
                 if (employee instanceof Keeper){
                     Keeper emp=(Keeper) employee;
-                    System.out.println("----- Keeper ID: "+emp.getKeeperID()+" -----");
+                    System.out.println("----- Keeper ID: "+emp.getID()+" -----");
                     System.out.println("Name: "+emp.getFirstName()+"\nSurname: "+emp.getLastName());
                 }
             }
@@ -89,7 +89,7 @@ public class EmployeeRoster implements Serializable{
             Employee employee=iter.next();
             if (employee instanceof Keeper){
                Keeper kp=(Keeper) employee;
-               if (kp.getKeeperID()==keeperID)
+               if (kp.getID()==keeperID)
                    return kp;
             }
         }

@@ -101,8 +101,8 @@ public class MediumCage extends Cage implements Serializable {
     @Override
     public String getCageDetails() {
         return "\n Cage Size: "+getCageSize()+
-                "\n Number of animals in the cage: "+assignedAnimals.size()+
-                "\n Cage Category: "+getCageCategory();
+                " ----- Number of animals in the cage: "+assignedAnimals.size()+
+                " ----- Cage Category: "+getCageCategory();
     }
 
     @Override

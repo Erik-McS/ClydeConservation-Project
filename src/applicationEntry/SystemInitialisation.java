@@ -25,7 +25,7 @@ public class SystemInitialisation {
     private SystemInitialisation(){}
 
     /**
-     * This method will check if each of the 4 files are present in the app folder. if not, it will create some data in the collections
+     * This method will check if 3 of the 4 files used by this app are present in the app folder. if not, it will create some data in the collections and save them as:
      * <p>
      * 'cages.dat': The charity cages collections
      * <p>
@@ -44,9 +44,9 @@ public class SystemInitialisation {
         checkCagesFile();
         // check assignments
         checkAssignmentsFile();
-
     }
 
+    // Check the files
     private static void checkCagesFile(){
         File f=new File("cages.dat");
         if (!f.exists()){

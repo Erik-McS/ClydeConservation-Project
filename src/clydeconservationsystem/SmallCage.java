@@ -75,13 +75,13 @@ public class SmallCage extends Cage implements Serializable {
 
         if (isEmpty()) {
             return "\n Cage Size: " +getCageSize()+
-                    "\n Number of animals in the cage: 0" +
-                    "\n Cage Category: N/A";
+                    " ----- Number of animals in the cage: 0" +
+                    " ----- Cage Category: N/A";
         }
         else{
             return "\n Cage Size: "+getCageSize()+
-                    "\n Number of animals in the cage: 1"+
-                    "\n Cage Category: "+getCageCategory();
+                    " ----- Number of animals in the cage: 1"+
+                    " ----- Cage Category: "+getCageCategory();
             }
         }
 
