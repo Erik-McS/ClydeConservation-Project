@@ -178,7 +178,7 @@ public class Menagerie {
 
     /**
      * Method to check if an object with this id exist in the arraylist
-     * @param id
+     * @param id Animal ID to check
      * @return exists or not
      */
     public static boolean idExist(int id){
@@ -194,6 +194,12 @@ public class Menagerie {
             return false;
         }
     }
+
+    /**
+     * Returns the animal ID of the Animal object passed in parameter
+     * @param animalID Animal object to get the ID from
+     * @return animalID
+     */
     public static Animal getAnimal(int animalID){
         if (menagerie.isEmpty())
             return null;

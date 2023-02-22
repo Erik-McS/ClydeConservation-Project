@@ -15,7 +15,9 @@ public class SmallCage extends Cage implements Serializable {
     // Animal object to contain the assigned animal
     private Animal assignedAnimal;
 
-
+    /**
+     * Default Constructor
+     */
     public SmallCage(){
         // creating the ID
         this.cageID=CAGE_ID_BASE++;

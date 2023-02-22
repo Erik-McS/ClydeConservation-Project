@@ -20,6 +20,9 @@ public abstract class Cage implements Serializable {
     protected static int CAGE_ID_BASE=300;
     // variable to store the category of the first animal assigned to it
     // this will allow to check if the animals added later are compatible
+    /**
+     * Will hold the category of animals in the cage, based on the first animal assigned to the cage.
+     */
     protected String cageCategory;
     /**
      * Method to return the cage Category
@@ -39,6 +42,10 @@ public abstract class Cage implements Serializable {
     public String getCageCategory(){
         return cageCategory;
     }
+
+    /**
+     * ID of the cage
+     */
     protected int cageID;
 
     /**

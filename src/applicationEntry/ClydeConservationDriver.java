@@ -3,6 +3,9 @@ package applicationEntry;
 import employees.*;
 import clydeconservationsystem.*;
 
+/**
+ * Main entry of the program
+ */
 public class ClydeConservationDriver {
 
     /**

@@ -15,7 +15,7 @@ public class EmployeeRoster implements Serializable{
     // setting a filename for the employee roster file
     private static final String fileName="roster.dat";
     // using a private constructor to prevent the creation of EmployeeRoster objects
-    public EmployeeRoster(){}
+    private EmployeeRoster(){}
     /**
      * The method will display the details of all the employees in the collection.
      */
@@ -80,7 +80,7 @@ public class EmployeeRoster implements Serializable{
     }
     /**
      * Method to search the employee roster and return a keeper ogject corresponding to the passed keeperID
-     * @param keeperID
+     * @param keeperID ID of the Keeper
      * @return the searched Keeper, or null if not found
      */
     public static Keeper getKeeper(int keeperID){

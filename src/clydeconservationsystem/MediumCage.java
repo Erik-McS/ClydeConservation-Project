@@ -19,7 +19,9 @@ public class MediumCage extends Cage implements Serializable {
     // arraylist to contains the assigned animals
     private ArrayList<Animal> assignedAnimals;
 
-
+    /**
+     * Default Constructor
+     */
     public MediumCage(){
         // initialising the arraylist
         assignedAnimals=new ArrayList<>();

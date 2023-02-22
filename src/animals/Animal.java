@@ -30,6 +30,9 @@ public abstract class Animal implements Serializable {
      * This variable is used to generate unique animal IDs
      */
     public static int ANIMAL_ID_BASE =200;
+    /**
+     * Animal ID
+     */
     protected int animalID;
 
     /**
@@ -107,7 +110,7 @@ public abstract class Animal implements Serializable {
      * This set method will get a user choice by calling the corresponding menu from the Menus class.
      * <p>
      *  Future improvement could be done by checking the correct date format is entered
-     *   <a href=https://howtodoinjava.com/java/regex/java-regex-date-format-validation/">Regex for date validations</a>
+     *  <a href="https://howtodoinjava.com/java/regex/java-regex-date-format-validation/">Regex for date validations</a>
      * @see Menus#setAnimalDoB()
      */
     public void setDateOfBirth(){
@@ -193,6 +196,7 @@ public abstract class Animal implements Serializable {
      * <p>
      * It will validate the data passed to it
      * @param sex Sex of the animal
+     * @throws ValidationException Invalid Value entered
      */
     public void setSex(String sex) throws ValidationException{
         if (sex.equals("Male")||sex.equals("Female"))
@@ -227,6 +231,7 @@ public abstract class Animal implements Serializable {
      * <p>
      * It will validate the data passed to it
      * @param category Sex of the animal
+     * @throws ValidationException Invalid sex entered
      */
     public void setCategory(String category) throws ValidationException{
         if (category.equals("Predator")||category.equals("Prey"))
@@ -250,6 +255,10 @@ public abstract class Animal implements Serializable {
         isCaged = caged;
     }
 
+    /**
+     * Method to return the type of Animal
+     * @return Bird, Reptile or Mammal
+     */
     public String getType(){
         if (this instanceof Bird)
             return "Bird";

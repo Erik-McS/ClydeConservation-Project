@@ -20,7 +20,9 @@ public class LargeCage extends Cage implements Serializable {
     private ArrayList<Animal> assignedAnimals;
 
 
-
+    /**
+     * Default Constructor
+     */
     public LargeCage(){
         // initialising the arraylist
         assignedAnimals=new ArrayList<>();
@@ -32,7 +34,7 @@ public class LargeCage extends Cage implements Serializable {
 
     /**
      * Method to return the cage capacity, to be used in tests in the AssignmentTable class
-     * @return
+     * @return Cage Capacity
      */
     public int getCAPACITY(){
         return CAPACITY;

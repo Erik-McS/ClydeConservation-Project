@@ -21,10 +21,14 @@ public class Keeper implements Employee, Serializable {
     private String address;
     private String contactNumber;
 
-    // protected variable that will be used to create an ID
+    /**
+     * protected variable that will be used to create an ID
+     */
     protected int keeperID;
-    // static variable used in child classes to generate unique ID
-    public static int KEEPER_ID_BASE=100;
+    /**
+     * static variable used in child classes to generate unique ID
+     */
+    protected static int KEEPER_ID_BASE=100;
 
 
     /**
@@ -69,6 +73,7 @@ public class Keeper implements Employee, Serializable {
     /**
      * Set the Keeper's lastname
      * @param lastName Keeper's lastname
+     * @throws ValidationException Incorrect name
      */
     public void setLastName(String lastName) throws ValidationException{
         String nameValidation="(\\p{Upper})(\\p{Lower}){1,12}";
