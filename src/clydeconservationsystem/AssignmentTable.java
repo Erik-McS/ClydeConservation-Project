@@ -26,6 +26,9 @@ public class AssignmentTable implements Serializable {
     // arraylist to store the assigned cages.
     private ArrayList<Cage> assignedCages=new ArrayList<>();
     // static variable to create an ID;
+    /**
+     * Base that will be used to create assignment IDs
+     */
     protected static int ASSIGNMENT_ID_BASE=500;
     private final int assignmentID;
 
@@ -140,7 +143,7 @@ public class AssignmentTable implements Serializable {
 
     /**
      * Method to check if a Cage is already assigned in the table
-     * @param cage
+     * @param cage Cage to check
      * @return True or False
      */
     public boolean cageIsPresent(Cage cage){

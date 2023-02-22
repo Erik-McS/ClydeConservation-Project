@@ -92,6 +92,7 @@ public class AssignmentsCollection {
      * Method to create a new Assignment. it needs the keeper passed as parameter.
      * The method will create a new AssignmentTable object with the Keeper
      * @param keeper The keeper to assign to the AssignmentTable
+     * @throws ValidationException Invalid Keeper ID
      */
     public static void addAssignment(Keeper keeper) throws ValidationException{
 
@@ -171,6 +172,7 @@ public class AssignmentsCollection {
      * Method to assign a cage to an existing assignment
      * @param assignmentIndex index of the assignment
      * @param cage Cage to add
+     * @return True or false
      */
     public static boolean addCageToAssignment(int assignmentIndex,Cage cage){
         if (assignments.get(assignmentIndex).assignCage(cage))
@@ -200,7 +202,7 @@ public class AssignmentsCollection {
 
     /**
      * Method to check if there are any assignments created
-     * @return
+     * @return True or False
      */
     public static boolean isEmpty(){
         if (assignments.isEmpty())
