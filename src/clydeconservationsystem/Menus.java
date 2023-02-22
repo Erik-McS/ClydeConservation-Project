@@ -718,13 +718,13 @@ public class Menus {
     private static void addAnimalToCage(){
         // display the unassigned animals
         System.out.println("-------- Animal assignment --------");
-        System.out.println("***** Animal List *****");
+        System.out.println("\n***** Animal List *****");
 
         if (Menagerie.countUnassignedAnimals()!=0) {
             try {
                 Menagerie.displayUnassignedAnimals();
                 // display cages that aren't full
-                System.out.println("***** Cage List ******");
+                System.out.println("\n***** Cage List ******");
                 //CagesCollection.displayNonFullCages();
                 CagesCollection.displayAllCages();
                 // getting user choices
@@ -759,26 +759,26 @@ public class Menus {
 
     // Keeper: Assign cage to a keeper
     private static void assignCageToKeeper(){
-        System.out.println("-------- Cage assignment --------");
+        System.out.println("\n-------- Cage assignment --------");
 
         // check if there are any unassigned cages
         if (CagesCollection.countUnassignedAndEmptyCages()==0) {
-            System.out.println("***** Cages List *****");
+            System.out.println("\n***** Cages List *****");
             System.out.println("There is no unassigned cages with animals");
         }
         // check if there are any available assignments
         else if(AssignmentsCollection.isEmpty()){
             {
-                System.out.println("***** Assignments List *****");
+                System.out.println("\n***** Assignments List *****");
                 System.out.println("There are no Assignments available, please create one.");
             }
         }
         // display the unassigned cages
         else
         {
-            System.out.println("***** Cages List *****");
+            System.out.println("\n***** Cages List *****");
             CagesCollection.displayUnassignedCages();
-            System.out.println("***** Assignments List *****");
+            System.out.println("\n***** Assignments List *****");
             // display the existing assignments
             AssignmentsCollection.displayAssignments();
             // get user choices

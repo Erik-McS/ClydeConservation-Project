@@ -250,5 +250,14 @@ public abstract class Animal implements Serializable {
         isCaged = caged;
     }
 
+    public String getType(){
+        if (this instanceof Bird)
+            return "Bird";
+        if (this instanceof Mammal)
+            return "Mammal";
+        if (this instanceof Reptile)
+            return "Reptile";
+        return "";
+    }
     // End of Class
 }

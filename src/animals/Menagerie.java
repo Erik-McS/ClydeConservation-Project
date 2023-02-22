@@ -54,8 +54,10 @@ public class Menagerie {
 
             while (iter.hasNext()) {
                 Animal an = iter.next();
-                if (!CagesCollection.isAssigned(an))
-                    System.out.println(an.getDetails());
+                if (!CagesCollection.isAssigned(an)) {
+                    System.out.println("--- Animal ID: " + an.getAnimalID() + " --- Name: " + an.getName() +
+                            " --- Type: " + an.getType() + " --- Category: " + an.getCategory());
+                }
 
             }
     }

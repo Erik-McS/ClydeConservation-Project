@@ -61,9 +61,13 @@ public class ClydeConservationDriver {
                                             """);
                     }
                     break;
+                case 5:
+                    System.out.println("Incorrect Choice entered");
+                    break;
                 default:
                     // looping until choice 1-2 is selected. the choice 3 in the Menus.mainMenu will use System.exit(0)
                     // to exit the application
+
                     break;
             }
         }

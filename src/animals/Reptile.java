@@ -38,30 +38,29 @@ public class Reptile extends Animal{
      * @param doA Date of Acquisition of the reptile
      */
     public Reptile(String name,String category,String sex,String doB,String doA){
-    try{
-        setName(name);
-        setCategory(category);
-        setSex(sex);
-        setDateOfAcquisition(doA);
-        setDateOfBirth(doB);
-        this.animalID= ANIMAL_ID_BASE++;
-        // the Animal is not assigned to a cage by default
-        setCaged(false);
-    }
+        try{
+            setName(name);
+            setCategory(category);
+            setSex(sex);
+            setDateOfAcquisition(doA);
+            setDateOfBirth(doB);
+            this.animalID= ANIMAL_ID_BASE++;
+            // the Animal is not assigned to a cage by default
+            setCaged(false);
+        }
         catch (ValidationException ex){
         System.out.println(ex.getMessage());
-    }
+        }
     }
 
     // custom toString()
     @Override
     public String getDetails() {
-        return "\nType: Reptile"+
+        return "\nAnimal ID: "+getAnimalID()+" --- Type: Bird --- "+
                 "\nName: "+getName()+
-                "\nCategory: "+getCategory()+
-                "\nSex: "+getSex()+
+                " --- Category: "+getCategory()+
+                " --- Sex: "+getSex()+
                 "\nDate of Birth: "+getDateOfBirth()+
-                "\nDate of Acquisition: "+getDateOfAcquisition()+
-                "\nAnimal ID: "+getAnimalID();
+                " --- Date of Acquisition: "+getDateOfAcquisition();
     }
 }
