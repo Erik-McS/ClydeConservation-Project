@@ -55,13 +55,12 @@ public class Bird extends Animal {
     @Override
     public String getDetails() {
 
-        return "\nType: Bird"+
+        return "\nAnimal ID: "+getAnimalID()+" --- Type: Bird --- "+
                 "\nName: "+getName()+
-                "\nCategory: "+getCategory()+
-                "\nSex: "+getSex()+
+                " --- Category: "+getCategory()+
+                " --- Sex: "+getSex()+
                 "\nDate of Birth: "+getDateOfBirth()+
-                "\nDate of Acquisition: "+getDateOfAcquisition()+
-                "\nAnimal ID: "+getAnimalID();
+                " --- Date of Acquisition: "+getDateOfAcquisition();
     }
 
 }

@@ -52,15 +52,15 @@ public class Mammal extends Animal {
             System.out.println(ex.getMessage());
         }
     }
+
     // custom toString()
     @Override
     public String getDetails() {
-        return "\nType: Mammal"+
-                "\nName: "+getName()+
-                "\nCategory: "+getCategory()+
-                "\nSex: "+getSex()+
-                "\nDate of Birth: "+getDateOfBirth()+
-                "\nDate of Acquisition: "+getDateOfAcquisition()+
-                "\nAnimal ID: "+getAnimalID();
-    }
+            return "\nAnimal ID: "+getAnimalID()+" --- Type: Bird --- "+
+                    "\nName: "+getName()+
+                    " --- Category: "+getCategory()+
+                    " --- Sex: "+getSex()+
+                    "\nDate of Birth: "+getDateOfBirth()+
+                    " --- Date of Acquisition: "+getDateOfAcquisition();
+        }
 }
