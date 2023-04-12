@@ -52,9 +52,9 @@ public class TestClass {
         AssignmentTable tb=AssignmentsCollection.getAssigment(500);
         tb.displayAssignment();
         System.out.println(CagesCollection.countUnassignedCages());*/
-        AssignmentsCollection.loadAssignment();
-        CagesCollection.loadCagesCollection();
-        AssignmentsCollection.displayAssignments();
+       // AssignmentsCollection.loadAssignment();
+        //CagesCollection.loadCagesCollection();
+        //AssignmentsCollection.displayAssignments();
 
 
 
