@@ -58,7 +58,6 @@ public class Menagerie {
                     System.out.println("--- Animal ID: " + an.getAnimalID() + " --- Name: " + an.getName() +
                             " --- Type: " + an.getType() + " --- Category: " + an.getCategory());
                 }
-
             }
     }
     /**
